@@ -1,0 +1,32 @@
+---
+title: "Third Assignment"
+authors: "Rose Camille Vincent,Giulia Minnucci, Daniel Jemberu"
+output: pdf_document
+---
+##Third Assignment: Benin
+
+As we said in the previous assignment, we chose the country of Benin to workon our project. In particular we would like to adrees a specific question: **What impact does decentralization have on the performance of the health provision system in Benin?**
+
+To do so,we need both data for the country and for the single municipalities to better analyze the situation and to find an appropriate answer to our main question.
+Thus, our first step is to web scrape data from the WB and the Who on Benin as a country, related to public health expenditure, health expenditure per capita, improved sanitation facilities, density of health infrastructures per 100000 population. 
+In fact, as we alredy mentioned, decentralization in Benin only begun in the 2000s with establishment of 77 municipalities and transfer of competencies from central to local governments.Consequently, let's see the trend of the last years concerning this country on behalf of health related variables.
+
+Firstly, we need to load the dataset.
+
+```{r, echo=FALSE}
+library(WDI)
+healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL', 'SH.XPD.PCAP','SH.STA.ACSN'))
+subset(healthpublicexpend,country=='Benin')
+```
+This dataset includes these variables: 
+
+(i) **health expenditure per capita (SH.XPD.PCAP)**, meaninig the sum of public and private health expenditures as a ratio of total population. It covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
+
+(ii) **public health expenditure (SH.XPD.PUBL)**,which consists of recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
+
+(iii) **improved sanitation facilities(SH.STA.ACSN)**, which actually refers to the access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. The indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
+
+The second dataset is taken from the WHO indicators.
+```{r, echo=FALSE}
+
+```
