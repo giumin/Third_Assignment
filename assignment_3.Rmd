@@ -13,7 +13,7 @@ In fact, as we alredy mentioned, decentralization in Benin only begun in the 200
 
 Firstly, we need to load the dataset.
 
-```{r, echo=FALSE}
+```{r}
 library(WDI)
 healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL', 'SH.XPD.PCAP','SH.STA.ACSN'))
 subset(healthpublicexpend,country=='Benin')
