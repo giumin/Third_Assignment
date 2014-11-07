@@ -1,7 +1,7 @@
 ---
 title: "Third Assignment"
-authors: "Rose Camille Vincent,Giulia Minnucci, Daniel Jemberu"
 output: pdf_document
+authors: Rose Camille Vincent,Giulia Minnucci, Daniel Jemberu
 ---
 ##Third Assignment: Benin
 
@@ -11,12 +11,13 @@ To do so,we need both data for the country and for the single municipalities to 
 Thus, our first step is to web scrape data from the WB and the Who on Benin as a country, related to public health expenditure, health expenditure per capita, improved sanitation facilities, density of health infrastructures per 100000 population. 
 In fact, as we alredy mentioned, decentralization in Benin only begun in the 2000s with establishment of 77 municipalities and transfer of competencies from central to local governments.Consequently, let's see the trend of the last years concerning this country on behalf of health related variables.
 
-Firstly, we need to load the dataset.
+Firstly, we need to load the dataset and eliminate the column we do not need.
 
 ```{r}
 library(WDI)
 healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL', 'SH.XPD.PCAP','SH.STA.ACSN'))
-subset(healthpublicexpend,country=='Benin')
+Benin<-subset(healthpublicexpend,country=='Benin')
+Benin$iso2c<-NULL
 ```
 This dataset includes these variables: 
 
@@ -26,7 +27,31 @@ This dataset includes these variables:
 
 (iii) **improved sanitation facilities(SH.STA.ACSN)**, which actually refers to the access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. The indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
 
-The second dataset is taken from the WHO indicators.
-```{r, echo=FALSE}
+The second dataset is taken from the WHO indicators, in particular, from the Global Health Obervatory Data Repository. What we want is the dataset that refers to the density of health infrastructures per 100000 population, including:
 
+(i) Health posts, that  are either community centres or health environments with a very limited number of beds with limited curative and preventive care resources normally assisted by health workers or nurses,
+
+(ii) Health centers,which includes the number of health centres from the public and private sectors, per 100,000 population
+
+(iii) Number of district/rural hospitals from the public and private sectors, per 100,000 population,
+
+(iv) Number of provincial hospitals from the public and private sectors, per 100,000 population,
+
+(v) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be regional, specialized, research hospitals or Federal/National Institutes.
+
+(vi) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be: regional, specialized, research hospitals or Federal/National Institutes.
+
+We import this Dataset with an URL from the WHO website, that we call infrastructures.From this dataset we definetly have to extract only the country we are interested in (BEN).
+From this point, the dataset has to be cleaned of all those columns that we really don't need, since the original one shows also elements such as if it was published, comments,NA elements etc...
+
+```{r}
+infrastructures <- read.csv("/var/folders/ln/gccsc1ts04d6l8_0qk_rlhp00000gn/T//RtmphC4lgc/data1b454d0b21")
+Benininfra<-subset(infrastructures,Country=='Benin')
+Benininfra$PUBLISH.STATES<-NULL
+Benininfra$WHO.region<-NULL
+Benininfra$Low<-NULL
+Benininfra$High<-NULL
+Benininfra$Comments<-NULL
 ```
+
+
