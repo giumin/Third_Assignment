@@ -1,9 +1,10 @@
 ---
 title: "Third Assignment"
-output: pdf_document
+output: html_document
 authors: Rose Camille Vincent,Giulia Minnucci, Daniel Jemberu
 ---
-##Third Assignment: Benin
+
+#Web scraping and data cleanig
 
 As we said in the previous assignment, we chose the country of Benin to workon our project. In particular we would like to adrees a specific question: **What impact does decentralization have on the performance of the health provision system in Benin?**
 
@@ -18,8 +19,18 @@ library(WDI)
 healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL', 'SH.XPD.PCAP','SH.STA.ACSN'))
 Benin<-subset(healthpublicexpend,country=='Benin')
 Benin$iso2c<-NULL
+
+
+plot(Benin$SH.XPD.PUBL, type="o", col="red", Benin$Year, xlab="public expenditure on health", ylab="years")
+title(main="Trend during the years", col.main="Black", font.main=4)
+
+
+plot(Benin$SH.XPD.PCAP, type="o", col="brown", Benin$Year, xlab="total expenditure per capita on health", ylab="years")
+title(main="Trend during the years", col.main="Black", font.main=4)
 ```
-This dataset includes these variables: 
+
+
+This dataset includes these variables over a seven year timespan (2005:2011): 
 
 (i) **health expenditure per capita (SH.XPD.PCAP)**, meaninig the sum of public and private health expenditures as a ratio of total population. It covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
 
@@ -41,6 +52,7 @@ The second dataset is taken from the WHO indicators, in particular, from the Glo
 
 (vi) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be: regional, specialized, research hospitals or Federal/National Institutes.
 
+However, these variables are only know for the years 2010 and 2013.
 We import this Dataset with an URL from the WHO website, that we call infrastructures.From this dataset we definetly have to extract only the country we are interested in (BEN).
 From this point, the dataset has to be cleaned of all those columns that we really don't need, since the original one shows also elements such as if it was published, comments,NA elements etc...
 
@@ -54,4 +66,12 @@ Benininfra$High<-NULL
 Benininfra$Comments<-NULL
 ```
 
+#Merging datasets
+
+Once we have our datasets, it is useful to merge them together so as to work easily and quickly with one dataset that would include all the needed variables.
+
+```{r}
+names(Benin)[names(Benin)=="country"] <- "Country"
+names(Benin)[names(Benin)=="year"] <- "Year"
+```
 
