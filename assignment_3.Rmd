@@ -4,13 +4,17 @@ bibliography: decentralizationind.bib
 output: pdf_document
 authors: Rose Camille Vincent,Giulia Minnucci, Daniel Jemberu
 ---
-
-#Web scraping and data cleanig
+#Researxh question and meyhodology
 
 As we said in the previous assignment, we chose the country of Benin to workon our project. In particular we would like to adrees a specific question: **What impact does decentralization have on the performance of the health provision system in Benin?**
 
 To do so,we need both data for the country and for the single municipalities to better analyze the situation and to find an appropriate answer to our main question.
-Thus, our first step is to web scrape data from the WB and the Who on Benin as a country, related to public health expenditure, health expenditure per capita, improved sanitation facilities, density of health infrastructures per 100000 population. 
+
+#Macro perspective
+
+##Web scraping and data cleanig
+
+Our first step is to web scrape data from the WB and the Who on Benin as a country, related to public health expenditure, health expenditure per capita, improved sanitation facilities, density of health infrastructures per 100000 population. 
 In fact, as we alredy mentioned, decentralization in Benin only begun in the 2000s with establishment of 77 municipalities and transfer of competencies from central to local governments.Consequently, let's see the trend of the last years concerning this country on behalf of health related variables.
 
 Firstly, we need to load the dataset and eliminate the column we do not need.
@@ -76,7 +80,7 @@ messy<-data.frame(
 tidy<-spread(messy,Indicator,Display.Value)
 ```
 
-#Merging datasets
+##Merging datasets
 
 Once we have our datasets, it is useful to merge them together so as to work easily and quickly with one dataset that would include all the needed variables.
 
