@@ -1,7 +1,7 @@
 ---
 title: "Third Assignment"
 bibliography: decentralizationind.bib
-output: pdf_document
+output: html_document
 authors: Rose Camille Vincent,Giulia Minnucci, Daniel Jemberu
 ---
 #Researxh question and meyhodology
@@ -19,16 +19,17 @@ In fact, as we alredy mentioned, decentralization in Benin only begun in the 200
 
 Firstly, we need to load the dataset and eliminate the column we do not need.
 
-```{r}
+```{r, echo=FALSE}
 library(WDI)
 healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL','SH.XPD.PCAP','SH.STA.ACSN'))
 Benin<-subset(healthpublicexpend,country=='Benin')
 Benin$iso2c<-NULL
-
+names(Benin)[names(Benin)=="year"] <- "Year"
 library("ggplot2", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
 ggplot(data=Benin, aes(x=Year,y=SH.XPD.PUBL)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
 
 ggplot(data=Benin, aes(x=Year,y=SH.XPD.PCAP)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
+ggplot(data=Benin, aes(x=Year,y=SH.STA.ACSN)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
 ```
 
 
