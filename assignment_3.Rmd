@@ -21,17 +21,14 @@ Firstly, we need to load the dataset and eliminate the column we do not need.
 
 ```{r}
 library(WDI)
-healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL', 'SH.XPD.PCAP','SH.STA.ACSN'))
+healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL','SH.XPD.PCAP','SH.STA.ACSN'))
 Benin<-subset(healthpublicexpend,country=='Benin')
 Benin$iso2c<-NULL
 
+library("ggplot2", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
+ggplot(data=Benin, aes(x=Year,y=SH.XPD.PUBL)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
 
-plot(Benin$Year,Benin$SH.XPD.PUBL, type="o",xlab="years",ylab="public expenditure on health")
-title(main="Trend over the years", col.main="Black", font.main=4)
-
-
-plot(Benin$Year,Benin$SH.XPD.PCAP, type="o",xlab="years", ylab="total expenditure per capita on health")
-title(main="Trend during the years", col.main="Black", font.main=4)
+ggplot(data=Benin, aes(x=Year,y=SH.XPD.PCAP)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
 ```
 
 
