@@ -57,7 +57,7 @@ We import this Dataset with an URL from the WHO website, that we call infrastruc
 From this point, the dataset has to be cleaned of all those columns that we really don't need, since the original one shows also elements such as if it was published, comments,NA elements etc...
 
 ```{r}
-infrastructures <- read.csv("/var/folders/ln/gccsc1ts04d6l8_0qk_rlhp00000gn/T//RtmphC4lgc/data1b454d0b21")
+infrastructures <- read.csv("http://apps.who.int/gho/athena/data/data-text.csv?target=GHO/DEVICES01,DEVICES02,DEVICES03,DEVICES04,DEVICES05&profile=text&filter=COUNTRY:*;REGION:AFR;REGION:AMR;REGION:SEAR;REGION:EUR;REGION:EMR;REGION:WPR")
 Benininfra<-subset(infrastructures,Country=='Benin')
 Benininfra$PUBLISH.STATES<-NULL
 Benininfra$WHO.region<-NULL
