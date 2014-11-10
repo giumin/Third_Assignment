@@ -1,6 +1,6 @@
 ---
 title: "Third Assignment"
-output: html_document
+output: pdf_document
 authors: Rose Camille Vincent,Giulia Minnucci, Daniel Jemberu
 ---
 
@@ -21,11 +21,11 @@ Benin<-subset(healthpublicexpend,country=='Benin')
 Benin$iso2c<-NULL
 
 
-plot(Benin$SH.XPD.PUBL, type="o", col="red", Benin$Year, xlab="public expenditure on health", ylab="years")
-title(main="Trend during the years", col.main="Black", font.main=4)
+plot(Benin$Year,Benin$SH.XPD.PUBL, type="o",xlab="years",ylab="public expenditure on health")
+title(main="Trend over the years", col.main="Black", font.main=4)
 
 
-plot(Benin$SH.XPD.PCAP, type="o", col="brown", Benin$Year, xlab="total expenditure per capita on health", ylab="years")
+plot(Benin$Year,Benin$SH.XPD.PCAP, type="o",xlab="years", ylab="total expenditure per capita on health")
 title(main="Trend during the years", col.main="Black", font.main=4)
 ```
 
@@ -64,6 +64,15 @@ Benininfra$WHO.region<-NULL
 Benininfra$Low<-NULL
 Benininfra$High<-NULL
 Benininfra$Comments<-NULL
+install.packages("tidyr")
+library(tidyr)
+messy<-data.frame(
+  Indicator=c("District/rural hospitals", "Health centres","Provincial hospitals","Specialized hospitals","Provincial hospitals","Specialized hospitals"),
+  Year=c(2010,2010,2010,2010,2013,2013),
+  Country=c("Benin","Benin","Benin","Benin","Benin","Benin"),
+  Display.Value=c(0.29,6.36,0.06,0.12,0.05,0.11)
+  )
+tidy<-spread(messy,Indicator,Display.Value)
 ```
 
 #Merging datasets
@@ -73,5 +82,6 @@ Once we have our datasets, it is useful to merge them together so as to work eas
 ```{r}
 names(Benin)[names(Benin)=="country"] <- "Country"
 names(Benin)[names(Benin)=="year"] <- "Year"
+total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 ```
 
