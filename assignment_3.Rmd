@@ -100,7 +100,7 @@ Rhe following part will present and analyse Benin's Revenue authonomy(RA) measur
 
 *Loading Data and cleaning
 ```{r, echo=FALSE}
-Decentdat<-read.csv("https://raw.githubusercontent.com/giumin/Third_Assignment/master/decentralization%20indicator.csv"")
+Decentdat<-read.csv()
                     
 Decentdat
 decentralazation <- na.omit(Decentdat)
