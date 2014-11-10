@@ -84,7 +84,6 @@ Once we have our datasets, it is useful to merge them together so as to work eas
 
 ```{r}
 names(Benin)[names(Benin)=="country"] <- "Country"
-names(Benin)[names(Benin)=="year"] <- "Year"
 total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 ```
 
@@ -101,7 +100,8 @@ Rhe following part will present and analyse Benin's Revenue authonomy(RA) measur
 
 *Loading Data and cleaning
 ```{r, echo=FALSE}
-Decentdat<-read.csv(file.choose(),header = TRUE)
+Decentdat<-read.csv("https://raw.githubusercontent.com/giumin/Third_Assignment/master/decentralization%20indicator.csv"")
+                    
 Decentdat
 decentralazation <- na.omit(Decentdat)
 decentralazation
