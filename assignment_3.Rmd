@@ -150,56 +150,50 @@ ggplot(data=decenthealth, aes(x=Cities,y=decentralization)) + geom_point() + the
 pkgs <- c('knitr', 'stargazer')
 library(car)
 
+
 # Estimate model
 R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
 summary(R1water)
-R2water <- lm(pop_wateraccess ~ decentralization + population + Density, data = decenthealth)
+R2water <- lm(pop_wateraccess ~ decentralization + population + Density + Year, data = decenthealth)
 summary(R2water)
-labels <- c('(Intercept)', 'GRE Score', 'GPA Score', '2nd Ranked School',
-            '3rd Ranked School', '4th Ranked School')
-stargazer::stargazer(L1, L2, L3, covariate.labels = labels,
-                     title = 'Logistic Regression Estimates of Grad School Acceptance',
+labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density')
+library(stargazer)
+stargazer::stargazer(R1water, R2water, covariate.labels = labels,
+                     title = 'Effect of decentralization on water access',
                      digits = 2, type = 'latex', header = FALSE)
 
-R1toilet <- lm(X.pop_wateraccess ~ Decentralization, data = decenthealth)
+
+R1toilet <- lm(pop_toiletacess ~ decentralization, data = decenthealth)
 summary(R1toilet)
-R2water <- lm(X.pop_wateraccess ~ Decentralization + Population + Density, data=decenthealth)
-summary(R2water)
-
-# Create scenario labels
-Scenarios <- c('Scenario 1', 'Scenario 2', 'Scenario 3', 'Scenario 4')
-
-# Create fitted data
-fitted <- with(Admission,
-               data.frame(gre = mean(gre),
-                          gpa = mean(gpa),
-                          rank = factor(1:4)))
-# Combine
-fitted <- data.frame(Scenarios, fitted)
-```{r, message=FALSE, results='asis'}
-
-# Create custom clean coefficient labels
-labels <- c('(Intercept)', 'GRE Score', 'GPA Score', '2nd Ranked School',
-            '3rd Ranked School', '4th Ranked School')
-stargazer::stargazer(L1, L2, L3, covariate.labels = labels,
-                     title = 'Logistic Regression Estimates of Grad School Acceptance',
+R2toilet <- lm(pop_toiletacess ~ decentralization + population + Density + Year, data = decenthealth)
+summary(R2toilet)
+labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density')
+library(stargazer)
+stargazer::stargazer(R1toilet, R2toilet, covariate.labels = labels,
+                     title = 'Effect of decentralization on toilet access',
                      digits = 2, type = 'latex', header = FALSE)
 
+R1soneb <- lm(connect_soneb ~ decentralization, data = decenthealth)
+summary(R1soneb)
+R2soneb <- lm(connect_soneb ~ decentralization + population + Density + Year, data = decenthealth)
+summary(R2soneb)
+labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density')
+library(stargazer)
+stargazer::stargazer(R1soneb, R2soneb, covariate.labels = labels,
+                     title = 'Effect of decentralization on water delivery infrastructure',
+                     digits = 2, type = 'latex', header = FALSE)
 
-
+R1soneb <- lm(pubhosp ~ decentralization, data = decenthealth)
+summary(R1pubhosp)
+R2soneb <- lm(pubhosp ~ decentralization + population + Density + Year, data = decenthealth)
+summary(R2pubhosp)
+labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density')
+library(stargazer)
+stargazer::stargazer(R1pubhosp, R2pubhosp, covariate.labels = labels,
+                     title = 'Effect of decentralization on health services infrastructure',
+                     digits = 2, type = 'latex', header = FALSE)
 ```
 
 
-
-```{r}
-
-```
-
-
-
-
-```{r}
-
-```
 
 
