@@ -138,33 +138,28 @@ Like decentralization, it is very challenging to find a composite proxy for heal
 
 As stated from our proposal, we will also take into account heterogeneity between the municipalities. For this reason, as so far, we have decided to include population, population density, per capita consumption, households health consumption, indicators on poverty, literacy rate, as well as the percentage of households which favor decentralization in each municipality. These control variables are drawn from Benin's Integrated Modular Surveys on Households Living Conditions (EMICoV)
 
-#Basic Regression 
+#Basic Regression models 
 ```{r, echo=FALSE}
 decentral <- read.csv("~/GitHub/Third_Assignment/decentral.csv")
 health <- read.csv("~/GitHub/Third_Assignment/health.csv")
-decenthealth <-merge(decentral,health, by=c("Cities", "Year"), all=TRUE)
+decenthealth <-merge(decentral,health, by=c("Year", "ID", "Cities"), all=TRUE)
 library(ggplot2)
-ggplot(data=decenthealth, aes(x=Year,y=Decentralization)) + geom_point() + theme_bw(base_size = 13) + ggtitle("Degree of decentralization\n")
-ggplot(data=Benin, aes(x=Year,y=ealth.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
-ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
 
+ggplot(data=decenthealth, aes(x=Cities,y=decentralization)) + geom_point() + theme_bw(base_size = 13) + ggtitle("Degree of decentralization\n")
+
+pkgs <- c('knitr', 'stargazer')
 library(car)
 
-```
-
-#Basic regression
-
-```{r}
-summary(decenthealth$Decentralization)
-describe()
-
 # Estimate model
-names(decenthealth)[names(decenthealth)=="X..educ_adult"] <- "educ"
-
-R1water <- lm(X.pop_wateraccess ~ Decentralization, data = decenthealth)
+R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
 summary(R1water)
-R2water <- lm(X.pop_wateraccess ~ Decentralization + Population + Density, data=decenthealth)
+R2water <- lm(pop_wateraccess ~ decentralization + population + Density, data = decenthealth)
 summary(R2water)
+labels <- c('(Intercept)', 'GRE Score', 'GPA Score', '2nd Ranked School',
+            '3rd Ranked School', '4th Ranked School')
+stargazer::stargazer(L1, L2, L3, covariate.labels = labels,
+                     title = 'Logistic Regression Estimates of Grad School Acceptance',
+                     digits = 2, type = 'latex', header = FALSE)
 
 R1toilet <- lm(X.pop_wateraccess ~ Decentralization, data = decenthealth)
 summary(R1toilet)
@@ -189,6 +184,15 @@ labels <- c('(Intercept)', 'GRE Score', 'GPA Score', '2nd Ranked School',
 stargazer::stargazer(L1, L2, L3, covariate.labels = labels,
                      title = 'Logistic Regression Estimates of Grad School Acceptance',
                      digits = 2, type = 'latex', header = FALSE)
+
+
+
+```
+
+
+
+```{r}
+
 ```
 
 
