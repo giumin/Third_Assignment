@@ -1,21 +1,37 @@
 ---
-title: "Third Assignment"
-bibliography: decentralizationind.bib
-output: html_document
-authors: Rose Camille Vincent,Giulia Minnucci, Daniel Jemberu
+title: "Second Assignment"
+bibliography: bibliography.bib
+date: "9 October 2014"
+output:
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+  html_document:
+    toc: yes
+  word_document: default
+authors: "Giulia Minnucci, Rose Camille Vincent, Daniel Jemberu"
+
 ---
-#Researxh question and meyhodology
+#Research question and Methodology
 
-As we said in the previous assignment, we chose the country of Benin to workon our project. In particular we would like to adrees a specific question: **What impact does decentralization have on the performance of the health provision system in Benin?**
+As stated in previous assignment, our research project aims to look at the impact of decentralization on health provision in Benin. Access to basic health-related services has been one of the core Millenium Development Goals. It is also regarded as the basic human rights and promoted by international organizations. On the supply side, governments and policy makers have worked towards enforcement of health policies by allowing funds to make this available to the rural areas, through decentralization and devolution of public services and public administration. 
 
-To do so,we need both data for the country and for the single municipalities to better analyze the situation and to find an appropriate answer to our main question.
+The Legal provision .... in Benin has confered the responsability of basic health to subnational entities. Yet, given that municipalities are financially incapable to meeting their assignment, the central government, with the help of international development agencies have increasingly transfered grants allowting local governments to face basic needs, including health provisions. Decentralization is said to have many benefits in the country where it is implemented; as health services is close to microeconomic, it is therefore more suitable to bring on a micro level. For this reason, we have decided to bring these two sides in our research, by asking the question: **What impact does decentralization have on the provision of health-related services and infrastructures in Benin**.
 
-#Macro perspective
+Studying both decentralization and health provision is a very challenging exercice as it requires consistent and reliable microeconomic data which are, very often, not openly avaible or not consistent. Therefore, in order to enhance the reliability of our study to better analyze the trends over the recent years, we have decided to combine a macro and a micro perspective. The first section below uses a macro approach, in other words we will look at overall health expenditures and provision of health-services in Benin over the years 2005-2013 (when the data is availble). There we make use of some descriptive statistics. The Second part of this paper looks at health provision on a micro level. We will be analyzing the impact of decentralization on elements that revolve around health care, like the number of facilities, improved health conditions etWe will further based our indicators and methodology on existing theoretical and empirical literatures on welfare states, poverty and health.  
 
-##Web scraping and data cleanig
+#Macro perspective: Data collection and cleaning 
 
-Our first step is to web scrape data from the WB and the Who on Benin as a country, related to public health expenditure, health expenditure per capita, improved sanitation facilities, density of health infrastructures per 100000 population. 
-In fact, as we alredy mentioned, decentralization in Benin only begun in the 2000s with establishment of 77 municipalities and transfer of competencies from central to local governments.Consequently, let's see the trend of the last years concerning this country on behalf of health related variables.
+In this section, we use data analytics tools to scrape openly available data on Benin's health-related expenditures and services. We first extracted a dataset from the World Bank which include indicators on Public Health Expenditure, Health Expenditure Per Capita and Improved Sanitation facilities overover a seven year timespan (2005:2011). The variables are defined as follow: 
+
+(i) **health expenditure per capita (SH.XPD.PCAP)**, meaninig the sum of public and private health expenditures as a ratio of total population. It covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
+
+(ii) **public health expenditure (SH.XPD.PUBL)**,which consists of recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
+
+(iii) **improved sanitation facilities(SH.STA.ACSN)**, which actually refers to the access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. The indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
+
+As mentionned from our research proposal decentralization in Benin only begun in the 2000s, and therefore it's at its very early stage. As the following graphs (using ggplot in R) demontrate, there has been a considerable increase in health expenditure in the past few years. Since health expenditures is a decentralized process, we could potentially argue that there is a correlation between health provision and the process of decentralization. Analyzing the micro data shall allow for a confirmation or rejection of this assumption. 
 
 Firstly, we need to load the dataset and eliminate the column we do not need.
 
@@ -25,21 +41,17 @@ healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL','SH.XPD.PCAP','SH.STA.ACSN'))
 Benin<-subset(healthpublicexpend,country=='Benin')
 Benin$iso2c<-NULL
 names(Benin)[names(Benin)=="year"] <- "Year"
-library("ggplot2", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
-ggplot(data=Benin, aes(x=Year,y=SH.XPD.PUBL)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
-
-ggplot(data=Benin, aes(x=Year,y=SH.XPD.PCAP)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
-ggplot(data=Benin, aes(x=Year,y=SH.STA.ACSN)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
+names(Benin)[names(Benin)=="SH.XPD.PUBL"] <- "Public.Health.Expenditure"
+names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
+names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
+install.packages("ggplot2")
+library(ggplot)
+library(ggplot2)
+ggplot(data=Benin, aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
+ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
+ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
 ```
 
-
-This dataset includes these variables over a seven year timespan (2005:2011): 
-
-(i) **health expenditure per capita (SH.XPD.PCAP)**, meaninig the sum of public and private health expenditures as a ratio of total population. It covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
-
-(ii) **public health expenditure (SH.XPD.PUBL)**,which consists of recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
-
-(iii) **improved sanitation facilities(SH.STA.ACSN)**, which actually refers to the access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. The indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
 
 The second dataset is taken from the WHO indicators, in particular, from the Global Health Obervatory Data Repository. What we want is the dataset that refers to the density of health infrastructures per 100000 population, including:
 
@@ -67,8 +79,8 @@ Benininfra$WHO.region<-NULL
 Benininfra$Low<-NULL
 Benininfra$High<-NULL
 Benininfra$Comments<-NULL
-install.packages("tidyr")
 library(tidyr)
+library(dplyr)
 messy<-data.frame(
   Indicator=c("District/rural hospitals", "Health centres","Provincial hospitals","Specialized hospitals","Provincial hospitals","Specialized hospitals"),
   Year=c(2010,2010,2010,2010,2013,2013),
@@ -89,38 +101,89 @@ total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 
 #Micro perspective
 
-Indicator for Decentralization:
-Decentralization typically defined in public planning, management and decision making as the transfer of authority and power from higher to lower levels of governing or from national to sub-national levels[@rondinelli1983collins].it has different characterstics for different writers as describe as delegation,devaluation,de-concentration,and privatization of responsibility and authority of tasks to lower level of administration.
-Decentralization system involves two different measures: level and degree .decentralizations may occur at system or organization level(Mintzberg(1979).Degree can be defined as the distribution of power over the decision made inside an organization.
+In this section, we explore decentralization and health provision at the 77 municipalities in Benin. The datasets on local finances are obtained from the National Commission on Local Finances of Benin. Health-related expenditures and provision are from Benin's Integrated Modular Surveys on Household Living Conditions (EMICoV) and the Demographic and Health Survey.
+
+##Decentralization as an indicator
+
+Decentralization typically defined in public planning, management and decision making as the transfer of authority and power from higher to lower levels of governing or from national to sub-national levels[@rondinelli1983collins]. It has different characteristics for different writers as describe as delegation,devaluation,de-concentration,and privatization of responsibility and authority of tasks to lower level of administration, leading to long debate in related literature and few argument on the best measurement. Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimension, it is difficult to capture the process and quantify in an empirical study. Despite a number of theoretical frameworks, few try to measure the level and the extent of decentralization based on standard space map.
+
+So it leads to a challenge for measuring the outcome of decentralization on health provision system. 
+Decentralization system involves two different measures: level and degree. Decentralizations may occur at system or organization level[@mintzberg1979].Degree can be defined as the distribution of power over the decision made inside an organization.
 Indicators for decentralization
-As defined above, decentralization is a complex multiple phenomenon, encompassing a number of political, fiscal and administrative dimension, it is difficult to capture the process and quantify for empirical study. So it leads to a challenge for measuring the outcome of decentralization on health provision system. 
-Despite a number of theoretical frameworks, few try to measure the level and the extent of decentralization based on standard space map. The approach will consider both the fiscal and non fiscal aspects of decentralization. Such as  Share of local income/ spending as a proportion of national income/spending  ,major decentralization healthy program (dummy variable pre and post period),citizen participation (high, medium or low),governance rules on healthy offices(high,medium,or low)
-We proposed here to use a Revenue authonomy(RA) measure approch  that, used in the [@akai2002sakata] and [@habibi2003etal]iteratures .This approach will consider both own municipalities revenue and total expenditure.Thus,takes the ratio of sub nationally financed administered revenue to the total expenditure that financed and administered by both central and sub national .
+
+We proposed here to use a Revenue authonomy(RA) measure approch  that, used by [@akai2002sakata] and [@habibi2003etal] literatures .This approach will consider both own municipalities revenue and total expenditure.Thus,takes the ratio of sub nationally financed administered revenue to the total expenditure that financed and administered by both central and sub national .
 Rhe following part will present and analyse Benin's Revenue authonomy(RA) measure for 77 muncipalities from 2005-2010. 
 
-*Loading Data and cleaning
+#Loading Data and cleaning
 ```{r, echo=FALSE}
-Decentdat<-read.csv()
-                    
-Decentdat
-decentralazation <- na.omit(Decentdat)
-decentralazation
+
+library(devtools)
+source_url('https://raw.githubusercontent.com/giumin/Third_Assignment/master/decentral.csv')
+
+
+
+library
+URL <- ''
+decentral <- source_data(URL)
+
+
+decentral <- read.csv("decentral.csv")
+health <- read.csv("health.csv")
+decenthealth <-merge(decentral,health, by=c("Cities", "Year"), all=TRUE)
+
+
+ggplot(data=decenthealth, aes(x=Year,y=Decentralization)) + geom_point() + theme_bw(base_size = 13) + ggtitle("Degree of decentralization\n")
+ggplot(data=Benin, aes(x=Year,y=ealth.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
+ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
+
+library(car)
+
+
 ```
 
-*Checking
-```{r}
-head(decentralazation)
-names(decentralazation)
-tail(decentralazation)
-sum(is.na(decentralazation))
-
-
+#Basic regression
 
 ```{r}
-summary(decentralazation)
-mean(decentralazation$Decentralazation)
-plot(decentralazation$Decentralazation)
+summary(decenthealth$Decentralization)
+describe()
 
+# Estimate model
+names(decenthealth)[names(decenthealth)=="X..educ_adult"] <- "educ"
+
+R1water <- lm(X.pop_wateraccess ~ Decentralization, data = decenthealth)
+summary(R1water)
+R2water <- lm(X.pop_wateraccess ~ Decentralization + Population + Density, data=decenthealth)
+summary(R2water)
+
+R1toilet <- lm(X.pop_wateraccess ~ Decentralization, data = decenthealth)
+summary(R1toilet)
+R2water <- lm(X.pop_wateraccess ~ Decentralization + Population + Density, data=decenthealth)
+summary(R2water)
+
+# Create scenario labels
+Scenarios <- c('Scenario 1', 'Scenario 2', 'Scenario 3', 'Scenario 4')
+
+# Create fitted data
+fitted <- with(Admission,
+               data.frame(gre = mean(gre),
+                          gpa = mean(gpa),
+                          rank = factor(1:4)))
+# Combine
+fitted <- data.frame(Scenarios, fitted)
+```{r, message=FALSE, results='asis'}
+
+# Create custom clean coefficient labels
+labels <- c('(Intercept)', 'GRE Score', 'GPA Score', '2nd Ranked School',
+            '3rd Ranked School', '4th Ranked School')
+stargazer::stargazer(L1, L2, L3, covariate.labels = labels,
+                     title = 'Logistic Regression Estimates of Grad School Acceptance',
+                     digits = 2, type = 'latex', header = FALSE)
+```
+
+
+
+
+```{r}
 
 ```
 
