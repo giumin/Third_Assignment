@@ -54,10 +54,6 @@ ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + 
 ```
 
 
-=======
-```
-
-
 This dataset includes these variables over a seven year timespan (2005:2011): 
 
 (i) **health expenditure per capita (SH.XPD.PCAP)**, meaninig the sum of public and private health expenditures as a ratio of total population. It covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
@@ -128,34 +124,21 @@ total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 
 In this section, we explore decentralization and health provision at the 77 municipalities in Benin. The datasets on local finances are obtained from the National Commission on Local Finances of Benin. Health-related expenditures and provision are from Benin's Integrated Modular Surveys on Household Living Conditions (EMICoV) and the Demographic and Health Survey.
 
-##Decentralization as an indicator
+##Description of Variables 
 
-Decentralization typically defined in public planning, management and decision making as the transfer of authority and power from higher to lower levels of governing or from national to sub-national levels[@rondinelli1983collins]. It has different characteristics for different writers as describe as delegation,devaluation,de-concentration,and privatization of responsibility and authority of tasks to lower level of administration, leading to long debate in related literature and few argument on the best measurement. Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimension, it is difficult to capture the process and quantify in an empirical study. Despite a number of theoretical frameworks, few try to measure the level and the extent of decentralization based on standard space map.
+###Independent variable: Decentralization 
 
-So it leads to a challenge for measuring the outcome of decentralization on health provision system. 
-Decentralization system involves two different measures: level and degree. Decentralizations may occur at system or organization level[@mintzberg1979].Degree can be defined as the distribution of power over the decision made inside an organization.
-Indicators for decentralization
+Decentralization typically defined in public planning, management and decision making as the transfer of authority and power from higher to lower levels of governing or from national to sub-national levels[@rondinelli1983collins]. It has different characteristics for different writers as describe as delegation,devaluation,de-concentration,and privatization of responsibility and authority of tasks to lower level of administration. Decentralization system involves two different measures: level and degree. Decentralizations may occur at system or organization level[@mintzberg1979].Degree can be defined as the distribution of power over the decision made inside an organization.This has led to long debate in related literature and few argument on the best measurement. Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimension, it is difficult to assess and measure the outcome of decentralization in an empirical study. For the purpose of this exercise, we propose here to use a Revenue authonomy(RA) measure approch  used by [@akai2002sakata] and [@habibi2003etal] to proxy for decentralization. A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditures, we have chosen this proxy which accounts for both. Its measurement implies taking the ratio of own-source revenues to the total of expenditures for each municipality over the year 2005 to 2011. The data on local finances are obtained from the National Commission on local finances. 
 
-We proposed here to use a Revenue authonomy(RA) measure approch  that, used by [@akai2002sakata] and [@habibi2003etal] literatures .This approach will consider both own municipalities revenue and total expenditure.Thus,takes the ratio of sub nationally financed administered revenue to the total expenditure that financed and administered by both central and sub national .
-Rhe following part will present and analyse Benin's Revenue authonomy(RA) measure for 77 muncipalities from 2005-2010. 
+###Dependent variables
+
+
 
 #Loading Data and cleaning
 ```{r, echo=FALSE}
-
-library(devtools)
-source_url('https://raw.githubusercontent.com/giumin/Third_Assignment/master/decentral.csv')
-
-
-
-library
-URL <- ''
-decentral <- source_data(URL)
-
-
 decentral <- read.csv("decentral.csv")
 health <- read.csv("health.csv")
 decenthealth <-merge(decentral,health, by=c("Cities", "Year"), all=TRUE)
-
 
 ggplot(data=decenthealth, aes(x=Year,y=Decentralization)) + geom_point() + theme_bw(base_size = 13) + ggtitle("Degree of decentralization\n")
 ggplot(data=Benin, aes(x=Year,y=ealth.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
