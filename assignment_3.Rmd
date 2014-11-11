@@ -41,6 +41,7 @@ healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL','SH.XPD.PCAP','SH.STA.ACSN'))
 Benin<-subset(healthpublicexpend,country=='Benin')
 Benin$iso2c<-NULL
 names(Benin)[names(Benin)=="year"] <- "Year"
+<<<<<<< HEAD
 names(Benin)[names(Benin)=="SH.XPD.PUBL"] <- "Public.Health.Expenditure"
 names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
 names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
@@ -53,6 +54,30 @@ ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + 
 ```
 
 
+=======
+```
+
+
+This dataset includes these variables over a seven year timespan (2005:2011): 
+
+(i) **health expenditure per capita (SH.XPD.PCAP)**, meaninig the sum of public and private health expenditures as a ratio of total population. It covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
+
+(ii) **public health expenditure (SH.XPD.PUBL)**,which consists of recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
+
+(iii) **improved sanitation facilities(SH.STA.ACSN)**, which actually refers to the access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. The indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
+
+When the daset is cleaned, it is usrful to have some graphs that show how these variables have been changing.
+
+```{r, echo=FALSE}
+library("ggplot2", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
+ggplot(data=Benin, aes(x=Year,y=SH.XPD.PUBL)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
+
+ggplot(data=Benin, aes(x=Year,y=SH.XPD.PCAP)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
+ggplot(data=Benin, aes(x=Year,y=SH.STA.ACSN)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
+```
+
+
+>>>>>>> origin/master
 The second dataset is taken from the WHO indicators, in particular, from the Global Health Obervatory Data Repository. What we want is the dataset that refers to the density of health infrastructures per 100000 population, including:
 
 (i) Health posts, that  are either community centres or health environments with a very limited number of beds with limited curative and preventive care resources normally assisted by health workers or nurses,
