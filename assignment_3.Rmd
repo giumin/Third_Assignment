@@ -40,16 +40,11 @@ healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL','SH.XPD.PCAP','SH.STA.ACSN'))
 Benin<-subset(healthpublicexpend,country=='Benin')
 Benin$iso2c<-NULL
 names(Benin)[names(Benin)=="year"] <- "Year"
-<<<<<<< HEAD
 names(Benin)[names(Benin)=="SH.XPD.PUBL"] <- "Public.Health.Expenditure"
 names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
 names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 install.packages("ggplot2")
-library(ggplot)
-library(ggplot2)
-ggplot(data=Benin, aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
-ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
-ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
+
 ```
 
 
@@ -57,11 +52,11 @@ As mentionned from our research proposal decentralization in Benin only begun in
 
 
 ```{r, echo=FALSE}
-library("ggplot2", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
-ggplot(data=Benin, aes(x=Year,y=SH.XPD.PUBL)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
-
-ggplot(data=Benin, aes(x=Year,y=SH.XPD.PCAP)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
-ggplot(data=Benin, aes(x=Year,y=SH.STA.ACSN)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
+library(ggplot)
+library(ggplot2)
+ggplot(data=Benin, aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
+ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
+ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
 ```
 
 >>>>>>> origin/master
