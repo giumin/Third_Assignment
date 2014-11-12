@@ -27,14 +27,15 @@ This paper is divided into three sections. The first one bring a general overvie
 
 #Macroeconomic Overview
 
-In this section, we use data analytics tools to scrape openly available datasets on Benin's health-related expenditures and services. We first extracted a dataset from the World Bank (WB) which include indicators on Public Health Expenditure, Health Expenditure Per Capita and Improved Sanitation facilities over a seven year timespan (2005:2011). The extracted variables are defined as follow: 
+In this section, we use data analytics tools to scrape openly available datasets on Benin's health-related expenditures and services. The first dataset is obtained from the World Bank (WB) and include the following indicators:
 
-(i) *health expenditure per capita (SH.XPD.PCAP)*, meaninig the sum of public and private health expenditures as a ratio of total population. It covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
+##World Bank Indicators
 
-(ii) *public health expenditure (SH.XPD.PUBL)*,which consists of recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
+(i) health expenditure per capita (SH.XPD.PCAP): sum of public and private health expenditures as a ratio of total population. This indicator covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
 
-(iii) *improved sanitation facilities(SH.STA.ACSN)*, which actually refers to the access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. The indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
+(ii) public health expenditure (SH.XPD.PUBL): recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
 
+(iii) improved sanitation facilities(SH.STA.ACSN): access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. This indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
 
 ```{r, echo=FALSE}
 library(WDI)
@@ -46,11 +47,7 @@ names(Benin)[names(Benin)=="SH.XPD.PUBL"] <- "Public.Health.Expenditure"
 names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
 names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 
-
 ```
-
-
-As mentionned from our research proposal decentralization in Benin only begun in the 2000s. As the following graphs (using ggplot in R) demontrate, there has been a considerable increase in health expenditure in the past few years. Since health expenditures is a decentralized process, we could potentially argue that there is a correlation between health provision and the process of decentralization. Analyzing the micro data shall allow for a confirmation or rejection of this assumption. 
 
 
 ```{r, echo=FALSE}
@@ -60,7 +57,11 @@ ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + 
 ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
 ```
 
-The second dataset is taken from the WHO indicators, in particular, from the Global Health Obervatory Data Repository. What we want is the dataset that refers to the density of health infrastructures per 100000 population, including:
+The above graphs suggest that all three elements: public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the timespan 2005 to 2011. As mentionned above and in our research proposal, the central government in Benin (alike other developing countries in West-Africa) have used decentralization as a mechanisms to reacht he targets of the Millenium Development Goal. Therefore, since health expenditure is highly decentralized, we could potentially argue that the macroeconomic overview is related to the outcome on a micro level. The microeconomic approach in section 2 will therefore help us testing this assumption.
+
+##World Health Organization Indicators
+
+The second dataset is taken from the WHO databases, particularly from the Global Health Obervatory Data Repository. What we want is the dataset that refers to the density of health infrastructures per 100000 population, including:
 
 (i) Health posts, that  are either community centres or health environments with a very limited number of beds with limited curative and preventive care resources normally assisted by health workers or nurses,
 
