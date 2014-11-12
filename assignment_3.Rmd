@@ -1,5 +1,5 @@
 ---
-title: "Second Assignment"
+title:"Second Assignment"
 bibliography:decentralizationind.bib
 date: "9 October 2014"
 output:
@@ -143,6 +143,7 @@ Like decentralization, it is very challenging to find a composite proxy for heal
 As stated from our proposal, we will also take into account heterogeneity between the municipalitie. For this reason, as so far, we have decided to include population, population density, per capita consumption, households health consumption, indicators on poverty, literacy rate, as well as the percentage of households which favor decentralization in each municipality. These control variables are drawn from Benin's Integrated Modular Surveys on Households Living Conditions (EMICoV)
 
 #Basic Regression models 
+
 ```{r, echo=FALSE}
 library("RCurl", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
 library("foreign", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")                 
@@ -159,6 +160,7 @@ install.packages("car")
 library("car")
 install.packages("stargazer")
 ```
+
 ### Model estimations
 
 ```{r, echo=FALSE}
@@ -195,9 +197,9 @@ stargazer::stargazer(R1soneb, R2soneb, covariate.labels = labels,
                      title = 'Effect of decentralization on water delivery infrastructure',
                      digits = 2, type = 'latex', header = FALSE)
 
-R1soneb <- lm(pubhosp ~ decentralization, data = decenthealth)
+R1pubhosp <- lm(pubhosp ~ decentralization, data = decenthealth)
 summary(R1pubhosp)
-R2soneb <- lm(pubhosp ~ decentralization + population + Density + Year, data = decenthealth)
+R2pubhosp <- lm(pubhosp ~ decentralization + population + Density + Year, data = decenthealth)
 summary(R2pubhosp)
 labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density')
 library(stargazer)
