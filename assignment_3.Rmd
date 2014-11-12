@@ -13,9 +13,9 @@ output:
 
 
 ---
-#Research question and Methodology
+#Research question and methodology
 
-As stated in previous assignment, our research project aims to look at the impact of decentralization on health provision in Benin. Access to basic health-related services has been one of the core Millenium Development Goals. It is also regarded as basic human rights and promoted by international organizations. For the past decade, governments and policy makers in developing countries, including Benin, have invested in improving basic sanitation and health-related facilities. Decentralization and devolution of public administration have been two important channels. 
+As stated in previous assignment, our research project aims to look at the impact of decentralization on health provision in Benin. Access to basic health-related services has been one of the core Millenium Development Goals; it is also regarded as basic human rights. For the past decade, governments and policy makers in developing countries, including Benin, have invested in improving basic sanitation and health-related facilities. Decentralization and devolution of public administration have been two important channels. 
 
 In Benin, the legal provision on decentralization has transfered health-related competencies to sub-national entities. Since the year 2002, municipal governments are increasingly responsible for providing basic infrastructures such as water access etc. In that regards, and to offset the vertical imbalance of subnational governments, the central government with the financial support of development agencies have used fiscal decentralization policies (e.g. tax power, intergovernmental transfers) and thereby allowing local governments to meet their expenditures requirements. Proponents of decentralization share the view that public services delivery is more efficient at the local level. Yet, as stated from previous paper, there are many controversies with regards to the efficiency of decentralization mechanisms on public goods delivery. Given the importance of health provision in the overall development of a country, we will draw from theories on public finances and development, using Benin as a case study to investigate the following question : **What impact does decentralization have on the provision of health-related services and infrastructures in Benin?**.
 
