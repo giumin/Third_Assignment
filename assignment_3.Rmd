@@ -22,7 +22,7 @@ In Benin, the legal provision on decentralization has transfered health-related 
 
 Studying the relationship between decentralization and health provision is a very challenging exercice as it requires consistent and reliable microeconomic data which are, very often, not openly avaible or not consistent. Therefore, in order to enhance the reliability of our findings, we have decided to broaden our approaches by including a macroeconomic perspective on health provision in Benin. In addition to the micro analysis, we will also look at the health-related expenditures in recent years. This paper is divided into two sections. The first one bring a general overview on health provision in Benin over the years 2005 to 2010. For this, we use data from the World Bank (WB) and the World Health Organization (WHO). We look at overall trends in health-related expenditures over the years 2005 to 2011. The second part looks at health provision on a micro level.We use households surveys and local finances data to analyze the impact of decentralization on four health-related indicators. We also present our basic econometric model.
 
-#Overview: Data collection and cleaning 
+#Macroeconomic Overview
 
 In this section, we use data analytics tools to scrape openly available datasets on Benin's health-related expenditures and services. We first extracted a dataset from the World Bank (WB) which include indicators on Public Health Expenditure, Health Expenditure Per Capita and Improved Sanitation facilities over a seven year timespan (2005:2011). The extracted variables are defined as follow: 
 
