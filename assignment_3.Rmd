@@ -196,7 +196,7 @@ labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density
 library(stargazer)
 stargazer::stargazer(R1soneb, R2soneb, covariate.labels = labels,
                      title = 'Effect of decentralization on water delivery infrastructure',
-                     digits = 2, type = 'latex', header = FALSE)
+                     digits = 2, type = 'text', header = FALSE,out="table1.txt")
 
 R2soneb <- lm(connect_soneb ~ decentralization + population + Density + Year + consump.c, data = decenthealth)
 summary(R2soneb)
