@@ -1,15 +1,18 @@
 ---
-title:"Third Assignment"
-bibliography:decentralization.bib
+title: "Third Assignment"
+authors: "Giulia Minnucci, Rose Camille Vincent, Daniel Jemberu"
+bibliography: decentralization.bib
+date: "15 November 2014"
 output:
   pdf_document:
-    fig_caption:yes
-    number_section:yes
-    toc:yes
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
   html_document:
-    toc:yes
-  word_document:default
-authors: "Giulia Minnucci, Rose Camille Vincent, Daniel Jemberu"
+    toc: yes
+  word_document: default
+
+
 ---
 #Research question and Methodology
 
