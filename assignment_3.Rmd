@@ -20,11 +20,11 @@ As stated in previous assignment, our research project aims to look at the impac
 In Benin, the legal provision on decentralization has transfered health-related competencies to sub-national entities. Since the year 2002, municipal governments are increasingly responsible for providing basic infrastructures such as water access etc. In that regards, and to offset the vertical imbalance of subnational governments, the central government with the financial support of development agencies have used fiscal decentralization policies (e.g. tax power, intergovernmental transfers) and thereby allowing local governments to meet their expenditures requirements. Proponents of decentralization share the view that public services delivery is more efficient at the local level. Yet, as stated from previous paper, there are many controversies with regards to the efficiency of decentralization mechanisms on public goods delivery. Given the importance of health provision in the overall development of a country, we will draw from theories on public finances and development, using Benin as a case study to investigate the following question : **What impact does decentralization have on the provision of health-related services and infrastructures in Benin?**.
 
 
-Studying the relationship between decentralization and health provision is a very challenging exercice as it requires consistent and reliable microeconomic data which are, very often, not openly avaible or not consistent. Therefore, in order to enhance the reliability of our findings, we have decided to broaden our approaches by including a macroeconomic perspective on health provision in Benin. In addition to the micro analysis, we will also look at the health-related expenditures in recent years. This paper is divided into two sections. The first one bring a general overview on health provision in Benin over the years 2005 to 2010. For this, we use data from the World Bank (WB) and the World Health Organization (WHO). We look at overall trends in health-related expenditures over the years 2005 to 2013. The second part looks at health provision on a micro level.We use households surveys and local finances data to analyze the impact of decentralization on four health-related indicators. We also present our basic econometric model.
+Studying the relationship between decentralization and health provision is a very challenging exercice as it requires consistent and reliable microeconomic data which are, very often, not openly avaible or not consistent. Therefore, in order to enhance the reliability of our findings, we have decided to broaden our approaches by including a macroeconomic perspective on health provision in Benin. In addition to the micro analysis, we will also look at the health-related expenditures in recent years. This paper is divided into two sections. The first one bring a general overview on health provision in Benin over the years 2005 to 2010. For this, we use data from the World Bank (WB) and the World Health Organization (WHO). We look at overall trends in health-related expenditures over the years 2005 to 2011. The second part looks at health provision on a micro level.We use households surveys and local finances data to analyze the impact of decentralization on four health-related indicators. We also present our basic econometric model.
 
-#Macro perspective: Data collection and cleaning 
+#Overview: Data collection and cleaning 
 
-In this section, we use data analytics tools to scrape openly available data on Benin's health-related expenditures and services. We first extracted a dataset from the World Bank which include indicators on Public Health Expenditure, Health Expenditure Per Capita and Improved Sanitation facilities overover a seven year timespan (2005:2011). The variables are defined as follow: 
+In this section, we use data analytics tools to scrape openly available datasets on Benin's health-related expenditures and services. We first extracted a dataset from the World Bank (WB) which include indicators on Public Health Expenditure, Health Expenditure Per Capita and Improved Sanitation facilities over a seven year timespan (2005:2011). The extracted variables are defined as follow: 
 
 (i) **health expenditure per capita (SH.XPD.PCAP)**, meaninig the sum of public and private health expenditures as a ratio of total population. It covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
 
@@ -32,9 +32,7 @@ In this section, we use data analytics tools to scrape openly available data on 
 
 (iii) **improved sanitation facilities(SH.STA.ACSN)**, which actually refers to the access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. The indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
 
-As mentionned from our research proposal decentralization in Benin only begun in the 2000s, and therefore it's at its very early stage. As the following graphs (using ggplot in R) demontrate, there has been a considerable increase in health expenditure in the past few years. Since health expenditures is a decentralized process, we could potentially argue that there is a correlation between health provision and the process of decentralization. Analyzing the micro data shall allow for a confirmation or rejection of this assumption. 
 
-Firstly, we need to load the dataset and eliminate the column we do not need.
 
 ```{r, echo=FALSE}
 library(WDI)
@@ -55,15 +53,8 @@ ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + 
 ```
 
 
-This dataset includes these variables over a seven year timespan (2005:2011): 
+As mentionned from our research proposal decentralization in Benin only begun in the 2000s. As the following graphs (using ggplot in R) demontrate, there has been a considerable increase in health expenditure in the past few years. Since health expenditures is a decentralized process, we could potentially argue that there is a correlation between health provision and the process of decentralization. Analyzing the micro data shall allow for a confirmation or rejection of this assumption. 
 
-(i) **health expenditure per capita (SH.XPD.PCAP)**, meaninig the sum of public and private health expenditures as a ratio of total population. It covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
-
-(ii) **public health expenditure (SH.XPD.PUBL)**,which consists of recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
-
-(iii) **improved sanitation facilities(SH.STA.ACSN)**, which actually refers to the access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. The indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
-
-When the daset is cleaned, it is usrful to have some graphs that show how these variables have been changing.
 
 ```{r, echo=FALSE}
 library("ggplot2", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
