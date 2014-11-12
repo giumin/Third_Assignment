@@ -1,17 +1,15 @@
 ---
-title:"Second Assignment"
-bibliography:decentralizationind.bib
-date: "9 October 2014"
+title:"Third Assignment"
+bibliography:decentralization.bib
 output:
   pdf_document:
-    fig_caption: yes
-    number_sections: yes
-    toc: yes
+    fig_caption:yes
+    number_section:yes
+    toc:yes
   html_document:
-    toc: yes
-  word_document: default
+    toc:yes
+  word_document:default
 authors: "Giulia Minnucci, Rose Camille Vincent, Daniel Jemberu"
-
 ---
 #Research question and Methodology
 
@@ -196,6 +194,9 @@ library(stargazer)
 stargazer::stargazer(R1soneb, R2soneb, covariate.labels = labels,
                      title = 'Effect of decentralization on water delivery infrastructure',
                      digits = 2, type = 'latex', header = FALSE)
+
+R2soneb <- lm(connect_soneb ~ decentralization + population + Density + Year + consump.c, data = decenthealth)
+summary(R2soneb)
 
 R1pubhosp <- lm(pubhosp ~ decentralization, data = decenthealth)
 summary(R1pubhosp)
