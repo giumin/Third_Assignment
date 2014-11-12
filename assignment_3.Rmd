@@ -171,6 +171,8 @@ R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
 summary(R1water)
 R2water <- lm(pop_wateraccess ~ decentralization + population + Density + Year, data = decenthealth)
 summary(R2water)
+R2water <- lm(pop_wateraccess ~ decentralization + population + Density + pubexp.c + Year, data = decenthealth)
+summary(R2water)
 labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density')
 library(stargazer)
 stargazer::stargazer(R1water, R2water, covariate.labels = labels,
