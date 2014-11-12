@@ -1,7 +1,6 @@
 ---
 title: "Third Assignment"
 authors: "Giulia Minnucci, Rose Camille Vincent, Daniel Jemberu"
-bibliography: decentralization.bib
 date: "15 November 2014"
 output:
   pdf_document:
@@ -43,7 +42,7 @@ names(Benin)[names(Benin)=="year"] <- "Year"
 names(Benin)[names(Benin)=="SH.XPD.PUBL"] <- "Public.Health.Expenditure"
 names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
 names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
-install.packages("ggplot2")
+
 
 ```
 
@@ -52,7 +51,6 @@ As mentionned from our research proposal decentralization in Benin only begun in
 
 
 ```{r, echo=FALSE}
-library(ggplot)
 library(ggplot2)
 ggplot(data=Benin, aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
 ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
@@ -77,7 +75,7 @@ However, these variables are only know for the years 2010 and 2013.
 We import this Dataset with an URL from the WHO website, that we call infrastructures.From this dataset we definetly have to extract only the country we are interested in (BEN).
 From this point, the dataset has to be cleaned of all those columns that we really don't need, since the original one shows also elements such as if it was published, comments,NA elements etc...
 
-```{r}
+```{r,include=FALSE}
 infrastructures <- read.csv("http://apps.who.int/gho/athena/data/data-text.csv?target=GHO/DEVICES01,DEVICES02,DEVICES03,DEVICES04,DEVICES05&profile=text&filter=COUNTRY:*;REGION:AFR;REGION:AMR;REGION:SEAR;REGION:EUR;REGION:EMR;REGION:WPR")
 Benininfra<-subset(infrastructures,Country=='Benin')
 Benininfra$PUBLISH.STATES<-NULL
@@ -114,17 +112,17 @@ In this section, we explore decentralization and health provision at the 77 muni
 
 ###Independent variable: Decentralization 
 
-*Loading Data and cleaning
+*Loading Data and cleaning*
 ```{r, echo=FALSE}
-library("RCurl", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
-library("foreign", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")                 
+library(RCurl)
+library(foreign)                   
 url <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/decentral.csv"
 decentralization.data <- getURL(url)                
 decentralization.data <- read.csv(textConnection(decentralization.data))
 ```
 
-*Checking
-```{r}
+*Checking*
+```{r,echo=FALSE}
 head(decentralization.data)
 names(decentralization.data)
 tail(decentralization.data)
@@ -145,27 +143,18 @@ As stated from our proposal, we will also take into account heterogeneity betwee
 
 #Basic Regression models 
 
-```{r, echo=FALSE}
-library("RCurl", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
-library("foreign", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")                 
-url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/health.csv"
-health.data <- getURL(url2)                
-health.data <- read.csv(textConnection(health.data))
+```{r, echo=FALSE}              
+#url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/health.csv"
+#health.data <- getURL(url2)                
+#health.data <- read.csv(textConnection(health.data))
+health.data <- read.csv("health.csv", stringsAsFactors = FALSE)
+
 decenthealth <-merge(decentralization.data,health.data, by=c("Year", "ID", "Cities"), all=TRUE)
-library(ggplot2)
-
-ggplot(data=decenthealth, aes(x=Cities,y=decentralization)) + geom_point() + theme_bw(base_size = 13) + ggtitle("Degree of decentralization\n")
-
-pkgs <- c('knitr', 'stargazer')
-install.packages("car")
-library("car")
-install.packages("stargazer")
 ```
 
 ### Model estimations
 
 ```{r, echo=FALSE}
-
 
 R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
 summary(R1water)
@@ -173,13 +162,18 @@ R2water <- lm(pop_wateraccess ~ decentralization + population + Density + Year, 
 summary(R2water)
 R3water <- lm(pop_wateraccess ~ decentralization + population + Density + pubexp.c + consump.c + ind_pauv_mon + Year, data = decenthealth)
 summary(R3water)
+```
+ 
+
+```{r,results='asis',echo=FALSE}
 labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density')
 library(stargazer)
 stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
                      title = 'Effect of decentralization on water access',
                      digits = 2, type = 'latex', header = FALSE)
+```
 
-
+```{r, echo=FALSE,results='asis'}
 R1toilet <- lm(pop_toiletacess ~ decentralization, data = decenthealth)
 summary(R1toilet)
 R2toilet <- lm(pop_toiletacess ~ decentralization + population + Density + Year, data = decenthealth)
@@ -191,7 +185,9 @@ library(stargazer)
 stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
                      title = 'Effect of decentralization on toilet access',
                      digits = 2, type = 'latex', header = FALSE)
+```
 
+```{r,echo=FALSE,results='asis'}
 R1soneb <- lm(connect_soneb ~ decentralization, data = decenthealth)
 summary(R1soneb)
 R2soneb <- lm(connect_soneb ~ decentralization + population + Density + Year, data = decenthealth)
@@ -200,11 +196,14 @@ R3soneb <- lm(connect_soneb ~ decentralization + population + Density + pubexp.c
 summary(R3soneb)
 labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density')
 library(stargazer)
-stargazer::stargazer(R1soneb, R2soneb, covariate.labels = labels,
+stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
                      title = 'Effect of decentralization on water delivery infrastructure',
-                     digits = 2, type = 'text', header = FALSE,out="table1.txt")
+                     digits = 2, type = 'latex', header = FALSE)
+```
 
 
+
+```{r,results='asis',echo=FALSE}
 R1pubhosp <- lm(pubhosp ~ decentralization, data = decenthealth)
 summary(R1pubhosp)
 R2pubhosp <- lm(pubhosp ~ decentralization + population + Density + Year, data = decenthealth)
@@ -217,6 +216,10 @@ stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
                      title = 'Effect of decentralization on health services infrastructure',
                      digits = 2, type = 'latex', header = FALSE)
 ```
+
+
+
+
 
 
 
