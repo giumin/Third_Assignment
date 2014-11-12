@@ -1,7 +1,6 @@
 ---
 title: "Second Assignment"
-bibliography: decentralizationind.bib
-<<<<<<< Updated upstream
+bibliography:decentralizationind.bib
 date: "9 October 2014"
 output:
   pdf_document:
@@ -13,10 +12,6 @@ output:
   word_document: default
 authors: "Giulia Minnucci, Rose Camille Vincent, Daniel Jemberu"
 
-=======
-output: pdf_document
-authors: Rose Camille Vincent,Giulia Minnucci, Daniel Jemberu
->>>>>>> Stashed changes
 ---
 #Research question and Methodology
 
@@ -113,11 +108,11 @@ total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 
 In this section, we explore decentralization and health provision at the 77 municipalities in Benin. The datasets on local finances are obtained from the National Commission on Local Finances of Benin. Health-related expenditures and provision are from Benin's Integrated Modular Surveys on Household Living Conditions (EMICoV) and the Demographic and Health Survey.
 
-<<<<<<< Updated upstream
+
 ##Description of Variables 
 
 ###Independent variable: Decentralization 
-=======
+
 *Loading Data and cleaning
 ```{r, echo=FALSE}
 library("RCurl", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
@@ -133,19 +128,19 @@ head(decentralization.data)
 names(decentralization.data)
 tail(decentralization.data)
 sum(is.na(decentralization.data))
->>>>>>> Stashed changes
+```
 
 Decentralization typically defined in public planning, management and decision making as the transfer of authority and power from higher to lower levels of governing or from national to sub-national levels[@rondinelli1983collins]. It has different characteristics for different writers as describe as delegation,devaluation,de-concentration,and privatization of responsibility and authority of tasks to lower level of administration. Decentralization system involves two different measures: level and degree. Decentralizations may occur at system or organization level[@mintzberg1979].Degree can be defined as the distribution of power over the decision made inside an organization.This has led to long debate in related literature and few argument on the best measurement. Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimension, it is difficult to assess and measure the outcome of decentralization in an empirical study. For the purpose of this exercise, we propose here to use a Revenue authonomy(RA) measure approch  used by [@akai2002sakata] and [@habibi2003etal] to proxy for decentralization. A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditures, we have chosen this proxy which accounts for both. Its measurement implies taking the ratio of own-source revenues to the total of expenditures for each municipality over the year 2005 to 2011. The data on local finances are obtained from the National Commission on local finances. 
 
 
-<<<<<<< Updated upstream
+
 ###Dependent variables
 
 Like decentralization, it is very challenging to find a composite proxy for health provision. Drawing from Benin's Integrated Households Survey (EMICoV) and the Demographic and Health Survey, we have decided to focus on some key variables which include (i) the access to basic sanitation services: *access to water*, *access to toilet facilities*, (ii) access to health-related infrastructure *water provision infrastructure*, *hospital*. 
 
 ###Explanatory variables
 
-As stated from our proposal, we will also take into account heterogeneity between the municipalities. For this reason, as so far, we have decided to include population, population density, per capita consumption, households health consumption, indicators on poverty, literacy rate, as well as the percentage of households which favor decentralization in each municipality. These control variables are drawn from Benin's Integrated Modular Surveys on Households Living Conditions (EMICoV)
+As stated from our proposal, we will also take into account heterogeneity between the municipalitie. For this reason, as so far, we have decided to include population, population density, per capita consumption, households health consumption, indicators on poverty, literacy rate, as well as the percentage of households which favor decentralization in each municipality. These control variables are drawn from Benin's Integrated Modular Surveys on Households Living Conditions (EMICoV)
 
 #Basic Regression models 
 ```{r, echo=FALSE}
@@ -163,8 +158,12 @@ pkgs <- c('knitr', 'stargazer')
 install.packages("car")
 library("car")
 install.packages("stargazer")
+```
+### Model estimations
 
-# Estimate model
+```{r, echo=FALSE}
+
+
 R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
 summary(R1water)
 R2water <- lm(pop_wateraccess ~ decentralization + population + Density + Year, data = decenthealth)
@@ -205,11 +204,9 @@ library(stargazer)
 stargazer::stargazer(R1pubhosp, R2pubhosp, covariate.labels = labels,
                      title = 'Effect of decentralization on health services infrastructure',
                      digits = 2, type = 'latex', header = FALSE)
-=======
-```{r}
-summary(decentralization.data)
->>>>>>> Stashed changes
 ```
+
+
 
 
 
