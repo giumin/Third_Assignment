@@ -101,7 +101,7 @@ tidy<-spread(messy,Indicator,Display.Value)
 
 Once we have our datasets, it is useful to merge them together so as to work easily and quickly with one dataset that would include all the needed variables.
 
-```{r}
+```{r, echo=FALSE}
 names(Benin)[names(Benin)=="country"] <- "Country"
 total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 ```
