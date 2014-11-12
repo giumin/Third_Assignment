@@ -113,6 +113,10 @@ In this section, we explore provision of health-related services and infrastruct
 
 ###Independent variable: Decentralization 
 
+Decentralization typically defined in public planning, management and decision making, as the transfer of authority and power from higher to lower levels of governing, or from national to sub-national levels[@rondinelli1983collins]. It has different characteristics for different writers which often describe it as either delegation, devaluation,de-concentration,and privatization of responsibility and authority of tasks to lower level of administration. Yet, decentralization is a very complex mechanism. In general, its measurement involves two elements: the level and the degree where the degree can be regarded as the distribution of power over the decision made inside the system, whereas the level takes into account sociological and political aspects. 
+
+This complexity in the definition and measurement of decentralizaiton has led to long academic debate, with several authors advancing their indicator as the best or the most reliable proxy, which lead to a multitude indicators from existing empirical works. Because decentralization involves revenues and expenditures,  Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimension, it is difficult to assess and measure the outcome of decentralization in an empirical study. For the purpose of this exercise, we propose here to use a Revenue authonomy(RA) measure approch  used by [@akai2002sakata] and [@habibi2003etal] to proxy for decentralization. A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditures, we have chosen this proxy which accounts for both. Its measurement implies taking the ratio of own-source revenues to the total of expenditures for each municipality over the year 2005 to 2011. The data on local finances are obtained from the National Commission on local finances. 
+
 *Loading Data and cleaning*
 ```{r, echo=FALSE}
 library(RCurl)
@@ -130,7 +134,7 @@ tail(decentralization.data)
 sum(is.na(decentralization.data))
 ```
 
-Decentralization typically defined in public planning, management and decision making as the transfer of authority and power from higher to lower levels of governing or from national to sub-national levels[@rondinelli1983collins]. It has different characteristics for different writers as describe as delegation,devaluation,de-concentration,and privatization of responsibility and authority of tasks to lower level of administration. Decentralization system involves two different measures: level and degree. Decentralizations may occur at system or organization level[@mintzberg1979].Degree can be defined as the distribution of power over the decision made inside an organization.This has led to long debate in related literature and few argument on the best measurement. Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimension, it is difficult to assess and measure the outcome of decentralization in an empirical study. For the purpose of this exercise, we propose here to use a Revenue authonomy(RA) measure approch  used by [@akai2002sakata] and [@habibi2003etal] to proxy for decentralization. A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditures, we have chosen this proxy which accounts for both. Its measurement implies taking the ratio of own-source revenues to the total of expenditures for each municipality over the year 2005 to 2011. The data on local finances are obtained from the National Commission on local finances. 
+
 
 
 
