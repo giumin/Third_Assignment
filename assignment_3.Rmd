@@ -304,8 +304,9 @@ stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
 Like the previous models, decentralization does not seem to be a significant elements in the availability of healthcare centers at the subnational level. With regards to the explanatory variables: population, population density, and average literacy rate of the head of households seem to be strongly determinants of the existence of healthcare centers. Public expenditures per capita and poverty level result to be significant as well.
 
 
-#Conclusions
+#Potential Issues 
 
+The macroeconomic overview suggests that Benin's has experienced an improvement on health-services delivery over the past few years. Given that health-related services is highly decentralized, we have tested the impact of decentralization on some key health-related variables, issued from Benin's Households Survy. The microeconomic analysis, however, did not find any significant imapct of decentralization (proxied by the ratio of own-revenue to total expenditures) on the provision of health-related services and infrastructures. Given that exisiting literatures provide various decentralization indicators, the significance found in the microeconomic analysis might be the result of a misleading indicator. Moreover, because public services in Benin is highly financed by intergovernmental (rather than own-source revenues), it might be more reliable to consider an indicator or a model that takes into account this factor. Therefore, we propose to revise our proxy for decentralization and to further work on our model specification. 
 
 
 
