@@ -244,9 +244,7 @@ stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
                      digits = 2, type = 'latex', header = FALSE)
 ```
 
-
 Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be significant. 
-
 
 *Effect of decentralization on water pipeline connection* 
 
@@ -258,10 +256,13 @@ ggplot(data=decenthealth, aes(x=decentralization,y=connect_soneb)) + geom_line()
 ```{r,echo=FALSE,results='asis'}
 R1soneb <- lm(connect_soneb ~ decentralization, data = decenthealth)
 summary(R1soneb)
+confint(R1soneb)
 R2soneb <- lm(connect_soneb ~ decentralization + population + Density, data = decenthealth)
 summary(R2soneb)
-R3soneb <- lm(connect_soneb ~ decentralization + population + Density + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=decenthealth)
+confint(R2soneb)
+R3soneb <- lm(connect_soneb ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=decenthealth)
 summary(R3soneb)
+confint(R3soneb)
 ```
 
 ```{r}
@@ -277,19 +278,33 @@ In this model, our key explanatory variable 'decentralization' seems to have no 
 
 *Effect of decentralization on availability of public health infrastructure* 
 
-```{r,results='asis',echo=FALSE}
+```{r, echo=FALSE}
+#ggplot 
+ggplot(data=decenthealth, aes(x=decentralization,y=pubhosp)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Scatterplot: Decentralization and Availability of Healthcare Centers")
+```
+
+```{r,echo=FALSE}
 R1pubhosp <- lm(pubhosp ~ decentralization, data = decenthealth)
 summary(R1pubhosp)
-R2pubhosp <- lm(pubhosp ~ decentralization + population + Density + Year, data = decenthealth)
+confint(R1puphosp)
+R2pubhosp <- lm(pubhosp ~ decentralization + population + Density, data = decenthealth)
 summary(R2pubhosp)
-R3pubhosp <- lm(pubhosp ~ decentralization + population + Density + Year, data = decenthealth)
+confint(R2pubhosp)
+R3pubhosp <- lm(pubhosp ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=decenthealth)
 summary(R3pubhosp)
-labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density')
-library(stargazer)
+confint(R3pubhosp)
+```
+
+```{r, echo=FALSE,results='asis'}
 stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
-                     title = 'Effect of decentralization on health services infrastructure',
+                     title = 'Effect of decentralization on availability of healthcare centers',
                      digits = 2, type = 'latex', header = FALSE)
 ```
+
+Like the previous models, decentralization does not seem to be a significant elements in the availability of healthcare centers at the subnational level. With regards to the explanatory variables: population, population density, and average literacy rate of the head of households seem to be strongly determinants of the existence of healthcare centers. Public expenditures per capita and poverty level result to be significant as well.
+
+
+
 
 
 
