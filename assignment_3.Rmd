@@ -144,9 +144,9 @@ As stated from our proposal, we will also take into account heterogeneity betwee
 #Basic Regression models 
 
 ```{r, echo=FALSE}              
-#url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/health.csv"
-#health.data <- getURL(url2)                
-#health.data <- read.csv(textConnection(health.data))
+url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/health.csv"
+health.data <- getURL(url2)                
+health.data <- read.csv(textConnection(health.data))
 health.data <- read.csv("health.csv", stringsAsFactors = FALSE)
 
 decenthealth <-merge(decentralization.data,health.data, by=c("Year", "ID", "Cities"), all=TRUE)
