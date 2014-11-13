@@ -108,16 +108,16 @@ total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 
 In this section, we explore provision of health-related services and infrastructures on a local level. Particularly, we look at the impact of decentralization on the access to basic health-related sercices and infrastructure.The datasets on local finances are obtained from the National Commission on Local Finances of Benin. Health-related expenditures and provision are from Benin's Integrated Modular Surveys on Household Living Conditions (EMICoV) and the Demographic and Health Survey.
 
-
 ##Description of Variables 
 
 ###Independent variable: Decentralization 
 
 Decentralization typically defined in public planning, management and decision making, as the transfer of authority and power from higher to lower levels of governing, or from national to sub-national levels[@rondinelli1983collins]. It has different characteristics for different writers which often describe it as either delegation, devaluation,de-concentration,and privatization of responsibility and authority of tasks to lower level of administration. Yet, decentralization is a very complex mechanism. In general, its measurement involves two elements: the level and the degree where the degree can be regarded as the distribution of power over the decision made inside the system, whereas the level takes into account sociological and political aspects. 
 
-This complexity in the definition and measurement of decentralizaiton has led to long academic debate, with several authors advancing their indicator as the best or the most reliable proxy, which lead to a multitude indicators from existing empirical works. Because decentralization involves revenues and expenditures,  Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimension, it is difficult to assess and measure the outcome of decentralization in an empirical study. For the purpose of this exercise, we propose here to use a Revenue authonomy(RA) measure approch  used by [@akai2002sakata] and [@habibi2003etal] to proxy for decentralization. A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditures, we have chosen this proxy which accounts for both. Its measurement implies taking the ratio of own-source revenues to the total of expenditures for each municipality over the year 2005 to 2011. The data on local finances are obtained from the National Commission on local finances. 
+The definition and measurement of decentralizaiton has led to long academic debate, with several authors proposing new indicators as the most reliable proxy, giving birth to a multiplicity of indicators using different approaches. Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimensions, it is difficult to assess and measure the outcome of decentralization mechanisms in an empirical study.
 
-*Loading Data and cleaning*
+A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditure, fwe propose here to use the Revenue authonomy(RA) indicator used by [@akai2002sakata] and [@habibi2003etal] to proxy for decentralization. This indicator is defined as the ratio of own-source revenues over the total expenditures of a subnational entity.  
+
 ```{r, echo=FALSE}
 library(RCurl)
 library(foreign)                   
@@ -126,7 +126,6 @@ decentralization.data <- getURL(url)
 decentralization.data <- read.csv(textConnection(decentralization.data))
 ```
 
-*Checking*
 ```{r,echo=FALSE}
 head(decentralization.data)
 names(decentralization.data)
@@ -134,13 +133,9 @@ tail(decentralization.data)
 sum(is.na(decentralization.data))
 ```
 
-
-
-
-
 ###Dependent variables
 
-Like decentralization, it is very challenging to find a composite proxy for health provision. Drawing from Benin's Integrated Households Survey (EMICoV) and the Demographic and Health Survey, we have decided to focus on some key variables which include (i) the access to basic sanitation services: *access to water*, *access to toilet facilities*, (ii) access to health-related infrastructure *water provision infrastructure*, *hospital*. 
+Like decentralization, it is very challenging to find a composite proxy for health provision. We have therefore decided to focus on some key variables which data is only available on a macro level. These are: *access to water*, *access to toilet facilities*, *water provision infrastructure*, *hospital*. These indicators are from Benin's EMICoV 2010 and 2011. 
 
 ###Explanatory variables
 
