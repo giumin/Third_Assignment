@@ -121,9 +121,13 @@ A large part of the debate on decentralization measurement regards the choice be
 ```{r, echo=FALSE}
 library(RCurl)
 library(foreign)  
+#url version to be edited 
 url <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/decentral.csv"
 decentralization.data <- read.csv("decentral.csv", stringsAsFactors = FALSE)
 
+#local file version 
+decentralization.data <- read.csv("~/GitHub/Third_Assignment/decentral.csv")
+View(decentral)
 ```
 
 ```{r,echo=FALSE}
@@ -131,61 +135,105 @@ head(decentralization.data)
 names(decentralization.data)
 tail(decentralization.data)
 sum(is.na(decentralization.data))
-summary(decentralization.data)
 ```
 
+```{r, echo=FALSE, results='asis'}
+summary(decentralization.data)
+library(stargazer)
+stargazer(decentralization.data[c("decentralization","population","Density")], type = 'latex', 
+ title="Descriptive statistics/selected variables", digits=2)
+```
 
 ###Dependent variables
 
-Like decentralization, it is very challenging to find a composite proxy for health provision. We have therefore decided to focus on some key variables which data is only available on a macro level. These are: *access to water*, *access to toilet facilities*, *water provision infrastructure*, *hospital*. These indicators are from Benin's EMICoV 2010 and 2011. 
+Like decentralization, it is very challenging to find a composite proxy for health provision. We have therefore decided to focus on some key variables which data is only available on a macro level. These variables are drawn from Benin's EmiCoV (2010,2011) and are defined as follwos: 
+(i) access to water: defined as the percentage of households in the municipality that have access to water 
+(ii)access to toilet facilities: percentage of households in the municipality that have access to toilet facilities 
+(iii)water provision infrastructure: percentage of households in that municipality that are connected to SONEB (water pipeline)
+(iv) hospital: the number of existing hospital or public healthcare center in the municpality. 
 
 ###Explanatory variables
 
-In addition to decentralization, we use a set of variables to account for heterogeneity accross the municipalities. As so far, we have included population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, literacy rate, as well as the percentage of households which favor decentralization in each municipality, all of them taken from Benin's EmiCov (2010, 2011). We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. The basic econometric model will be further specified in the final paper.
+In addition to decentralization, we use a set of variables to account for heterogeneity accross the municipalities, such as population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, average literacy rate of the head of households, as well as monetary poverty indice, all of them obtained from Benin's EmiCov (2010, 2011). We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. The basic econometric model will be further specified in the final paper.
 
-#Basic Regression models 
+```{r,echo=FALSE}
+#URl to be edited 
 
-```{r, echo=FALSE}              
 url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/health.csv"
 health.data <- read.csv("health.csv", stringsAsFactors = FALSE)
+
+# local file 
+health.data <- read.csv("~/GitHub/Third_Assignment/health.csv")
+View(health.data)
+
 decenthealth <-merge(decentralization.data,health.data, by=c("Year", "ID", "Cities"), all=TRUE)
 ```
 
+```{r, echo=FALSE}
+
+head(health.data)
+names(health.data)
+tail(health.data)
+sum(is.na(health.data))
+```
+
+```{r,echo=FALSE, results='asis'}
+stargazer(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp", "connect_soneb")], type = 'latex', 
+ title="Descriptive statistics of dependent variables", digits=2)
+```
+
+#Basic Regression models 
+
+In our basic mode, we regress decentralization our independent variables as above-mentionned.  
+
 ### Model estimations
 
+*Effect of Decentralization on Water Access*
 ```{r, echo=FALSE}
 R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
 summary(R1water)
 confint(R1water)
-R2water <- lm(pop_wateraccess ~ decentralization + population + Density + Year, data = decenthealth)
+R2water <- lm(pop_wateraccess ~ decentralization + population + Density, data = decenthealth)
 summary(R2water)
 confint(R2water)
-R3water <- lm(pop_wateraccess ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + for_dentr. + cons_health, data = decenthealth)
+R3water <- lm(pop_wateraccess ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = decenthealth)
 summary(R3water)
+confint(R3water)
 ```
  
-
 ```{r,results='asis',echo=FALSE}
-labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density')
-library(stargazer)
+labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index')
 stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
                      title = 'Effect of decentralization on water access',
                      digits = 2, type = 'latex', header = FALSE)
 ```
 
+In this model, decentralization reveals to be insignificant, while household consumption ratio on health and average literacy rate of household's head result to be slightly significant. This may be due to mispecification of the model. 
+
+*Effect of decentralization on access to toilet facilities* 
+
 ```{r, echo=FALSE,results='asis'}
 R1toilet <- lm(pop_toiletacess ~ decentralization, data = decenthealth)
 summary(R1toilet)
-R2toilet <- lm(pop_toiletacess ~ decentralization + population + Density + Year, data = decenthealth)
+confint(R1toilet)
+R2toilet <- lm(pop_toiletacess ~ decentralization + population + Density, data = decenthealth)
 summary(R2toilet)
-R3toilet <- lm(pop_toiletacess ~ decentralization + population + Density + pubexp.c + consump.c + ind_pauv_mon + Year, data = decenthealth)
+confint(R2toilet)
+R3toilet <- lm(pop_toiletacess ~ decentralization +  population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = decenthealth)
 summary(R3toilet)
-labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density')
-library(stargazer)
+confint(R3toilet)
+```
+
+Alike the model on water access, decentralization seems to not have a parti
+
+```{r,echo=FALSE,results='asis'}
+labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index')
 stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
                      title = 'Effect of decentralization on toilet access',
                      digits = 2, type = 'latex', header = FALSE)
 ```
+
+*Effect of decentralization on access to toilet facilities* 
 
 ```{r,echo=FALSE,results='asis'}
 R1soneb <- lm(connect_soneb ~ decentralization, data = decenthealth)
