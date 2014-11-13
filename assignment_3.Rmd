@@ -160,14 +160,8 @@ confint(R1water)
 R2water <- lm(pop_wateraccess ~ decentralization + population + Density + Year, data = decenthealth)
 summary(R2water)
 confint(R2water)
-
 R3water <- lm(pop_wateraccess ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + for_dentr. + cons_health, data = decenthealth)
 summary(R3water)
-
-R3water <- glm(pop_wateraccess ~ decentralization + Density, data = decenthealth)
-summary(R3water)
-
-
 ```
  
 
