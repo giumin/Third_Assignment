@@ -10,7 +10,9 @@ output:
     toc: yes
   word_document: default
 authors: "Giulia Minnucci and Rose Camille Vincent and Daniel Jemberu"
+bibliography: decentralizationind.bib
 ---
+
 #Research question and methodology
 
 As stated in previous assignment, our research project aims to look at the impact of decentralization on health provision in Benin. Access to basic health-related services has been one of the core Millenium Development Goals; it is also regarded as basic human rights. For the past decade, governments and policymakers in developing countries have invested in improving basic sanitation and health-related facilities in urban and rural areas. Decentralization and devolution of public administration are two important channels through which these governments, and development agencies, achieve these goals. 
@@ -318,7 +320,7 @@ stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
 The macroeconomic overview suggests that Benin's has experienced an improvement on health-services delivery over the past few years. Given that health-related services is highly decentralized, we have tested the impact of decentralization on some key health-related variables, issued from Benin's Households Survy. The microeconomic analysis, however, did not find any significant imapct of decentralization (proxied by the ratio of own-revenue to total expenditures) on the provision of health-related services and infrastructures. Given that exisiting literatures provide various decentralization indicators, the significance found in the microeconomic analysis might be the result of a misleading indicator. Moreover, because public services in Benin is highly financed by intergovernmental (rather than own-source revenues), it might be more reliable to consider an indicator or a model that takes into account this factor. Therefore, we propose to revise our proxy for decentralization and to further work on our model specification. 
 
 
-
+#References
 
 
 
