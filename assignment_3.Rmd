@@ -92,6 +92,7 @@ messy<-data.frame(
   Country=c("Benin","Benin","Benin","Benin","Benin","Benin"),
   Display.Value=c(0.29,6.36,0.06,0.12,0.05,0.11)
   )
+library(tidyr)
 tidy<-spread(messy,Indicator,Display.Value)
 ```
 
@@ -123,11 +124,9 @@ library(RCurl)
 library(foreign)  
 #url version to be edited 
 url <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/decentral.csv"
-decentralization.data <- read.csv("decentral.csv", stringsAsFactors = FALSE)
+decentralization.data <- getURL(url)                
+decentralization.data <- read.csv(textConnection(decentralization.data))
 
-#local file version 
-decentralization.data <- read.csv("~/GitHub/Third_Assignment/decentral.csv")
-View(decentral)
 ```
 
 ```{r,echo=FALSE}
@@ -160,11 +159,8 @@ In addition to decentralization, we use a set of variables to account for hetero
 #URl to be edited 
 
 url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/health.csv"
-health.data <- read.csv("health.csv", stringsAsFactors = FALSE)
-
-# local file 
-health.data <- read.csv("~/GitHub/Third_Assignment/health.csv")
-View(health.data)
+health.data <- getURL(url2)                
+health.data <- read.csv(textConnection(health.data))
 
 decenthealth <-merge(decentralization.data,health.data, by=c("Year", "ID", "Cities"), all=TRUE)
 ```
@@ -178,8 +174,8 @@ sum(is.na(health.data))
 ```
 
 ```{r,echo=FALSE, results='asis'}
-stargazer(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp", "connect_soneb")], type = 'latex', 
- title="Descriptive statistics of dependent variables", digits=2)
+
+stargazer(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'latex', title="Descriptive statistics of dependent variables", digits=2)
 ```
 
 #Basic Regression models 
@@ -284,14 +280,14 @@ ggplot(data=decenthealth, aes(x=decentralization,y=pubhosp)) + geom_line() + the
 ```
 
 ```{r,echo=FALSE}
-R1pubhosp <- lm(pubhosp ~ decentralization, data = decenthealth)
-summary(R1pubhosp)
-confint(R1puphosp)
+R1pubhosp<-lm(pubhosp ~ decentralization, data=decenthealth)
+
+
 R2pubhosp <- lm(pubhosp ~ decentralization + population + Density, data = decenthealth)
-summary(R2pubhosp)
+
 confint(R2pubhosp)
 R3pubhosp <- lm(pubhosp ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=decenthealth)
-summary(R3pubhosp)
+
 confint(R3pubhosp)
 ```
 
