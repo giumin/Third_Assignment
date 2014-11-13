@@ -15,7 +15,7 @@ bibliography: decentralizationind.bib
 
 #Research question and methodology
 
-As stated in previous assignment, our research project aims to look at the impact of decentralization on health provision in Benin. Access to basic health-related services has been one of the core Millenium Development Goals; it is also regarded as basic human rights. For the past decade, governments and policymakers in developing countries have invested in improving basic sanitation and health-related facilities in urban and rural areas. Decentralization and devolution of public administration are two important channels through which these governments, and development agencies, achieve these goals. 
+As stated in a previous assignment, our research project aims to look at the impact of decentralization on health provision in Benin. Access to basic health-related services has been one of the core Millenium Development Goals; it is also regarded as basic human rights. For the past decade, governments and policymakers in developing countries have invested in improving basic sanitation and health-related facilities in urban and rural areas. Decentralization and devolution of public administration are two important channels through which these governments, and development agencies, achieve these goals. 
 
 In Benin, legal provisions on decentralization has transfered part of health provision competencies to subnational entities (districts and municipalities. Since the year 2002, municipal governments are increasingly responsible for providing basic services and infrastructures such as water access. To offset the vertical imbalance of subnational governments, the central government have conceded some tax raising powers and has also use intergovernmental transfers through the National Commission on Local Finances. 
 
@@ -103,7 +103,7 @@ tidy<-spread(messy,Indicator,Display.Value)
 
 Once we have our datasets, it is useful to merge them together so as to work easily and quickly with one dataset that would include all the needed variables.
 
-```{r, echo=FALSE}
+```{r}
 names(Benin)[names(Benin)=="country"] <- "Country"
 total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 ```
@@ -193,7 +193,7 @@ In our basic mode, we regress decentralization our independent variables as abov
 *Effect of Decentralization on Water Access*
 
 
-In this model, decentralization reveals to be insignificant, while household consumption ratio on health and average literacy rate of household's head result to be slightly significant. This may be due to mispecification of the model. 
+In this model, decentralization reveals to be insignificant,as well as the other explanatory variables. This may be due to mispecification of the model. 
  
 ```{r,echo=FALSE}
 # First regression:water acces
@@ -225,7 +225,7 @@ stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
 ggplot(data=decenthealth, aes(x=decentralization,y=pop_toiletacess)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Decentralization and Access to toilet facilities\n")
 ```
 
-Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be significant. 
+Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be  slightly significant. 
 
 ```{r, echo=FALSE}
 # First regression: toilet access
@@ -259,7 +259,7 @@ stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
 ggplot(data=decenthealth, aes(x=decentralization,y=connect_soneb)) + geom_line() + theme_bw(base_size = 13) + ggtitle(" Decentralization and Water pipeline connection\n")
 ```
 
-In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastrucure. In reverse, population density, public expenditures per capita, households health consumption and average literacy rate of heads of households reveal to be significant, with education highly significant. 
+In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastrucure. In reverse, population density, public expenditures per capita and average literacy rate of heads of households reveal to be significant; housholds health consumption is slightly significant. 
 
 
 ```{r,echo=FALSE}
