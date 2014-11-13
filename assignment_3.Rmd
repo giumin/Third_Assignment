@@ -120,10 +120,10 @@ A large part of the debate on decentralization measurement regards the choice be
 
 ```{r, echo=FALSE}
 library(RCurl)
-library(foreign)                   
+library(foreign)  
 url <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/decentral.csv"
-decentralization.data <- getURL(url)                
-decentralization.data <- read.csv(textConnection(decentralization.data))
+decentralization.data <- read.csv("decentral.csv", stringsAsFactors = FALSE)
+
 ```
 
 ```{r,echo=FALSE}
@@ -131,7 +131,9 @@ head(decentralization.data)
 names(decentralization.data)
 tail(decentralization.data)
 sum(is.na(decentralization.data))
+summary(decentralization.data)
 ```
+
 
 ###Dependent variables
 
@@ -139,29 +141,33 @@ Like decentralization, it is very challenging to find a composite proxy for heal
 
 ###Explanatory variables
 
-As stated from our proposal, we will also take into account heterogeneity between the municipalitie. For this reason, as so far, we have decided to include population, population density, per capita consumption, households health consumption, indicators on poverty, literacy rate, as well as the percentage of households which favor decentralization in each municipality. These control variables are drawn from Benin's Integrated Modular Surveys on Households Living Conditions (EMICoV)
+In addition to decentralization, we use a set of variables to account for heterogeneity accross the municipalities. As so far, we have included population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, literacy rate, as well as the percentage of households which favor decentralization in each municipality, all of them taken from Benin's EmiCov (2010, 2011). We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. The basic econometric model will be further specified in the final paper.
 
 #Basic Regression models 
 
 ```{r, echo=FALSE}              
 url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/health.csv"
-health.data <- getURL(url2)                
-health.data <- read.csv(textConnection(health.data))
 health.data <- read.csv("health.csv", stringsAsFactors = FALSE)
-
 decenthealth <-merge(decentralization.data,health.data, by=c("Year", "ID", "Cities"), all=TRUE)
 ```
 
 ### Model estimations
 
 ```{r, echo=FALSE}
-
 R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
 summary(R1water)
+confint(R1water)
 R2water <- lm(pop_wateraccess ~ decentralization + population + Density + Year, data = decenthealth)
 summary(R2water)
-R3water <- lm(pop_wateraccess ~ decentralization + population + Density + pubexp.c + consump.c + ind_pauv_mon + Year, data = decenthealth)
+confint(R2water)
+
+R3water <- lm(pop_wateraccess ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + for_dentr. + cons_health, data = decenthealth)
 summary(R3water)
+
+R3water <- glm(pop_wateraccess ~ decentralization + Density, data = decenthealth)
+summary(R3water)
+
+
 ```
  
 
