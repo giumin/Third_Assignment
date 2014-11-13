@@ -1,17 +1,15 @@
 ---
 title: "Third Assignment"
-authors: "Giulia Minnucci, Rose Camille Vincent, Daniel Jemberu"
 date: "15 November 2014"
 output:
+  word_document: default
   pdf_document:
     fig_caption: yes
     number_sections: yes
     toc: yes
   html_document:
     toc: yes
-  word_document: default
-
-
+authors: Giulia Minnucci, Rose Camille Vincent, Daniel Jemberu
 ---
 #Research question and methodology
 
@@ -37,7 +35,7 @@ In this section, we use data analytics tools to scrape openly available datasets
 
 (iii) improved sanitation facilities(SH.STA.ACSN): access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. This indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
 
-```{r, echo=FALSE}
+```{r, include=FALSE}
 library(WDI)
 healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL','SH.XPD.PCAP','SH.STA.ACSN'))
 Benin<-subset(healthpublicexpend,country=='Benin')
@@ -52,9 +50,12 @@ names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 
 ```{r, echo=FALSE}
 library(ggplot2)
+
 ggplot(data=Benin, aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
+
 ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
-ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years")
+
+ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
 ```
 
 The above graphs suggest that all three elements: public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the timespan 2005 to 2011. As mentionned above and in our research proposal, the central government in Benin (alike other developing countries in West-Africa) have used decentralization as a mechanisms to reacht he targets of the Millenium Development Goal. Therefore, since health expenditure is highly decentralized, we could potentially argue that the macroeconomic overview is related to the outcome on a micro level. The microeconomic approach in section 2 will therefore help us testing this assumption.
@@ -119,7 +120,7 @@ The definition and measurement of decentralizaiton has led to long academic deba
 
 A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditure, fwe propose here to use the Revenue authonomy(RA) indicator used by [@akai2002sakata] and [@habibi2003etal] to proxy for decentralization. This indicator is defined as the ratio of own-source revenues over the total expenditures of a subnational entity.  
 
-```{r, echo=FALSE}
+```{r, include=FALSE}
 library(RCurl)
 library(foreign)  
 #url version to be edited 
@@ -129,17 +130,20 @@ decentralization.data <- read.csv(textConnection(decentralization.data))
 
 ```
 
-```{r,echo=FALSE}
+```{r,include=FALSE}
 head(decentralization.data)
 names(decentralization.data)
 tail(decentralization.data)
 sum(is.na(decentralization.data))
 ```
 
-```{r, echo=FALSE, results='asis'}
-summary(decentralization.data)
+```{r, include=FALSE, results='asis'}
+
 library(stargazer)
-stargazer(decentralization.data[c("decentralization","population","Density")], type = 'latex', 
+```
+
+```{r, results='asis',echo=FALSE}
+stargazer(decentralization.data[c("decentralization","population","Density", "pubexp.c")], type = 'latex', 
  title="Descriptive statistics/selected variables", digits=2)
 ```
 
@@ -155,7 +159,7 @@ Like decentralization, it is very challenging to find a composite proxy for heal
 
 In addition to decentralization, we use a set of variables to account for heterogeneity accross the municipalities, such as population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, average literacy rate of the head of households, as well as monetary poverty indice, all of them obtained from Benin's EmiCov (2010, 2011). We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. The basic econometric model will be further specified in the final paper.
 
-```{r,echo=FALSE}
+```{r,include=FALSE}
 #URl to be edited 
 
 url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/health.csv"
@@ -165,7 +169,7 @@ health.data <- read.csv(textConnection(health.data))
 decenthealth <-merge(decentralization.data,health.data, by=c("Year", "ID", "Cities"), all=TRUE)
 ```
 
-```{r, echo=FALSE}
+```{r,include=FALSE}
 
 head(health.data)
 names(health.data)
@@ -187,20 +191,20 @@ In our basic mode, we regress decentralization our independent variables as abov
 *Effect of Decentralization on Water Access*
 
 ```{r, echo=FALSE}
-#ggplot 
-library(ggplot2)
-ggplot(data=decenthealth, aes(x=decentralization,y=pop_wateraccess)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Scatterplot: Decentralization and Water Access")
+
+ggplot(data=decenthealth, aes(x=decentralization,y=pop_wateraccess)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Scatterplot: Decentralization and Water Access\n")
 ```
 
-```{r}
+In this model, decentralization reveals to be insignificant, while household consumption ratio on health and average literacy rate of household's head result to be slightly significant. This may be due to mispecification of the model. 
+
+```{r,include=FALSE}
 R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
-summary(R1water)
 confint(R1water)
+
 R2water <- lm(pop_wateraccess ~ decentralization + population + Density, data = decenthealth)
-summary(R2water)
 confint(R2water)
+
 R3water <- lm(pop_wateraccess ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = decenthealth)
-summary(R3water)
 confint(R3water)
 ```
 
@@ -212,24 +216,25 @@ stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
                      digits = 2, type = 'latex', header = FALSE)
 ```
 
-In this model, decentralization reveals to be insignificant, while household consumption ratio on health and average literacy rate of household's head result to be slightly significant. This may be due to mispecification of the model. 
+
 
 *Effect of decentralization on access to toilet facilities* 
 
 ```{r, echo=FALSE}
 #ggplot 
-ggplot(data=decenthealth, aes(x=decentralization,y=pop_toiletacess)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Scatterplot: Decentralization and Access to toilet facilities")
+ggplot(data=decenthealth, aes(x=decentralization,y=pop_toiletacess)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Scatterplot: Decentralization and Access to toilet facilities\n")
 ```
 
-```{r, echo=FALSE,results='asis'}
+Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be significant. 
+
+```{r, include=FALSE}
 R1toilet <- lm(pop_toiletacess ~ decentralization, data = decenthealth)
-summary(R1toilet)
 confint(R1toilet)
+
 R2toilet <- lm(pop_toiletacess ~ decentralization + population + Density, data = decenthealth)
-summary(R2toilet)
 confint(R2toilet)
+
 R3toilet <- lm(pop_toiletacess ~ decentralization +  population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = decenthealth)
-summary(R3toilet)
 confint(R3toilet)
 ```
 
@@ -240,28 +245,32 @@ stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
                      digits = 2, type = 'latex', header = FALSE)
 ```
 
-Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be significant. 
+
 
 *Effect of decentralization on water pipeline connection* 
 
 ```{r, echo=FALSE}
 #ggplot 
-ggplot(data=decenthealth, aes(x=decentralization,y=connect_soneb)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Scatterplot: Decentralization and Water pipeline connection")
+ggplot(data=decenthealth, aes(x=decentralization,y=connect_soneb)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Scatterplot: Decentralization and Water pipeline connection\n")
 ```
 
-```{r,echo=FALSE,results='asis'}
+In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastrucure. In reverse, population density, public expenditures per capita, households health consumption and average literacy rate of heads of households reveal to be significant, with education highly significant. 
+
+
+```{r,include=FALSE}
+
 R1soneb <- lm(connect_soneb ~ decentralization, data = decenthealth)
-summary(R1soneb)
 confint(R1soneb)
+
 R2soneb <- lm(connect_soneb ~ decentralization + population + Density, data = decenthealth)
-summary(R2soneb)
 confint(R2soneb)
+
 R3soneb <- lm(connect_soneb ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=decenthealth)
-summary(R3soneb)
 confint(R3soneb)
 ```
 
-```{r}
+```{r, echo=FALSE,results='asis'}
+
 labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index')
 
 stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
@@ -269,17 +278,19 @@ stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
                      digits = 2, type = 'latex', header = FALSE)
 ```
 
-In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastrucure. In reverse, population density, public expenditures per capita, households health consumption and average literacy rate of heads of households reveal to be significant, with education highly significant. 
 
 
 *Effect of decentralization on availability of public health infrastructure* 
 
 ```{r, echo=FALSE}
 #ggplot 
-ggplot(data=decenthealth, aes(x=decentralization,y=pubhosp)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Scatterplot: Decentralization and Availability of Healthcare Centers")
+ggplot(data=decenthealth, aes(x=decentralization,y=pubhosp)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Scatterplot: Decentralization and Availability of Healthcare Centers\n")
 ```
 
-```{r,echo=FALSE}
+Like the previous models, decentralization does not seem to be a significant elements in the availability of healthcare centers at the subnational level. With regards to the explanatory variables: population, population density, and average literacy rate of the head of households seem to be strongly determinants of the existence of healthcare centers. Public expenditures per capita and poverty level result to be significant as well.
+
+
+```{r,include=FALSE}
 R1pubhosp<-lm(pubhosp ~ decentralization, data=decenthealth)
 
 
@@ -297,7 +308,6 @@ stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
                      digits = 2, type = 'latex', header = FALSE)
 ```
 
-Like the previous models, decentralization does not seem to be a significant elements in the availability of healthcare centers at the subnational level. With regards to the explanatory variables: population, population density, and average literacy rate of the head of households seem to be strongly determinants of the existence of healthcare centers. Public expenditures per capita and poverty level result to be significant as well.
 
 
 #Potential Issues 
