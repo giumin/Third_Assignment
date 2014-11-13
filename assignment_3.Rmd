@@ -194,14 +194,16 @@ In our basic mode, we regress decentralization our independent variables as abov
 
 
 In this model, decentralization reveals to be insignificant, while household consumption ratio on health and average literacy rate of household's head result to be slightly significant. This may be due to mispecification of the model. 
-
+ 
 ```{r,echo=FALSE}
+# First regression:water acces
 R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
 confint(R1water)
 summary(R1water)
+# Second regression: water access
 R2water <- lm(pop_wateraccess ~ decentralization + population + Density, data = decenthealth)
 confint(R2water)
-
+# Third regression: water access
 R3water <- lm(pop_wateraccess ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = decenthealth)
 confint(R3water)
 ```
@@ -226,14 +228,15 @@ ggplot(data=decenthealth, aes(x=decentralization,y=pop_toiletacess)) + geom_line
 Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be significant. 
 
 ```{r, echo=FALSE}
+# First regression: toilet access
 R1toilet <- lm(pop_toiletacess ~ decentralization, data = decenthealth)
 summary(R1toilet)
 confint(R1toilet)
-
+# Second regression: toilet access
 R2toilet <- lm(pop_toiletacess ~ decentralization + population + Density, data = decenthealth)
 summary(R2toilet)
 confint(R2toilet)
-
+# Third regression: toilet access
 R3toilet <- lm(pop_toiletacess ~ decentralization +  population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = decenthealth)
 summary(R3toilet)
 confint(R3toilet)
@@ -260,15 +263,15 @@ In this model, our key explanatory variable 'decentralization' seems to have no 
 
 
 ```{r,echo=FALSE}
-
+# First regression: water pipeline
 R1soneb <- lm(connect_soneb ~ decentralization, data = decenthealth)
 summary(R1soneb)
 confint(R1soneb)
-
+# Second regression: water pipeline
 R2soneb <- lm(connect_soneb ~ decentralization + population + Density, data = decenthealth)
 summary(R2soneb)
 confint(R2soneb)
-
+# Third regression: water pipeline
 R3soneb <- lm(connect_soneb ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=decenthealth)
 summary(R3soneb)
 confint(R3soneb)
@@ -296,12 +299,15 @@ Like the previous models, decentralization does not seem to be a significant ele
 
 
 ```{r,echo=FALSE}
+# First regression: public healthcare center
 R1pubhosp<-lm(pubhosp ~ decentralization, data=decenthealth)
 summary(R1pubhosp)
 confint(R1pubhosp)
+# Second regression: public healthcare center
 R2pubhosp <- lm(pubhosp ~ decentralization + population + Density, data = decenthealth)
 summary(R2pubhosp)
 confint(R2pubhosp)
+# Third regression: public healthcare center
 R3pubhosp <- lm(pubhosp ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=decenthealth)
 summary(R3pubhosp)
 confint(R3pubhosp)
