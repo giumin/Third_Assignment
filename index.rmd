@@ -15,11 +15,11 @@ names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
 names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 ```
 
-```{r.include=FALSE, message=FALSE}
+```{r,include=FALSE, message=FALSE}
 library(googleVis)
 ```
 
-```{r.include=FALSE, results='asis'}
+```{r,include=FALSE, results='asis'}
 compare_trend <-data.frame(
   Year=c("2005","2006","2007","2008","2009","2010","2011"),
   Public.Health.Expenditure=c(49.69487,50.22141,50.75158,50.95043,53.35198,51.16728,52.10150),
@@ -27,7 +27,7 @@ compare_trend <-data.frame(
   Improved.Sanitation.Facilities=c(11.2,11.7,12.2,12.7,13.2,13.7,14.2))
 ```
 
-```{r.echo=FALSE, results='asis'}
+```{r,echo=FALSE, results='asis'}
 line_plot <- gvisLineChart(compare_trend)
 print(line_plot, tag = 'chart')
 ```
@@ -55,18 +55,9 @@ decenthealth <-merge(decentralization.data,health.data, by=c("Year", "ID", "Citi
 
 
 ```{r echo=FALSE, results='asis'}
-library(googleVis)
-cities_map <- gvisGeoChart(decenthealth, locationvar = 'ID  ',
-                      colorvar = 'Benin cities',
-                      options = list(
-                          colors = "['#fff7bc', '#d95f0e']"
-                          ))
-
-```
-
-```{r}
 library(ggmap)
-qmap('benin', zoom = 4)
+qmap('benin')
 ```
+
 
 
