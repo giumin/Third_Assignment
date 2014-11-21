@@ -2,10 +2,58 @@
 title: "Index.rmd"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "20 novembre 2014"
-output: html_document
+output: word_document
 ---
 
+#Research question
 
+Health decentralization policies have already been implemented in the last decades in many countries, such as Gana, Zambia, Uganda and on a broader scale all over the world as a step in a process of economic and political change. This initiative has also been supported by bilateral and multilateral agencies that have been investing in such projects time and resources. 
+The process of decentralization involves a series of mechanisms that are focused on the transferal of fiscal, administrative and political authority from the central level, such as the Ministry of Health, to the institutions at the local level. 
+Decentralization is said to have many benefits in the country where it is implemented; for example, improving efficiency in allocating resources to a set of services or improving the use of expenditures, since they are decided locally based on specific need. 
+
+However, focusing our research on the impacts and effects this process has on health provision in Benin, we want to see if it is truly efficient always, or if it can affect negatively some circumstances and overall the benefits perceived by the population.
+For example, we would like to see if the fiscal decentralization somehow resulted in an increase or decrease of health provision, which means the complexity of elements that revolve around health care, like the number of facilities, improved health conditions etc...
+
+Thus, our research question is : which are the effects of decentralization on health provision in Benin? 
+A better question would be: **What impact does decentralization have on the performance of the health provision system in Benin?**
+
+## Why Benin?
+Decentralization in Benin only begun in the 2000s with establishment of 77 municipalities and transfer of competencies from central to local governments . The country is currently ranked 165 out of 187 countries in the 2014 Human Development Index, with a GDP/capita of US$794.433 (5% growth in 2013) and an estimated population of 9.351 million in 2012. For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
+
+
+#Literature review
+
+Proponents of decentralization share the view that local governments are the major vehicles for specific poverty alleviation policies. This argument is sustained by economic theory which argue that: 
+
+(i) decision-making should occur at the lowest level of government in order to reach allocation efficiency reflecting economies of scale and benefit-cost spill outs [@shah1994reform] 
+
+(ii) local government has an informational advantage, which is essential to improve provision of public services [@oates1972fiscal]
+
+(iii) decentralization shall enhance the accountability of policymakers through greater participation of nearby communities in political decisions [@crook1998democracy; @tiebout1956pure]
+
+There have been numerous attempts to check these theories and empirically assess the impact of decentralization on provision of public goods and services. Hence, our first set of literature concerns the interaction between decentralization and public spending. 
+
+In that regards, there are several positive evidence. 
+For instance, @santos2005participatory studying the case of the city Porto-Alegre in Brazil found decentralization has contributed to double  the level of access to basic sanitation as well as enrollment in elementary schools between 1989 and 1996, while revenue collection increased by 48%. @bardhan2000capture found greater fiscal autonomy of local governments expands the volume of service delivery in West Bengal. @faguet2004does studying Bolivia finds that public investment in education, water and sanitation rose significantly with decentralization and devolution of administrative authorities. @bird1999decentralization in a comparative study of Asian and Latin-American economies also found positive effect of decentralization on health, primary education and infrastructure. On the comparison between centralized and decentralized in delivery of public goods or pro-poor programs, @galasso2005decentralized studying a decentralized food-for-education program in Bangladesh, found that a somewhat larger fraction of the poor received benefits from the program than did the non-poor. They also found that that the program shifted the balance of power in favor of the poor. 
+
+In contrast to these positive outcomes, a greater number of publications have indicated the pitfalls of decentralization policies, such as local capture and corruption of subnational authorities. For instance @reinikka2004local highlight the capture of decentralized school grants by local officials in Uganda. @treisman2000causes also suggests that more levels of government induce higher perceived corruption, less effective provision of public health services, and lower adult literacy, especially in developing countries. @prud1995dangers stresses several additional pitfalls of decentralization in developing countries, such as interjurisdictional disparities or ethnic bias in elections. @del2008local suggest a process of yardstick competition between local governments in Indonesia while @gregoire2010decentralization establish the existence of strategic complementarities of local public goods among Beninese communes. 
+
+As decentralization echoes in the developing world, there is an increasing body of researchers devoted to empirically assess its contribution to poverty alleviation. In light of these publications, we hope to contribute to the debate by studying an important aspect in development economics literature which is health, and which will be at the center of the post-2015 development agenda. 
+
+
+
+#Data
+
+To answer our research question and estimate the contribution of decentralization to health provision, we will construct a panel data with information on local finances, socio economic indicators and health provision. 
+At first, we will use the municipalities’ fiscal accounts which contains information on revenues and expenditures, to define an indicator for decentralization, drawing insights for existing empirical literature on the measurements of decentralization [@blume2011federalism; @martinez2009decentralization; @stegarescu2005public].
+
+Secondly, we will use Benin’s Integrated Modular Surveys on Household Living Conditions (EMICoV) and the Demographic and Health Survey, to compute an aggregated indicator for health provision. Time-invariant and control variables such as population, GINI coefficient, poverty level, urbanization rate, ethnic fragmentation, per capita consumption, education level, will also be extracted from Benin’s Integrated Modular Survey on Household Living Conditions. Others indicators, such as local capture and corruption will defined or measured throughout the literature review process. The above-mentioned datasets are obtained from the Ministry of Economy and Finances, the National Institute of Statistics and the National Commission on Local Finances. Additional information or variables will be drawn from international or regional databases such as the World Bank Indicators or Afro-barometer.
+
+
+
+#Research methodology
+
+For the methodology, we will first explore legal and political backgrounds of decentralisation in Benin and attributions of different administrative levels with regards to health provision. Secondly we will review existing theoretical and empirical literatures on welfare states, poverty and health. The literature review will help us defining the main concepts and discuss measurements of the key variables to be included in the empirical analysis. The empirical strategy will consist of using panel data with fixed-effects estimators. Besides the indicators of decentralization level and health provision, the panel will contain information on the 77 municipalities such as population, territory, poverty level. We will use statistical methods to test for potential endogeneity of the main variables and for the fitness of our econometric model. 
 
 #Research question and methodology
 
