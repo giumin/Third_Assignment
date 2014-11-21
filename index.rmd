@@ -120,9 +120,9 @@ tidy<-spread(messy,Indicator,Display.Value)
 
 ##Merging WB and WHO datasets
 
-Once we have our datasets, it is useful to merge them together so as to work easily and quickly with one dataset that would include all the needed variables.
+Once we have our datasets, it is useful to merge them together so as to work easily and quickly with one dataset that would include all the needed variables. Thus, firstly we change the names of the variables "country" and "year", so that they have exactly the same capital letters in both datasets.
 
-```{r}
+```{r, include=FALSE}
 names(Benin)[names(Benin)=="country"] <- "Country"
 total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 ```
