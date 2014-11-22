@@ -49,6 +49,33 @@ names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 
 ```
 
+```{r,include=FALSE, message=FALSE}
+library(googleVis)
+```
+
+```{r,include=FALSE, results='asis'}
+compare_trend <-data.frame(
+  Year=c("2005","2006","2007","2008","2009","2010","2011"),
+  Public.Health.Expenditure=c(49.69487,50.22141,50.75158,50.95043,53.35198,51.16728,52.10150),
+  Health.Expenditure.Per.Capita=c( 25.21300,26.47114,28.77537,31.01608,31.80012,30.47805,33.73303),
+  Improved.Sanitation.Facilities=c(11.2,11.7,12.2,12.7,13.2,13.7,14.2))
+```
+
+```{r,echo=FALSE, results='asis'}
+line_plot <- gvisLineChart((compare_trend), 
+              options=list(
+                        title="Compare trends",
+                        titleTextStyle="{color:'black', 
+                                           fontName:'Courier', 
+                                           fontSize:16}",   
+                          curveType="function",
+                          width=700,
+                          height=400                         
+                          )) 
+print(line_plot, tag = 'chart')
+```
+
+
 
 ```{r, echo=FALSE}
 library(ggplot2)

@@ -213,25 +213,29 @@ line_plot <- gvisLineChart((compare_trend),
                                            fontName:'Courier', 
                                            fontSize:16}",   
                           curveType="function",
-                          width=700,
-                          height=400                         
+                          width=900,
+                          height=500                         
                           )) 
 print(line_plot, tag = 'chart')
 ```
 
 
+The above graph suggests that all three elements, public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the timespan 2005 to 2011. 
+As mentionned above, the central government in Benin (alike other developing countries in West-Africa) has used decentralization as a mechanisms to reach the targets of the Millenium Development Goals.  
+
+Now, let's take a look at every single variable and its trend. 
+
 ```{r, echo=FALSE}
 library(ggplot2)
 
-ggplot(data=Benin,aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() +theme_bw(base_size=13) + ggtitle("Trend of total public expenditure over the years\n")
+ggplot(data=Benin,aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() +theme_bw(base_size=8) + ggtitle("Trend of total public expenditure over the years\n")
 
-ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
+ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 8) + ggtitle("Trend over the years\n")
 
-ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 13) + ggtitle("Trend over the years\n")
+ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 8) + ggtitle("Trend over the years\n")
 ```
 
-The above graphs suggest that all three elements, public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the timespan 2005 to 2011. 
-As mentionned above, the central government in Benin (alike other developing countries in West-Africa) has used decentralization as a mechanisms to reach the targets of the Millenium Development Goals. Therefore, since health expenditure is highly decentralized, we could potentially argue that the macroeconomic overview is related to the outcome on a micro level.
+Since health expenditure is highly decentralized, we could potentially argue that the macroeconomic overview is related to the outcome on a micro level.
 The microeconomic approach in section 2 will therefore help us testing this assumption.
 
 
