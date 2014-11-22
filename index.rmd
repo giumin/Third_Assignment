@@ -294,7 +294,7 @@ library(stargazer)
 ```
 
 ```{r, results='asis',echo=FALSE}
-stargazer(decentralization.data[c("decentralization","population","Density", "pubexp.c")], type = 'latex', 
+stargazer(decentralization.data[c("decentralization","population","Density", "pubexp.c")], type = 'html', 
  title="Descriptive statistics/selected variables", digits=2)
 ```
 
@@ -335,8 +335,11 @@ sum(is.na(health.data))
 
 ```{r,echo=FALSE, results='asis'}
 
-stargazer(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'latex', title="Descriptive statistics of dependent variables", digits=2)
+stargazer(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'html', title="Descriptive statistics of dependent variables", digits=2)
 ```
+
+
+
 
 
 ###Basic Regression models 
@@ -350,26 +353,31 @@ In our basic model, we regress decentralization and our independent variables as
 
 In this model, decentralization reveals to be insignificant,as well as the other explanatory variables. This may be due to mispecification of the model. 
  
-```{r,echo=FALSE}
+```{r,include=FALSE, results='asis'}
+
 # First regression:water acces
 R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
 confint(R1water)
 summary(R1water)
+
 # Second regression: water access
 R2water <- lm(pop_wateraccess ~ decentralization + population + Density, data = decenthealth)
 confint(R2water)
+
 # Third regression: water access
 R3water <- lm(pop_wateraccess ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = decenthealth)
 confint(R3water)
+
 ```
 
  
-```{r,results='asis',include=FALSE}
-labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index')
+```{r, echo=FALSE, results='asis'}
+labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
 stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
                      title = 'Effect of decentralization on water access',
-                     digits = 2, type = 'latex', header = FALSE)
+                     digits = 2, type = 'html', header = FALSE)
 ```
+
 
 
 
@@ -378,14 +386,8 @@ stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
 
 Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be  slightly significant. 
 
+
 ```{r, include=FALSE}
-#ggplot 
-ggplot(data=decenthealth, aes(x=decentralization,y=pop_toiletacess)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Decentralization and Access to toilet facilities\n")
-```
-
-
-
-```{r, echo=FALSE}
 # First regression: toilet access
 R1toilet <- lm(pop_toiletacess ~ decentralization, data = decenthealth)
 summary(R1toilet)
@@ -400,12 +402,12 @@ summary(R3toilet)
 confint(R3toilet)
 ```
 
-```{r,include=FALSE,results='asis'}
-labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index')
+```{r,echo=FALSE,results='asis'}
+labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
 
 stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
                      title = 'Effect of decentralization on toilet access',
-                     digits = 2, type = 'latex', header = FALSE)
+                     digits = 2, type = 'html', header = FALSE)
 ```
 
 
@@ -416,13 +418,9 @@ stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
 In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastrucure. In reverse, population density, public expenditures per capita and average literacy rate of heads of households reveal to be significant; housholds health consumption is slightly significant. 
 
 
-```{r, include=FALSE}
-#ggplot 
-ggplot(data=decenthealth, aes(x=decentralization,y=connect_soneb)) + geom_line() + theme_bw(base_size = 13) + ggtitle(" Decentralization and Water pipeline connection\n")
-```
 
 
-```{r,echo=FALSE}
+```{r,include=FALSE}
 # First regression: water pipeline
 R1soneb <- lm(connect_soneb ~ decentralization, data = decenthealth)
 summary(R1soneb)
@@ -437,13 +435,13 @@ summary(R3soneb)
 confint(R3soneb)
 ```
 
-```{r, include=FALSE,results='asis'}
+```{r, echo=FALSE,results='asis'}
 
-labels <- c('(Intercept)', 'Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index')
+labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
 
 stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
                      title = 'Effect of decentralization on water delivery infrastructure',
-                     digits = 2, type = 'latex', header = FALSE)
+                     digits = 2, type = 'html', header = FALSE)
 ```
 
 
@@ -453,14 +451,9 @@ stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
 
 Like the previous models, decentralization does not seem to be a significant elements in the availability of healthcare centers at the subnational level. With regards to the explanatory variables: population, population density, and average literacy rate of the head of households seem to be strongly determinants of the existence of healthcare centers. Public expenditures per capita and poverty level result to be significant as well.
 
-```{r, include=FALSE}
-#ggplot 
-ggplot(data=decenthealth, aes(x=decentralization,y=pubhosp)) + geom_line() + theme_bw(base_size = 13) + ggtitle("Decentralization and Availability of Healthcare Centers\n")
-```
 
 
-
-```{r,echo=FALSE}
+```{r,include=FALSE}
 # First regression: public healthcare center
 R1pubhosp<-lm(pubhosp ~ decentralization, data=decenthealth)
 summary(R1pubhosp)
@@ -475,10 +468,10 @@ summary(R3pubhosp)
 confint(R3pubhosp)
 ```
 
-```{r, include=FALSE,results='asis'}
+```{r, echo=FALSE,results='asis'}
 stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
                      title = 'Effect of decentralization on availability of healthcare centers',
-                     digits = 2, type = 'latex', header = FALSE)
+                     digits = 2, type = 'html', header = FALSE)
 ```
 
 
