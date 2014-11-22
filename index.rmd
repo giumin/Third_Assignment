@@ -2,6 +2,7 @@
 title: "Index.rmd"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "20 novembre 2014"
+bibliography: bibliographyproject.bib
 output: html_document
 ---
 
@@ -267,7 +268,7 @@ decentralization.data <- read.csv(textConnection(decentralization.data))
 
 **Independent variable: Decentralization**
 
-Decentralization is typically defined in public planning, management and decision making, as the transfer of authority and power from higher to lower levels of governing, or from national to sub-national levels[@rondinelli1983collins]. 
+Decentralization is typically defined in public planning, management and decision making, as the transfer of authority and power from higher to lower levels of governing, or from national to sub-national levels. 
 It has different characteristics for different writers which often describe it as either delegation, devaluation, de-concentration and privatization of responsibility and authority of tasks to lower level of administration. 
 
 Yet, decentralization is a very complex mechanism. In general, its measurement involves two elements: 
