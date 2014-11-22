@@ -206,7 +206,16 @@ compare_trend <-data.frame(
 ```
 
 ```{r,echo=FALSE, results='asis'}
-line_plot <- gvisLineChart(compare_trend)
+line_plot <- gvisLineChart((compare_trend), 
+              options=list(
+                        title="Compare trends",
+                        titleTextStyle="{color:'black', 
+                                           fontName:'Courier', 
+                                           fontSize:16}",   
+                          curveType="function",
+                          width=700,
+                          height=400                         
+                          )) 
 print(line_plot, tag = 'chart')
 ```
 
