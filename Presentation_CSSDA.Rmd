@@ -18,7 +18,7 @@ output: ioslides_presentation
 
 - Population: 10.32 million habitants 
 
-- Human Development Index 2014: 165 out of 187 countries in
+- Human Development Index 2014: 165 out of 187 countries 
 
 ```{r, echo=FALSE, message=FALSE}
 library(ggmap)
@@ -28,8 +28,7 @@ print(Country_Benin)
 
 
 ##Why Benin?
- 
-- huge transformation of the political and administrative organization
+
 
 - Decentralization and devolution have been at the center of national policy for the past decade
 
@@ -39,14 +38,41 @@ print(Country_Benin)
 
 - Legal provisions has transfered part of health provision competencies to subnational entities 
 
-
-
-Since the year 2002, municipal governments are increasingly responsible for providing basic services and infrastructures such as water access. To offset the vertical imbalance of subnational governments, the central government have conceded some tax raising powers and has also use intergovernmental transfers through the National Commission on Local Finances. 
--
+- Subnational governments have tax raising powers and are allocated transfers to meet assigned expenditures
 
 
 
 ## Theoretical background
+
+Proponents of decentralization share the view that local governments are the major vehicles for specific poverty alleviation policies. 
+
+*Economic Theory*
+
+- decision-making should occur at the lowest level of government in order to reach allocation efficiency reflecting economies of scale and benefit-cost spill outs [@shah1994reform] 
+- local government has an informational advantage, which is essential to improve provision of public services [@oates1972fiscal]
+- decentralization shall enhance the accountability of policymakers through greater participation of nearby communities in political decisions [@crook1998democracy]  [@tiebout1956pure]
+
+*Empirical Findings*
+
+- [@santos2005participatory] (Bresil): Decentralization has contributed to double the level of access to basic sanitation and enrollment in elementary schools between 1989 and 1996. Revenue collection increased by 48%. 
+
+- [@bardhan2000capture]: (West Bengal): Fiscal autonomy of local governments expands the volume of service delivery 
+
+- [@faguet2004does] (Bolivia): Public investment in education, water and sanitation rose significantly with decentralization and devolution of administrative authorities
+
+- [@bird1999decentralization] (Asian and Latin-America): Positive effect of decentralization on health, primary education and infrastructure.
+
+- [@galasso2005decentralized] studied a decentralized food-for-education program in Bangladesh and found out that a somewhat larger fraction of the poor received benefits from the program compared to the non-poor. They also found that that the program shifted the balance of power in favor of the poor. 
+
+
+In contrast to these positive outcomes, a greater number of publications have indicated the pitfalls of decentralization policies, such as local capture and corruption of subnational authorities. 
+
+For instance @reinikka2004local highlights the capture of decentralized school grants by local officials in Uganda. 
+On this topic, @treisman2000causes also suggests that more levels of government induce higher perceived corruption, less effective provision of public health services and lower adult literacy, especially in developing countries.   
+Several additional pitfalls of decentralization in developing countries are stressed by @prud1995dangers, such as interjurisdictional disparities or ethnic biases in elections. 
+Other studies are those of @del2008local, that suggests a process of yardstick competition between local governments in Indonesia, and @gregoire2010decentralization, that establishes the existence of strategic complementarities of local public goods among Beninese communes. 
+
+As decentralization echoes in the developing world, there is an increasing body of researchers devoted to empirically assess its contribution to poverty alleviation. In light of these publications, we hope to contribute to the debate by studying an important aspect in development economics literature which is health, and which will be at the center of the post-2015 development agenda. 
 
 
 - Bullet 1
