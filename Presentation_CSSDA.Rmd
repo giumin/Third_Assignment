@@ -5,27 +5,105 @@ date: "Thursday, November 27, 2014"
 output: ioslides_presentation
 ---
 
-## R Markdown
+## Research Question
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+ **What impact does decentralization have on the performance of the health provision system in Benin?**
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+```{r, echo=FALSE, message=FALSE}
+library(ggmap)
+Country_Benin<-qmap(location='benin',zoom=6)
+print(Country_Benin)
+```
 
-## Slide with Bullets
+
+##Why Benin?
+
+In Benin, legal provisions on decentralization has transfered part of health provision competencies to subnational entities such as districts and municipalities. Since the year 2002, municipal governments are increasingly responsible for providing basic services and infrastructures such as water access. To offset the vertical imbalance of subnational governments, the central government have conceded some tax raising powers and has also use intergovernmental transfers through the National Commission on Local Finances. 
+
+The country is currently ranked 165 out of 187 countries in the 2014 Human Development Index, with a GDP/capita of US$794.433 (5% growth in 2013) and an estimated population of 9.351 million in 2012. For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. 
+We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
+
+
+
+## Theoretical background
 
 - Bullet 1
 - Bullet 2
 - Bullet 3
 
-## Slide with R Code and Output
+## Data and methodology
 
-```{r}
-summary(cars)
+
+
+## Macro overview
+```{r, include=FALSE}
+library(WDI)
+healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL','SH.XPD.PCAP','SH.STA.ACSN'))
+Benin<-subset(healthpublicexpend,country=='Benin')
+Benin$iso2c<-NULL
+names(Benin)[names(Benin)=="year"] <- "Year"
+names(Benin)[names(Benin)=="SH.XPD.PUBL"] <- "Public.Health.Expenditure"
+names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
+names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
+
 ```
 
-## Slide with Plot
+```{r,include=FALSE}
+infrastructures <- read.csv("http://apps.who.int/gho/athena/data/data-text.csv?target=GHO/DEVICES01,DEVICES02,DEVICES03,DEVICES04,DEVICES05&profile=text&filter=COUNTRY:*;REGION:AFR;REGION:AMR;REGION:SEAR;REGION:EUR;REGION:EMR;REGION:WPR")
+Benininfra<-subset(infrastructures,Country=='Benin')
+Benininfra$PUBLISH.STATES<-NULL
+Benininfra$WHO.region<-NULL
+Benininfra$Low<-NULL
+Benininfra$High<-NULL
+Benininfra$Comments<-NULL
+library(dplyr)
+messy<-data.frame(
+  Indicator=c("District/rural hospitals", "Health centres","Provincial hospitals","Specialized hospitals","Provincial hospitals","Specialized hospitals"),
+  Year=c(2010,2010,2010,2010,2013,2013),
+  Country=c("Benin","Benin","Benin","Benin","Benin","Benin"),
+  Display.Value=c(0.29,6.36,0.06,0.12,0.05,0.11)
+  )
+library(tidyr)
+tidy<-spread(messy,Indicator,Display.Value)
+```
+
+```{r, include=FALSE}
+names(Benin)[names(Benin)=="country"] <- "Country"
+total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
+```
 
 ```{r, echo=FALSE}
-plot(cars)
+library(ggplot2)
+
+ggplot(data=Benin,aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() +theme_bw(base_size=9) + ggtitle("Trend of total public expenditure over the years\n")
 ```
 
+## 
+
+```{r, echo=FALSE}
+
+ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 9) + ggtitle("Trend over the years\n")
+``` 
+ 
+##
+```{r,echo=FALSE}
+
+ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 9) + ggtitle("Trend over the years\n")
+```
+
+
+## Micro analysis
+
+- Independent variable: Decentralization
+- Dependent variables:
+    access to water
+    -access to toilet facilities
+    -water provision infrastructure
+    -public health infrastructure
+    
+- Explanatory variables
+
+
+## Results 
+
+## Limitations
