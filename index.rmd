@@ -36,6 +36,12 @@ The country is currently ranked 165 out of 187 countries in the 2014 Human Devel
 We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
 
 
+```{r, echo=FALSE, message=FALSE}
+library(ggmap)
+Country_Benin<-qmap(location='benin',zoom=6)
+print(Country_Benin)
+```
+
 
 
 
