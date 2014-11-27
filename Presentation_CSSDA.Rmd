@@ -8,6 +8,17 @@ output: ioslides_presentation
 ## Research Question
 
  **What impact does decentralization have on the performance of the health provision system in Benin?**
+ 
+
+## Description of Benin
+
+- GDP per capita: USD 804.67 in 2013
+
+- GDP growth: 5.6% in 2013
+
+- Population: 10.32 million habitants 
+
+- Human Development Index 2014: 165 out of 187 countries in
 
 ```{r, echo=FALSE, message=FALSE}
 library(ggmap)
@@ -17,15 +28,26 @@ print(Country_Benin)
 
 
 ##Why Benin?
+ 
+- huge transformation of the political and administrative organization
 
-In Benin, legal provisions on decentralization has transfered part of health provision competencies to subnational entities such as districts and municipalities. Since the year 2002, municipal governments are increasingly responsible for providing basic services and infrastructures such as water access. To offset the vertical imbalance of subnational governments, the central government have conceded some tax raising powers and has also use intergovernmental transfers through the National Commission on Local Finances. 
+- Decentralization and devolution have been at the center of national policy for the past decade
 
-The country is currently ranked 165 out of 187 countries in the 2014 Human Development Index, with a GDP/capita of US$794.433 (5% growth in 2013) and an estimated population of 9.351 million in 2012. For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. 
-We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
+- Decentralization: huge transformation of the political and administrative organization
+
+- Decentralization as mechanism to fight poverty and reduce inequality
+
+- Legal provisions has transfered part of health provision competencies to subnational entities 
+
+
+
+Since the year 2002, municipal governments are increasingly responsible for providing basic services and infrastructures such as water access. To offset the vertical imbalance of subnational governments, the central government have conceded some tax raising powers and has also use intergovernmental transfers through the National Commission on Local Finances. 
+-
 
 
 
 ## Theoretical background
+
 
 - Bullet 1
 - Bullet 2
