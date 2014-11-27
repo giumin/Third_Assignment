@@ -46,13 +46,17 @@ print(Country_Benin)
 
 Proponents of decentralization share the view that local governments are the major vehicles for specific poverty alleviation policies. 
 
-*Economic Theory*
+**Economic Theory**
 
 - decision-making should occur at the lowest level of government in order to reach allocation efficiency reflecting economies of scale and benefit-cost spill outs [@shah1994reform] 
+
 - local government has an informational advantage, which is essential to improve provision of public services [@oates1972fiscal]
+
 - decentralization shall enhance the accountability of policymakers through greater participation of nearby communities in political decisions [@crook1998democracy]  [@tiebout1956pure]
 
-*Empirical Findings*
+## Empirical Findings 
+
+**Pros**
 
 - [@santos2005participatory] (Bresil): Decentralization has contributed to double the level of access to basic sanitation and enrollment in elementary schools between 1989 and 1996. Revenue collection increased by 48%. 
 
@@ -62,25 +66,24 @@ Proponents of decentralization share the view that local governments are the maj
 
 - [@bird1999decentralization] (Asian and Latin-America): Positive effect of decentralization on health, primary education and infrastructure.
 
-- [@galasso2005decentralized] studied a decentralized food-for-education program in Bangladesh and found out that a somewhat larger fraction of the poor received benefits from the program compared to the non-poor. They also found that that the program shifted the balance of power in favor of the poor. 
+- [@galasso2005decentralized] (Bangladesh): Decentralization shifted the balance of power in favor of the poor. 
+
+**Cons**
+
+- [@reinikka2004local] (Uganda): Capture of decentralized school grants by local officials in Uganda. 
+
+- [@treisman2000causes]: (developing countries): more levels of government induce higher perceived corruption, less effective provision of public health services 
+
+- [@del2008local] (Indonesia): decentralization leads to yardstick competition between local governments 
 
 
-In contrast to these positive outcomes, a greater number of publications have indicated the pitfalls of decentralization policies, such as local capture and corruption of subnational authorities. 
+## Methodology and Exploratory Data Collection 
 
-For instance @reinikka2004local highlights the capture of decentralized school grants by local officials in Uganda. 
-On this topic, @treisman2000causes also suggests that more levels of government induce higher perceived corruption, less effective provision of public health services and lower adult literacy, especially in developing countries.   
-Several additional pitfalls of decentralization in developing countries are stressed by @prud1995dangers, such as interjurisdictional disparities or ethnic biases in elections. 
-Other studies are those of @del2008local, that suggests a process of yardstick competition between local governments in Indonesia, and @gregoire2010decentralization, that establishes the existence of strategic complementarities of local public goods among Beninese communes. 
+*Macroeconomic approach*
 
-As decentralization echoes in the developing world, there is an increasing body of researchers devoted to empirically assess its contribution to poverty alleviation. In light of these publications, we hope to contribute to the debate by studying an important aspect in development economics literature which is health, and which will be at the center of the post-2015 development agenda. 
-
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-## Data and methodology
-
+Given that health related services is highly decentralized, there might be a strong correlation between the macro-overview and the microeconomic outcome.
+- country's health-related public expenditures (WB, WHO) 
+- improved sanitation facilities on a macro level
 
 
 ## Macro overview
@@ -126,14 +129,15 @@ library(ggplot2)
 ggplot(data=Benin,aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() +theme_bw(base_size=9) + ggtitle("Trend of total public expenditure over the years\n")
 ```
 
-## 
+---
 
 ```{r, echo=FALSE}
 
 ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 9) + ggtitle("Trend over the years\n")
 ``` 
  
-##
+---
+
 ```{r,echo=FALSE}
 
 ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 9) + ggtitle("Trend over the years\n")
@@ -143,15 +147,53 @@ ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + 
 ## Micro analysis
 
 - Independent variable: Decentralization
-- Dependent variables:
-    access to water
-    -access to toilet facilities
-    -water provision infrastructure
-    -public health infrastructure
-    
-- Explanatory variables
 
+- Dependent variables:
+  +access to water: defined as the percentage of households in the municipality that have access to water 
+  +access to toilet facilities: percentage of households in the municipality that have access to toilet facilities 
+  +water provision infrastructure: percentage of households in that municipality that are connected to SONEB (water pipeline)
+  +healthcare centers (hospitals): number of existing hospitals or public healthcare centers in the municpality
+    
+- Explanatory variables: population, population density, per capita consumption, public expenditure per capita, households health consumption, monetary poverty index, average literacy rate of the head of households, gini coefficient, 
 
 ## Results 
+
+```{r,include=FALSE}
+url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/gh-pages/decenthealth.csv"
+combineddata.data <- getURL(url2, ssl.verifypeer = FALSE)                
+combineddata.data <- read.csv(textConnection(combineddata.data))
+```
+
+```{r, echo=FALSE, results='asis'}
+stargazer(combineddata.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'html', title="Descriptive statistics of dependent variables", digits=2)
+```
+
+**Effect of Decentralization on Water Access**
+
+```{r,include=FALSE, results='asis'}
+# First regression:water acces
+R1water <- lm(pop_wateraccess ~ decentralization2, data = combineddata.data)
+confint(R1water)
+summary(R1water)
+
+# Second regression: water access
+R2water <- lm(pop_wateraccess ~ decentralization2 + log(population) + Density, data = combineddata.data)
+confint(R2water)
+
+# Third regression: water access
+R3water <- lm(pop_wateraccess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr, data = combineddata.data)
+confint(R3water)
+```
+
+
+```{r, echo=FALSE, results='asis'}
+labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
+stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
+                     title = 'Effect of decentralization on water access',
+                     digits = 2, type = 'html', header = FALSE)
+```
+
+
+
 
 ## Limitations
