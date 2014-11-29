@@ -326,8 +326,7 @@ In our basic model, we regress decentralization and our independent variables as
 
 **Estimated Model**
 
-$$ D = \alpha + \beta_{1}Decentralization + \beta_{2}LogPop + \beta_{3}Density + \beta_{4}Log PubExp 
-+ \beta_{5}Log Comsump/c + \beta_{6}Educ + \beta_{7}PovertyInd + \beta_{8}Gini + \beta_{9}Perception + e $$
+$$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
 
 
 

@@ -83,10 +83,10 @@ Proponents of decentralization share the view that local governments are the maj
 - [@faguet2004does] (Bolivia): Public investment in education, water and sanitation rose significantly 
 
 - [@bird1999decentralization] (Asian and Latin-America): Positive effect of decentralization on health, primary education and infrastructure.
+---
 
 - [@galasso2005decentralized] (Bangladesh): Decentralization shifted the balance of power in favor of the poor. 
 
----
 
 **Cons**
 
@@ -167,33 +167,18 @@ ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + 
 
 **Estimated Model**
 
-$$ D = \alpha + \beta_{1}Decentralization + \beta_{2}Log Population + \beta_{3}Density + \beta_{4}Log Public Expenditures 
-+ \beta_{5}Log Comsumption per Capita + \beta_{6}Education + \beta_{7}PovertyIndex + \beta_{8}Gini Coefficient + \beta_{9}Perception on Decentralization + e $$
+$$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
 
-- Independent variable: Decentralization
+
 ---
 
-<div class="columns-2">
-- Dependent variables:
+**Variables**
+- Independent variable: Decentralization
 
-  + access to water
-  
-  + access to toilet facilities
-  
-  + water provision infrastructure
-  
-  + healthcare centers (hospitals)
+- Dependent variables:access to water, access to toilet facilities, water provision infrastructure, healthcare centers (hospitals)
     
--  Explanatory variables: 
+-  Explanatory variables: population, population density, per capita consumption, public expenditure per capita, households health consumption, monetary poverty index, average literacy rate of the head of households, gini coefficient 
 
- + population, population density 
- 
- + per capita consumption, public expenditure per capita, households health consumption
- 
- + monetary poverty index, average literacy rate of the head of households
- 
- + gini coefficient 
-</div>
 
 ## Results 
 
@@ -202,6 +187,7 @@ url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/gh-pages/dece
 combineddata.data <- getURL(url2, ssl.verifypeer = FALSE)                
 combineddata.data <- read.csv(textConnection(combineddata.data))
 ```
+
 
 ```{r, echo=FALSE, results='asis'}
 stargazer(combineddata.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'html', title="Descriptive statistics of dependent variables", digits=2)
@@ -227,7 +213,6 @@ summary(R3water)
 ---
 ```{r,echo=FALSE,results='asis'}
 
-
 #Testing for multicollinearity among variables
 vif(R3water)
 sqrt(vif(R3water)) > 2
@@ -249,7 +234,7 @@ summary(gvmodelwater)
 labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
 stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
                      title = 'Effect of decentralization on water access',
-                     digits = 2, type = 'html', header = FALSE)
+                     digits = 2, type = 'html',font.size="tiny", header = FALSE)
 ```
 
 ---
