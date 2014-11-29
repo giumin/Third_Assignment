@@ -83,6 +83,14 @@ names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 ```
 
 
+```{r}
+require(devtools)
+install_github('ramnathv/rCharts@dev')
+install_github('ramnathv/rMaps')
+
+install_github('ramnathv/rMaps')
+```
+
 
 **World Health Organization Indicators**
 

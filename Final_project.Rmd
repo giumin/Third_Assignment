@@ -324,6 +324,11 @@ stargazer(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_s
 
 In our basic model, we regress decentralization and our independent variables as above-mentionned.  
 
+**Estimated Model**
+
+$$ D = \alpha + \beta_{1}Decentralization + \beta_{2}LogPop + \beta_{3}Density + \beta_{4}Log PubExp 
++ \beta_{5}Log Comsump/c + \beta_{6}Educ + \beta_{7}PovertyInd + \beta_{8}Gini + \beta_{9}Perception + e $$
+
 
 
 **Effect of Decentralization on Water Access**
