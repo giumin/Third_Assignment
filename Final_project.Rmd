@@ -3,6 +3,7 @@ title: "Final Project"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "27 novembre 2014"
 output: pdf_document
+bibliography: bibliographyproject.bib
 ---
 
 

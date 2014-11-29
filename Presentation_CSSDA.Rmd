@@ -3,12 +3,19 @@ title: "Presentation"
 author: "Daniel Jemberu, Giula Minnucci, Rose Camille Vincent"
 date: "Thursday, November 27, 2014"
 output: ioslides_presentation
+bibliography: bibliographyproject.bib
 ---
 
 ## Research Question
 
  **What impact does decentralization have on the performance of the health provision system in Benin?**
- 
+```{r, echo=FALSE, message=FALSE}
+library(ggmap)
+Country_Benin<-qmap(location='benin',zoom=6)
+print(Country_Benin)
+```
+
+
 
 ## Description of Benin
 
@@ -20,11 +27,6 @@ output: ioslides_presentation
 
 - Human Development Index 2014: 165 out of 187 countries 
 
-```{r, echo=FALSE, message=FALSE}
-library(ggmap)
-Country_Benin<-qmap(location='benin',zoom=6)
-print(Country_Benin)
-```
 
 
 ##Why Benin?
@@ -48,17 +50,17 @@ Proponents of decentralization share the view that local governments are the maj
 
 **Economic Theory**
 
-- decision-making should occur at the lowest level of government in order to reach allocation efficiency reflecting economies of scale and benefit-cost spill outs [@shah1994reform] 
+- decision-making should occur at the lowest level of government --> allocation efficiency  [@shah1994reform] 
 
-- local government has an informational advantage, which is essential to improve provision of public services [@oates1972fiscal]
+- local government has an informational advantage  [@oates1972fiscal]
 
-- decentralization shall enhance the accountability of policymakers through greater participation of nearby communities in political decisions [@crook1998democracy]  [@tiebout1956pure]
+- decentralization --> greater participation of nearby communities --> accountability of policymakers [@crook1998democracy]  [@tiebout1956pure]
 
 ## Empirical Findings 
 
 **Pros**
 
-- [@santos2005participatory] (Bresil): Decentralization has contributed to double the level of access to basic sanitation and enrollment in elementary schools between 1989 and 1996. Revenue collection increased by 48%. 
+- [@santos2005participatory] (Brazil): Decentralization has contributed to double the level of access to basic sanitation and enrollment in elementary schools between 1989 and 1996. Revenue collection increased by 48%. 
 
 - [@bardhan2000capture]: (West Bengal): Fiscal autonomy of local governments expands the volume of service delivery 
 
@@ -67,6 +69,8 @@ Proponents of decentralization share the view that local governments are the maj
 - [@bird1999decentralization] (Asian and Latin-America): Positive effect of decentralization on health, primary education and infrastructure.
 
 - [@galasso2005decentralized] (Bangladesh): Decentralization shifted the balance of power in favor of the poor. 
+
+---
 
 **Cons**
 
@@ -159,12 +163,14 @@ ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + 
 ## Results 
 
 ```{r,include=FALSE}
+library(RCurl)
 url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/gh-pages/decenthealth.csv"
-combineddata.data <- getURL(url2, ssl.verifypeer = FALSE)                
+combineddata.data <- getURL(url2)                
 combineddata.data <- read.csv(textConnection(combineddata.data))
 ```
 
 ```{r, echo=FALSE, results='asis'}
+library(stargazer)
 stargazer(combineddata.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'html', title="Descriptive statistics of dependent variables", digits=2)
 ```
 
@@ -181,7 +187,7 @@ R2water <- lm(pop_wateraccess ~ decentralization2 + log(population) + Density, d
 confint(R2water)
 
 # Third regression: water access
-R3water <- lm(pop_wateraccess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr, data = combineddata.data)
+R3water <- lm(pop_wateraccess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
 confint(R3water)
 ```
 
