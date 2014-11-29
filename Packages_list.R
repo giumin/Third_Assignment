@@ -1,0 +1,7 @@
+install.packages("gvlma")
+library(gvlma)
+library(stargazer)
+install.packages("robust")
+library(robust)
+install.packages("het.test")
+library(het.test)
