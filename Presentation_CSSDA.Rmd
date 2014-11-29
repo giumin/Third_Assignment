@@ -7,6 +7,20 @@ bibliography: bibliographyproject.bib
 ---
 
 
+```{r,echo=FALSE,message=FALSE}
+library(ggmap)
+install.packages("car")
+library(car)
+library(ggplot2)
+library(RCurl)
+library(stargazer)
+install.packages("gvlma")
+library(gvlma)
+install.packages("robust")
+library(robust)
+install.packages("het.test")
+library(het.test)
+```
 
 ## Research Question
 
