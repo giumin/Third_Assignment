@@ -1,4 +1,7 @@
+library(ggmap)
 install.packages("gvlma")
+
+
 library(gvlma)
 library(stargazer)
 install.packages("robust")
