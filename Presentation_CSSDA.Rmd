@@ -4,23 +4,17 @@ author: "Daniel Jemberu, Giula Minnucci, Rose Camille Vincent"
 date: "Thursday, November 27, 2014"
 output: ioslides_presentation    
 bibliography: bibliographyproject.bib
-
 ---
 
 
-```{r,echo=FALSE,message=FALSE}
+```{r,include=FALSE}
 library(ggmap)
-
-
 library(car)
 library(ggplot2)
 library(RCurl)
 library(stargazer)
-
 library(gvlma)
-
 library(robust)
-
 library(het.test)
 ```
 
@@ -83,10 +77,8 @@ Proponents of decentralization share the view that local governments are the maj
 - [@faguet2004does] (Bolivia): Public investment in education, water and sanitation rose significantly 
 
 - [@bird1999decentralization] (Asian and Latin-America): Positive effect of decentralization on health, primary education and infrastructure.
+
 ---
-
-- [@galasso2005decentralized] (Bangladesh): Decentralization shifted the balance of power in favor of the poor. 
-
 
 **Cons**
 
@@ -173,6 +165,7 @@ $$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
 ---
 
 **Variables**
+
 - Independent variable: Decentralization
 
 - Dependent variables:access to water, access to toilet facilities, water provision infrastructure, healthcare centers (hospitals)
@@ -379,3 +372,4 @@ stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
                      digits = 2, type = 'html', header = FALSE)
 ```
 
+##References
