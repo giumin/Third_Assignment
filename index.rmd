@@ -220,7 +220,6 @@ stargazer(decentralization.data[c("decentralization","population","Density", "pu
 ```
 ####scatterplot matrix
 ```{r, results='asis',echo=FALSE}
-install.packages("car")
 library("car")
 car::scatterplotMatrix(decentralization.data[c("decentralization","population","Density", "pubexp.c")])
 ```
