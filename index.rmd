@@ -218,6 +218,12 @@ library(stargazer)
 stargazer(decentralization.data[c("decentralization","population","Density", "pubexp.c")], type = 'html', 
  title="Descriptive statistics/selected variables", digits=2)
 ```
+####scatterplot matrix
+```{r, results='asis',echo=FALSE}
+install.packages("car")
+library("car")
+car::scatterplotMatrix(decentralization.data[c("decentralization","population","Density", "pubexp.c")])
+```
 
 **Dependent variables**
 
@@ -250,7 +256,11 @@ decenthealth <-merge(decentralization.data,health.data, by=c("Year", "ID", "Citi
 
 stargazer(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'html', title="Descriptive statistics of dependent variables", digits=2)
 ```
-
+#####scatterplot matrix 
+```{r,echo=FALSE, results='asis'}
+library("car")
+car::scatterplotMatrix(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")])
+```
 
 
 
