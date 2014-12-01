@@ -211,8 +211,8 @@ stargazer(decentralization.data[c("decentralization","population","Density", "pu
  title="Descriptive statistics/selected variables", digits=2)
 ```
 ####scatterplot matrix
-The above scatterplot matrix will illustrate the correlation matix between the explanatory variables decentlazation,population,density and public expenditure.In addition,it will show that wether the study varaibles has showed normal distribution or not.
-as clearly showed in the graph most of the variables follows positive skewed distribution.
+The above scatterplot matrix will illustrate the correlation matix between the explanatory variables decentlazation,population,density and public expenditure per capital.In addition,it will show that wether the study varaibles has showed normal distribution or not.
+as clearly showed in the graph almost all variables has followed positive skewed distribution.
 ```{r, results='asis',echo=FALSE}
 library("car")
 car::scatterplotMatrix(decentralization.data[c("decentralization","population","Density", "pubexp.c")])
