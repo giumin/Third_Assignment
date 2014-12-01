@@ -2,7 +2,7 @@
 title: "Presentation"
 author: "Daniel Jemberu, Giula Minnucci, Rose Camille Vincent"
 date: "Thursday, November 27, 2014"
-output: ioslides_presentation    
+output: ioslides_presentation   
 bibliography: bibliographyproject.bib
 ---
 
