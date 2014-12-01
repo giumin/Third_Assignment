@@ -305,6 +305,8 @@ summary(R2soneb)
 R3soneb <- lm(connect_soneb ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
 summary(R3soneb)
 ```
+
+
 ---
 
 **Effect of Decentralization on provision of public healthcare facilities**
