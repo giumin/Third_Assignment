@@ -12,10 +12,10 @@ library(ggmap)
 library(car)
 library(ggplot2)
 library(RCurl)
-library(stargazer)
 library(gvlma)
 library(robust)
 library(het.test)
+library(stargazer)
 ```
 
 ## Research Question
@@ -168,29 +168,77 @@ print(line_plot, tag = 'chart')
 
 ## Micro analysis
 
+
 **Estimated Model**
 
 $$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
 
 
----
+##Variables
 
-**Variables**
-
-- Independent variable: Decentralization
-
-- Dependent variables:access to water, access to toilet facilities, water provision infrastructure, healthcare centers (hospitals)
-    
--  Explanatory variables: population, population density, per capita consumption, public expenditure per capita, households health consumption, monetary poverty index, average literacy rate of the head of households, gini coefficient 
-
-
-## Results 
-
-```{r,include=FALSE}
+**Independent variable** : Decentralization
+```{r,include=FALSE, message=FALSE}
 url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/gh-pages/decenthealth.csv"
 combineddata.data <- getURL(url2, ssl.verifypeer = FALSE)                
 combineddata.data <- read.csv(textConnection(combineddata.data))
 ```
+
+```{r, results='asis',echo=FALSE}
+stargazer(combineddata.data[c("decentralization","population","Density", "pubexp.c")], type = 'html', 
+ title="Descriptive statistics/selected variables", digits=2)
+```
+
+---
+
+
+```{r, results='asis',echo=FALSE, message=FALSE}
+library("car")
+car::scatterplotMatrix(combineddata.data[c("decentralization2","pop_wateraccess","pop_toiletacess", "connect_soneb", "pubhosp")])
+```
+
+---
+
+
+**Dependent variables**
+
+- access to water
+
+- access to toilet facilities
+
+- water provision infrastructure
+
+- healthcare centers (hospitals)
+
+
+
+---  
+
+
+**Explanatory variables**
+
+
+
+- population
+
+- population density 
+
+- per/c consumption
+
+- public expenditure per/c
+
+-  health consumpt.(per house)
+
+- monetary poverty index
+
+-  av. literacy rate
+
+- gini  
+
+
+
+
+## Results 
+
 
 **Effect of Decentralization on Water Access**
 
@@ -209,40 +257,18 @@ R3water <- lm(pop_wateraccess ~ decentralization2 + log(population) + Density + 
 summary(R3water)
 ```
 
-```{r}
-install.packages("arm")
+
+```{r, echo=FALSE}
+par(mfrow=c(2,3))
+termplot(R3water)
+```
+
+```{r, echo=FALSE,results='asis'}
 library("arm")
 data("combineddata.data", package = "car")
 coefplot(R2water, xlim=c(-20, 80),            intercept=TRUE)
 coefplot(R1water, add=TRUE, col.pts="red",  intercept=TRUE)
 coefplot(R3water, add=TRUE, col.pts="blue", intercept=TRUE, offset=0.2)
-```
-
----
-```{r,echo=FALSE,results='asis'}
-
-#Testing for multicollinearity among variables
-vif(R3water)
-sqrt(vif(R3water)) > 2
-
-# Evaluate homoscedasticity
-#   non-constant error variance test
-ncvTest(R3water)
-#   Beusch-Pagan test
-bptest(R3water)
-
-# Global test of model assumptions
-gvmodelwater <- gvlma(R3water) 
-summary(gvmodelwater)
-
-```
-
----
-```{r, echo=FALSE, results='asis'}
-labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
-stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
-                     title = 'Effect of decentralization on water access',
-                     digits = 2, type = 'html',font.size="tiny", header = FALSE)
 ```
 
 ---
@@ -261,33 +287,6 @@ summary(R2toilet)
 R3toilet <- lm(pop_toiletacess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
 summary(R3toilet)
 
-```
----
-
-```{r,echo=FALSE,results='asis'}
-
-#Testing for multicollinearity among variables
-vif(R3toilet)
-sqrt(vif(R3toilet)) > 2
-
-# Evaluate homoscedasticity
-#   non-constant error variance test
-ncvTest(R3toilet)
-#   Beusch-Pagan test
-bptest(R3toilet)
-
-# Global test of model assumptions
-gvmodeltoilet <- gvlma(R3toilet) 
-summary(gvmodeltoilet)
-
-```
-
----
-```{r, echo=FALSE, results='asis'}
-labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
-stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
-                     title = 'Effect of decentralization on access to toilet facilities',
-                     digits = 2, type = 'html', header = FALSE)
 ```
 
 ---
@@ -308,42 +307,6 @@ summary(R3soneb)
 ```
 ---
 
-```{r, echo=FALSE, results='asis'}
-
-#Testing for multicollinearity among variables
-vif(R3soneb)
-sqrt(vif(R3soneb)) > 2
-
-# Evaluate homoscedasticity
-#   non-constant error variance test
-ncvTest(R3soneb)
-#   Beusch-Pagan test
-bptest(R3soneb)
-
-# Global test of model assumptions
-gvmodelsoneb <- gvlma(R3soneb) 
-summary(gvmodelsoneb)
-
-
-## Heteroskedastic robust standard errors in R
-require("sandwich")
-require("lmtest")
-
-R3soneb$newse<-vcovHC(R3soneb)
-coeftest(R3soneb,R3soneb$newse)
-
-```
-
----
-
-```{r, echo=FALSE, results='asis'}
-labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
-stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
-                     title = 'Effect of decentralization on provision of water facilities',
-                     digits = 2, type = 'html', header = FALSE)
-```
-
----
 **Effect of Decentralization on provision of public healthcare facilities**
 
 ```{r,include=FALSE, results='asis'}
@@ -360,31 +323,7 @@ R3pubhosp <- lm(pubhosp ~ decentralization2 + log(population) + Density + log(pu
 summary(R3pubhosp)
 ```
 ---
-```{r, echo=FALSE,results='asis'}
 
-# Global test of model assumptions
-gvmodelpubhosp <- gvlma(R3pubhosp) 
-summary(gvmodelpubhosp)
 
-#Testing for multicollinearity among variables
-vif(R3pubhosp)
-sqrt(vif(R3pubhosp)) > 2
-
-# Evaluate homoscedasticity
-#   non-constant error variance test
-ncvTest(R3pubhosp)
-#   Beusch-Pagan test
-bptest(R3pubhosp)
-
-```
-
----
-
-```{r, echo=FALSE, results='asis'}
-labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
-stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
-                     title = 'Effect of decentralization on provision of public healthcare facilities',
-                     digits = 2, type = 'html', header = FALSE)
-```
 
 ##References
