@@ -211,6 +211,8 @@ stargazer(decentralization.data[c("decentralization","population","Density", "pu
  title="Descriptive statistics/selected variables", digits=2)
 ```
 ####scatterplot matrix
+The above scatterplot matrix will illustrate the correlation matix between the explanatory variables decentlazation,population,density and public expenditure.In addition,it will show that wether the study varaibles has showed normal distribution or not.
+as clearly showed in the graph most of the variables follows positive skewed distribution.
 ```{r, results='asis',echo=FALSE}
 library("car")
 car::scatterplotMatrix(decentralization.data[c("decentralization","population","Density", "pubexp.c")])
@@ -248,6 +250,8 @@ decenthealth <-merge(decentralization.data,health.data, by=c("Year", "ID", "Citi
 stargazer(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'html', title="Descriptive statistics of dependent variables", digits=2)
 ```
 #####scatterplot matrix 
+The above scatterplot matrix will illustrate the correlation matix between the study variables water acess,water facilities,water pipeline connection and public healthcare center .In addition,it will show that wether the study varaibles has showed normal distribution or not.
+as clearly showed in the graph except acess to water ,water facilities ,both  water pipeline connection and public healthcare center follows positive skewed distribution.
 ```{r,echo=FALSE, results='asis'}
 library("car")
 car::scatterplotMatrix(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")])
