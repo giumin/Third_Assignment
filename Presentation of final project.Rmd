@@ -186,6 +186,20 @@ combineddata.data <- read.csv(textConnection(combineddata.data))
 
 
 
+##Impact on Water Access
+![Image](regwater.png)
+
+
+##Impact on Access to toilet facilities
+![Image](regtoilet.png)
+
+
+##Impact on provision of water facilities
+![Image](regpipe.png)
+
+##Impact on provision of public healthcare facilities
+
+![Image](reghosp.png)
 
 ##References
 
