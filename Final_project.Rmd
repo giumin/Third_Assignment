@@ -228,14 +228,17 @@ In this section, we explore provision of health-related services and infrastruct
 The datasets on local finances are obtained from the National Commission on Local Finances of Benin. Health-related expenditures and provision are from Benin's Integrated Modular Surveys on Household Living Conditions (EMICoV) and the Demographic and Health Survey.
 [As we gathered the data from these sources as excel files, we transformed them in .csv files to import them in our project.]
 
+
 ```{r, include=FALSE}
 library(RCurl)
 library(foreign)  
-#url version to be edited 
-url <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/decentral.csv"
-decentralization.data <- getURL(url)                
-decentralization.data <- read.csv(textConnection(decentralization.data))
 
+```
+
+```{r,include=FALSE}
+url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/gh-pages/decenthealth.csv"
+combineddata.data <- getURL(url2, ssl.verifypeer = FALSE)                
+combineddata.data <- read.csv(textConnection(combineddata.data))
 ```
 
 
@@ -259,22 +262,7 @@ A large part of the debate on decentralization measurement regards the choice be
 This indicator is defined as the ratio of own-source revenues over the total expenditures of a subnational entity.  
 
 
-```{r,include=FALSE}
-head(decentralization.data)
-names(decentralization.data)
-tail(decentralization.data)
-sum(is.na(decentralization.data))
-```
 
-```{r, include=FALSE, results='asis'}
-
-library(stargazer)
-```
-
-```{r, results='asis',echo=FALSE}
-stargazer(decentralization.data[c("decentralization","population","Density", "pubexp.c")], type = 'latex', 
- title="Descriptive statistics/selected variables", digits=2)
-```
 
 **Dependent variables**
 
@@ -293,27 +281,14 @@ We assume that these variables might have some impact either on health health-re
 
 Thus, we use the dataset 'health.data' that contains these variables and we merge it with the one on decentralization to make our analysis easier.
 
-```{r,include=FALSE}
-#URl to be edited 
 
-url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/health.csv"
-health.data <- getURL(url2)                
-health.data <- read.csv(textConnection(health.data))
+```{r, include=FALSE, results='asis'}
 
-decenthealth <-merge(decentralization.data,health.data, by=c("Year", "ID", "Cities"), all=TRUE)
+library(stargazer)
 ```
 
-```{r,include=FALSE}
-
-head(health.data)
-names(health.data)
-tail(health.data)
-sum(is.na(health.data))
-```
-
-```{r,echo=FALSE, results='asis'}
-
-stargazer(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'latex', title="Descriptive statistics of dependent variables", digits=2)
+```{r, echo=FALSE, results='asis'}
+stargazer(combineddata.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'latex', title="Descriptive statistics of dependent variables", digits=2)
 ```
 
 
@@ -335,23 +310,47 @@ $$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
 
 In this model, decentralization reveals to be insignificant,as well as the other explanatory variables. This may be due to mispecification of the model. 
  
-```{r,include=FALSE, results='asis'}
 
+```{r,include=FALSE}
+library(car)
+library(gvlma)
+library(robust)
+library(het.test)
+```
+
+ 
+```{r,echo=FALSE, results='asis'}
 # First regression:water acces
-R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
+R1water <- lm(pop_wateraccess ~ decentralization2, data = combineddata.data)
 confint(R1water)
 summary(R1water)
 
 # Second regression: water access
-R2water <- lm(pop_wateraccess ~ decentralization + population + Density, data = decenthealth)
-confint(R2water)
+R2water <- lm(pop_wateraccess ~ decentralization2 + log(population) + Density, data = combineddata.data)
+summary(R2water)
 
 # Third regression: water access
-R3water <- lm(pop_wateraccess ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = decenthealth)
-confint(R3water)
-
+R3water <- lm(pop_wateraccess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
+summary(R3water)
 ```
 
+```{r,echo=FALSE,results='asis'}
+
+#Testing for multicollinearity among variables
+vif(R3water)
+sqrt(vif(R3water)) > 2
+
+# Evaluate homoscedasticity
+#   non-constant error variance test
+ncvTest(R3water)
+#   Beusch-Pagan test
+bptest(R3water)
+
+# Global test of model assumptions
+gvmodelwater <- gvlma(R3water) 
+summary(gvmodelwater)
+
+```
  
 ```{r, echo=FALSE, results='asis'}
 labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
@@ -369,20 +368,41 @@ stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
 Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be  slightly significant. 
 
 
-```{r, include=FALSE}
-# First regression: toilet access
-R1toilet <- lm(pop_toiletacess ~ decentralization, data = decenthealth)
+```{r,echo=FALSE, results='asis'}
+# First regression:access to toilet facilities
+R1toilet <- lm(pop_toiletacess ~ decentralization2, data = combineddata.data)
 summary(R1toilet)
-confint(R1toilet)
-# Second regression: toilet access
-R2toilet <- lm(pop_toiletacess ~ decentralization + population + Density, data = decenthealth)
+
+# Second regression: access to toilet facilities
+R2toilet <- lm(pop_toiletacess  ~ decentralization2 + log(population) + Density, data = combineddata.data)
 summary(R2toilet)
-confint(R2toilet)
-# Third regression: toilet access
-R3toilet <- lm(pop_toiletacess ~ decentralization +  population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = decenthealth)
+
+# Third regression: access to toilet facilities
+R3toilet <- lm(pop_toiletacess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
 summary(R3toilet)
-confint(R3toilet)
+
 ```
+
+
+```{r,echo=FALSE,results='asis'}
+
+#Testing for multicollinearity among variables
+vif(R3toilet)
+sqrt(vif(R3toilet)) > 2
+
+# Evaluate homoscedasticity
+#   non-constant error variance test
+ncvTest(R3toilet)
+#   Beusch-Pagan test
+bptest(R3toilet)
+
+# Global test of model assumptions
+gvmodeltoilet <- gvlma(R3toilet) 
+summary(gvmodeltoilet)
+
+```
+
+
 
 ```{r,echo=FALSE,results='asis'}
 labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
@@ -394,27 +414,52 @@ stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
 
 
 
-**Effect of decentralization on water pipeline connection**
+**Effect of Decentralization on provision of water facilities**
 
 
 In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastrucure. In reverse, population density, public expenditures per capita and average literacy rate of heads of households reveal to be significant; housholds health consumption is slightly significant. 
 
 
 
-
-```{r,include=FALSE}
-# First regression: water pipeline
-R1soneb <- lm(connect_soneb ~ decentralization, data = decenthealth)
+```{r,echo=FALSE, results='asis'}
+# First regression:access to pipelines
+R1soneb <- lm(connect_soneb ~ decentralization2, data = combineddata.data)
 summary(R1soneb)
-confint(R1soneb)
-# Second regression: water pipeline
-R2soneb <- lm(connect_soneb ~ decentralization + population + Density, data = decenthealth)
+
+# Second regression: access to pipelines
+R2soneb <- lm(connect_soneb ~ decentralization2 + log(population) + Density, data = combineddata.data)
 summary(R2soneb)
-confint(R2soneb)
-# Third regression: water pipeline
-R3soneb <- lm(connect_soneb ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=decenthealth)
+
+# Third regression: access to pipelines
+R3soneb <- lm(connect_soneb ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
 summary(R3soneb)
-confint(R3soneb)
+```
+
+
+```{r, echo=FALSE, results='asis'}
+
+#Testing for multicollinearity among variables
+vif(R3soneb)
+sqrt(vif(R3soneb)) > 2
+
+# Evaluate homoscedasticity
+#   non-constant error variance test
+ncvTest(R3soneb)
+#   Beusch-Pagan test
+bptest(R3soneb)
+
+# Global test of model assumptions
+gvmodelsoneb <- gvlma(R3soneb) 
+summary(gvmodelsoneb)
+
+
+## Heteroskedastic robust standard errors in R
+require("sandwich")
+require("lmtest")
+
+R3soneb$newse<-vcovHC(R3soneb)
+coeftest(R3soneb,R3soneb$newse)
+
 ```
 
 ```{r, echo=FALSE,results='asis'}
@@ -435,19 +480,37 @@ Like the previous models, decentralization does not seem to be a significant ele
 
 
 
-```{r,include=FALSE}
-# First regression: public healthcare center
-R1pubhosp<-lm(pubhosp ~ decentralization, data=decenthealth)
+```{r,echo=FALSE, results='asis'}
+# First regression:public health center
+R1pubhosp <- lm(pubhosp ~ decentralization2, data = combineddata.data)
 summary(R1pubhosp)
-confint(R1pubhosp)
-# Second regression: public healthcare center
-R2pubhosp <- lm(pubhosp ~ decentralization + population + Density, data = decenthealth)
+
+# Second regression: public health center
+R2pubhosp <- lm(pubhosp ~ decentralization2 + log(population) + Density, data = combineddata.data)
 summary(R2pubhosp)
-confint(R2pubhosp)
-# Third regression: public healthcare center
-R3pubhosp <- lm(pubhosp ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=decenthealth)
+
+# Third regression: public health center
+R3pubhosp <- lm(pubhosp ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
 summary(R3pubhosp)
-confint(R3pubhosp)
+```
+
+
+```{r, echo=FALSE,results='asis'}
+
+# Global test of model assumptions
+gvmodelpubhosp <- gvlma(R3pubhosp) 
+summary(gvmodelpubhosp)
+
+#Testing for multicollinearity among variables
+vif(R3pubhosp)
+sqrt(vif(R3pubhosp)) > 2
+
+# Evaluate homoscedasticity
+#   non-constant error variance test
+ncvTest(R3pubhosp)
+#   Beusch-Pagan test
+bptest(R3pubhosp)
+
 ```
 
 ```{r, echo=FALSE,results='asis'}
