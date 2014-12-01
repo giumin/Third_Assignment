@@ -192,11 +192,6 @@ combineddata.data <- getURL(url2, ssl.verifypeer = FALSE)
 combineddata.data <- read.csv(textConnection(combineddata.data))
 ```
 
-
-```{r, echo=FALSE, results='asis'}
-stargazer(combineddata.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'html', title="Descriptive statistics of dependent variables", digits=2)
-```
----
 **Effect of Decentralization on Water Access**
 
 ```{r,include=FALSE, results='asis'}
@@ -212,6 +207,15 @@ summary(R2water)
 # Third regression: water access
 R3water <- lm(pop_wateraccess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
 summary(R3water)
+```
+
+```{r}
+install.packages("arm")
+library("arm")
+data("combineddata.data", package = "car")
+coefplot(R2water, xlim=c(-20, 80),            intercept=TRUE)
+coefplot(R1water, add=TRUE, col.pts="red",  intercept=TRUE)
+coefplot(R3water, add=TRUE, col.pts="blue", intercept=TRUE, offset=0.2)
 ```
 
 ---

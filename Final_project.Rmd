@@ -229,10 +229,11 @@ The datasets on local finances are obtained from the National Commission on Loca
 [As we gathered the data from these sources as excel files, we transformed them in .csv files to import them in our project.]
 
 
+
 ```{r, include=FALSE}
 library(RCurl)
 library(foreign)  
-
+library(stargazer)
 ```
 
 ```{r,include=FALSE}
@@ -261,7 +262,10 @@ The definition and measurement of decentralizaiton has led to a long academic de
 A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditure, few propose here to use the Revenue authonomy(RA) indicator used by [@akai2002sakata] and [@habibi2003etal] to proxy for decentralization. 
 This indicator is defined as the ratio of own-source revenues over the total expenditures of a subnational entity.  
 
-
+```{r, results='asis',echo=FALSE, message=FALSE}
+stargazer(combineddata.data[c("decentralization","population","Density", "pubexp.c")], type = 'latex', 
+ title="Descriptive statistics/selected variables", digits=2)
+```
 
 
 **Dependent variables**
@@ -281,13 +285,7 @@ We assume that these variables might have some impact either on health health-re
 
 Thus, we use the dataset 'health.data' that contains these variables and we merge it with the one on decentralization to make our analysis easier.
 
-
-```{r, include=FALSE, results='asis'}
-
-library(stargazer)
-```
-
-```{r, echo=FALSE, results='asis'}
+```{r, echo=FALSE, results='asis',message=FALSE}
 stargazer(combineddata.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'latex', title="Descriptive statistics of dependent variables", digits=2)
 ```
 
@@ -319,7 +317,7 @@ library(het.test)
 ```
 
  
-```{r,echo=FALSE, results='asis'}
+```{r,include=FALSE, results='asis'}
 # First regression:water acces
 R1water <- lm(pop_wateraccess ~ decentralization2, data = combineddata.data)
 confint(R1water)
@@ -334,7 +332,7 @@ R3water <- lm(pop_wateraccess ~ decentralization2 + log(population) + Density + 
 summary(R3water)
 ```
 
-```{r,echo=FALSE,results='asis'}
+```{r,echo=FALSE,results='asis',message=FALSE}
 
 #Testing for multicollinearity among variables
 vif(R3water)
@@ -353,7 +351,7 @@ summary(gvmodelwater)
 ```
  
 ```{r, echo=FALSE, results='asis'}
-labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
+labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','gini','perception of decentralization','(Intercept)')
 stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
                      title = 'Effect of decentralization on water access',
                      digits = 2, type = 'latex', header = FALSE)
@@ -368,7 +366,7 @@ stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
 Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be  slightly significant. 
 
 
-```{r,echo=FALSE, results='asis'}
+```{r,include=FALSE, results='asis'}
 # First regression:access to toilet facilities
 R1toilet <- lm(pop_toiletacess ~ decentralization2, data = combineddata.data)
 summary(R1toilet)
@@ -384,7 +382,7 @@ summary(R3toilet)
 ```
 
 
-```{r,echo=FALSE,results='asis'}
+```{r,echo=FALSE,results='asis',message=FALSE}
 
 #Testing for multicollinearity among variables
 vif(R3toilet)
@@ -405,7 +403,7 @@ summary(gvmodeltoilet)
 
 
 ```{r,echo=FALSE,results='asis'}
-labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
+labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','gini','perception of decentralization','(Intercept)')
 
 stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
                      title = 'Effect of decentralization on toilet access',
@@ -421,7 +419,7 @@ In this model, our key explanatory variable 'decentralization' seems to have no 
 
 
 
-```{r,echo=FALSE, results='asis'}
+```{r,include=FALSE, results='asis'}
 # First regression:access to pipelines
 R1soneb <- lm(connect_soneb ~ decentralization2, data = combineddata.data)
 summary(R1soneb)
@@ -436,7 +434,7 @@ summary(R3soneb)
 ```
 
 
-```{r, echo=FALSE, results='asis'}
+```{r, echo=FALSE, results='asis',message=FALSE}
 
 #Testing for multicollinearity among variables
 vif(R3soneb)
@@ -464,7 +462,7 @@ coeftest(R3soneb,R3soneb$newse)
 
 ```{r, echo=FALSE,results='asis'}
 
-labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
+labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','gini','perception of decentralization','(Intercept)')
 
 stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
                      title = 'Effect of decentralization on water delivery infrastructure',
@@ -480,7 +478,7 @@ Like the previous models, decentralization does not seem to be a significant ele
 
 
 
-```{r,echo=FALSE, results='asis'}
+```{r,include=FALSE, results='asis'}
 # First regression:public health center
 R1pubhosp <- lm(pubhosp ~ decentralization2, data = combineddata.data)
 summary(R1pubhosp)
@@ -495,7 +493,7 @@ summary(R3pubhosp)
 ```
 
 
-```{r, echo=FALSE,results='asis'}
+```{r, echo=FALSE,results='asis',message=FALSE}
 
 # Global test of model assumptions
 gvmodelpubhosp <- gvlma(R3pubhosp) 
@@ -514,6 +512,9 @@ bptest(R3pubhosp)
 ```
 
 ```{r, echo=FALSE,results='asis'}
+labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','gini','perception of decentralization','(Intercept)')
+
+
 stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
                      title = 'Effect of decentralization on availability of healthcare centers',
                      digits = 2, type = 'latex', header = FALSE)
