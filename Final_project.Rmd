@@ -263,8 +263,7 @@ A large part of the debate on decentralization measurement regards the choice be
 This indicator is defined as the ratio of own-source revenues over the total expenditures of a subnational entity.  
 
 ```{r, results='asis',echo=FALSE, message=FALSE}
-stargazer(combineddata.data[c("decentralization","population","Density", "pubexp.c")], type = 'latex', 
- title="Descriptive statistics/selected variables", digits=2)
+stargazer(combineddata.data[c("decentralization","population","Density", "pubexp.c")], type = 'latex', title="Descriptive statistics/selected variables", digits=2)
 ```
 
 
@@ -301,6 +300,11 @@ In our basic model, we regress decentralization and our independent variables as
 
 $$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
 
+
+```{r, results='asis',echo=FALSE, message=FALSE}
+library("car")
+car::scatterplotMatrix(combineddata.data[c("decentralization2","pop_wateraccess","pop_toiletacess", "connect_soneb", "pubhosp")])
+```
 
 
 **Effect of Decentralization on Water Access**
