@@ -3,6 +3,8 @@ title: "Presentation of final project"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "01 dicembre 2014"
 output: ioslides_presentation
+   
+    
 bibliography: bibliographyproject.bib
 ---
 
@@ -28,6 +30,8 @@ print(Country_Benin)
 
 
 ## Description of Benin
+
+
 
 - GDP per capita: USD 804.67 in 2013
 
@@ -58,7 +62,9 @@ print(Country_Benin)
 
 Proponents of decentralization share the view that local governments are the major vehicles for specific poverty alleviation policies. 
 
+<div class="blue2">
 **Economic Theory**
+</div>
 
 - decision-making should occur at the lowest level of government --> allocation efficiency  [@shah1994reform] 
 
@@ -68,7 +74,9 @@ Proponents of decentralization share the view that local governments are the maj
 
 ## Empirical Findings 
 
+<div class="blue2">
 **Pros**
+</div>
 
 - [@santos2005participatory] (Brazil): Decentralization has contributed to double the level of access to basic sanitation and enrollment in elementary schools between 1989 and 1996. Revenue collection increased by 48%. 
 
@@ -80,7 +88,12 @@ Proponents of decentralization share the view that local governments are the maj
 
 ---
 
+
+<div class="blue2">
 **Cons**
+</div>
+
+
 
 - [@reinikka2004local] (Uganda): Capture of decentralized school grants by local officials in Uganda. 
 
@@ -91,7 +104,9 @@ Proponents of decentralization share the view that local governments are the maj
 
 ## Methodology and Exploratory Data Collection 
 
-*Macroeconomic approach*
+<div class="blue2">
+**Macroeconomic approach**
+</div>
 
 Given that health related services is highly decentralized, there might be a strong correlation between the macro-overview and the microeconomic outcome.
 
@@ -169,8 +184,9 @@ print(line_plot, tag = 'chart')
 
 **Estimated Model**
 
+<div class="red2">
 $$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
-
+</div>
 
 **Independent variable** : Decentralization
 
