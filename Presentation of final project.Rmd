@@ -256,16 +256,34 @@ R3sonebpop.out <- setx(R3soneb, population = seq(10, 13, by = 0.5))
 simR3sonebpop <- sim(R3soneb, x = R3sonebpop.out)
 plot(simR3sonebpop, xlab = 'Log Population', ylab = 'Water Facilities')
 
-
-
-##Impact on Water Access
-
 ```
 
 
+##Model 4: Impact of decentralization on access to healthcare facilities 
+
+```{r, message=FALSE, echo=FALSE}
+R3pubhosp <- zelig(log(pubhosp) ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
+summary(R3pubhosp)
+
+R3pubhosp.out <- setx(R3pubhosp, decentralization2 = seq(0, 3, by = 2.2))
+simR3pubhosp <- sim(R3pubhosp, x = R3pubhosp.out)
+plot(simR3pubhosp, xlab = 'Decentralization', ylab = 'Access to healthcare facilities')
+
+#log pop or population?
+
+R3pubhosppop.out <- setx(R3pubhosp, population = seq(10, 13, by = 0.5))
+simR3pubhosppop <- sim(R3pubhosp, x = R3pubhosppop.out)
+plot(simR3pubhosppop, xlab = 'Population', ylab = 'Access to Healthcare Facilities')
 
 
+R3pubhospedu.out <- setx(R3pubhosp, educ_adult = seq(8, 86, by = 10))
+simR3pubhospedu <- sim(R3pubhosp, x = R3pubhospedu.out)
+plot(simR3pubhospedu, xlab = 'Average Literacy Rate of Head of Households', ylab = 'Access to Healthcare Facilities')
 
+R3pubhosppovind.out <- setx(R3pubhosp, ind_pauv_mon = seq(15, 65, by = 10))
+simR3pubhosppovind <- sim(R3pubhosp, x = R3pubhosppovind.out)
+plot(simR3pubhosppovind, xlab = 'Monetary Poverty Index', ylab = 'Access to Healthcare Facilities')
+```
 
 ##References
 
