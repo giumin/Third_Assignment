@@ -241,16 +241,20 @@ plot(simR3toiletedu, xlab = 'Average Literacy Rate of Head of Households', ylab 
 library(Zelig)
 combineddata.data$connect_soneb<-combineddata.data$connect_soneb+0.1
 combineddata.data$pubhosp<-combineddata.data$pubhosp+0.1
+combineddata.data$logpop<-log(combineddata.data$population)
+
 R3soneb <- zelig(log(connect_soneb) ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
 summary(R3soneb)
 
 R3soneb.out <- setx(R3soneb, decentralization2 = seq(0, 3, by = 2.2))
 simR3soneb <- sim(R3soneb, x = R3soneb.out)
-plot(simR3soneb, xlab = 'Decentralization', ylab = 'Water Access')
+plot(simR3soneb, xlab = 'Decentralization', ylab = 'Water Facilities')
 
-R3soneb.out <- setx(R3soneb, decentralization2 = seq(0, 3, by = 2.2))
-simR3soneb <- sim(R3soneb, x = R3soneb.out)
-plot(simR3soneb, xlab = 'Decentralization', ylab = 'Water Access')
+#log pop or population?
+
+R3sonebpop.out <- setx(R3soneb, population = seq(10, 13, by = 0.5))
+simR3sonebpop <- sim(R3soneb, x = R3sonebpop.out)
+plot(simR3sonebpop, xlab = 'Log Population', ylab = 'Water Facilities')
 
 
 
