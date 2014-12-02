@@ -200,6 +200,7 @@ combineddata.data <- read.csv(textConnection(combineddata.data))
 
 Decentralization: Authors's calculation, based on data from Municipal Financial Accounts of Benin's municipalitiess (Revenues & expenditures)
 
+Deependant & Explanatory variables: Integrated Modular Survey on Households Living Conditions (EMICoV)
 
 ##Model 1: Impact of decentralization on water access
 
@@ -274,7 +275,6 @@ plot(simR3pubhosp, xlab = 'Decentralization', ylab = 'Access to healthcare facil
 R3pubhosppop.out <- setx(R3pubhosp, population = seq(10, 13, by = 0.5))
 simR3pubhosppop <- sim(R3pubhosp, x = R3pubhosppop.out)
 plot(simR3pubhosppop, xlab = 'Population', ylab = 'Access to Healthcare Facilities')
-
 
 R3pubhospedu.out <- setx(R3pubhosp, educ_adult = seq(8, 86, by = 10))
 simR3pubhospedu <- sim(R3pubhosp, x = R3pubhospedu.out)
