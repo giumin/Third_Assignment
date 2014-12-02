@@ -195,26 +195,49 @@ combineddata.data <- read.csv(textConnection(combineddata.data))
 
 **Explanatory variables**: population, population density, per/c consumption, public expenditure per/c, health consumpt.(per head of house), monetary poverty index, average literacy rate, gini  
 
+
 ##Micro data collection
 
 Decentralization: Authors's calculation, based on data from Municipal Financial Accounts of Benin's municipalitiess (Revenues & expenditures)
 
-He
 
-```{r}
+##Model 1: Impact of decentralization on water access
+
+```{r, echo=FALSE, message=FALSE}
 library(Zelig)
-R3water2 <- zelig(pop_wateraccess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
-summary(R3water2)
+R3water <- zelig(pop_wateraccess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
+summary(R3water)
 
-R3.out <- setx(R3water2, decentralization2 = seq(0, 3, by = 2.2))
+R3water.out <- setx(R3water, decentralization2 = seq(0, 3, by = 2.2))
+simR3water <- sim(R3water, x = R3water.out)
+plot(simR3water, xlab = 'Decentralization', ylab = 'Water Access')
 
-simz2 <- sim(R3water2, x = R3.out)
+R3wateredu.out <- setx(R3water, educ_adult = seq(8, 86, by = 10))
+simR3wateredu <- sim(R3water, x = R3wateredu.out)
+plot(simR3wateredu, xlab = 'Average Literacy Rate of Head of Households', ylab = 'Water Access')
 
-plot(simz2, xlab = 'decentralizatiion2', ylab = 'Water Access')
 ```
 
-```{r, message=FALSE, echo=FALSE}
+##Model 2: Impact of decentralization on access to toilet facilities 
 
+```{r, echo=FALSE, message=FALSE}
+library(Zelig)
+R3toilet <- zelig(pop_toiletacess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
+summary(R3toilet)
+
+R3toilet.out <- setx(R3toilet, decentralization2 = seq(0, 3, by = 2.2))
+simR3toilet <- sim(R3toilet, x = R3toilet.out)
+plot(simR3toilet, xlab = 'Decentralization', ylab = 'Access to toilet facilities')
+
+R3toiletedu.out <- setx(R3toilet, educ_adult = seq(8, 86, by = 10))
+simR3toiletedu <- sim(R3toilet, x = R3toiletedu.out)
+plot(simR3toiletedu, xlab = 'Average Literacy Rate of Head of Households', ylab = 'Access to toilet facilities')
+
+```
+
+##Model 3: Impact of decentralization on connection to water facilities (pipelines)
+
+```{r, message=FALSE, echo=FALSE}
 library(Zelig)
 combineddata.data$connect_soneb<-combineddata.data$connect_soneb+0.1
 combineddata.data$pubhosp<-combineddata.data$pubhosp+0.1
@@ -222,29 +245,21 @@ R3soneb <- zelig(log(connect_soneb) ~ decentralization2 + log(population) + Dens
 summary(R3soneb)
 
 R3soneb.out <- setx(R3soneb, decentralization2 = seq(0, 3, by = 2.2))
-
 simR3soneb <- sim(R3soneb, x = R3soneb.out)
-
 plot(simR3soneb, xlab = 'Decentralization', ylab = 'Water Access')
+
+R3soneb.out <- setx(R3soneb, decentralization2 = seq(0, 3, by = 2.2))
+simR3soneb <- sim(R3soneb, x = R3soneb.out)
+plot(simR3soneb, xlab = 'Decentralization', ylab = 'Water Access')
+
+
+
 ##Impact on Water Access
 
 ```
 
----
-
-![Image](regwater.png)
 
 
-##Impact on Access to toilet facilities
-![Image](regtoilet.png)
-
-
-##Impact on provision of water facilities
-![Image](regpipe.png)
-
-##Impact on provision of public healthcare facilities
-
-![Image](reghosp.png)
 
 
 
