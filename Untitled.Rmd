@@ -1,0 +1,57 @@
+---
+title: "Untitled"
+author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
+date: "29 novembre 2014"
+output: ioslides_presentation
+---
+
+## R Markdown
+
+<div class="columns-2">
+<div class="blue2">
+pros
+</div>
+-1
+
+-2
+
+
+cons
+
+-1
+
+-2
+</div>
+
+## Slide with Bullets
+
+<div class="red2">
+-Bullet 1
+</div>
+
++ b1
+
+-Bullet 2
+
++ b2
+
+
+## Slide with R Code and Output
+
+```{r}
+library(ggmap)
+library(car)
+library(ggplot2)
+library(RCurl)
+library(stargazer)
+library(gvlma)
+library(robust)
+library(het.test)
+```
+
+## Slide with Plot
+
+```{r, echo=FALSE}
+plot(cars)
+```
+

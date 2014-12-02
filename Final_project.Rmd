@@ -350,8 +350,8 @@ bptest(R3water)
 
 # Global test of model assumptions
 gvmodelwater <- gvlma(R3water) 
-summary(gvmodelwater)
 
+diagnostic <- summary(gvmodelwater)
 ```
  
 ```{r, echo=FALSE, results='asis'}

@@ -3,14 +3,12 @@ title: "Presentation of final project"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "01 dicembre 2014"
 output: ioslides_presentation
-   
-    
 bibliography: bibliographyproject.bib
 ---
 
 ## Research Question
 
- **What impact does decentralization have on the performance of the health provision system in Benin?**
+ **What impact does decentralization have on the provision of health-related services in Benin?**
  
 ```{r,include=FALSE}
 library(ggmap)
@@ -46,15 +44,12 @@ print(Country_Benin)
 ##Why Benin?
 
 
-- Decentralization and devolution have been at the center of national policy for the past decade
+
+- Decentralization and devolution have been at the center of national policy for the past decade, as a mechanism for poverty alleviation 
 
 - Decentralization: huge transformation of the political and administrative organization
 
-- Decentralization as mechanism to fight poverty and reduce inequality
-
 - Legal provisions has transfered part of health provision competencies to subnational entities 
-
-- Subnational governments have tax raising powers and are allocated transfers to meet assigned expenditures
 
 
 
@@ -71,6 +66,7 @@ Proponents of decentralization share the view that local governments are the maj
 - local government has an informational advantage  [@oates1972fiscal]
 
 - decentralization --> greater participation of nearby communities --> accountability of policymakers [@crook1998democracy]  [@tiebout1956pure]
+
 
 ## Empirical Findings 
 
@@ -94,7 +90,6 @@ Proponents of decentralization share the view that local governments are the maj
 </div>
 
 
-
 - [@reinikka2004local] (Uganda): Capture of decentralized school grants by local officials in Uganda. 
 
 - [@treisman2000causes]: (developing countries): more levels of government induce higher perceived corruption, less effective provision of public health services 
@@ -105,15 +100,15 @@ Proponents of decentralization share the view that local governments are the maj
 ## Methodology and Exploratory Data Collection 
 
 <div class="blue2">
+
 **Macroeconomic approach**
 </div>
-
-Given that health related services is highly decentralized, there might be a strong correlation between the macro-overview and the microeconomic outcome.
 
 - country's health-related public expenditures (WB, WHO) 
 
 - improved sanitation facilities on a macro level
 
+Given that health related services is highly decentralized, there might be a strong correlation between the macro-overview and the microeconomic outcome.
 
 ## Macro overview
 ```{r, include=FALSE}
@@ -179,13 +174,14 @@ print(line_plot, tag = 'chart')
 ```
 
 
+
 ## Micro analysis
 
 
 **Estimated Model**
 
 <div class="red2">
-$$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
+$$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X'\beta_{} + e $$
 </div>
 
 **Independent variable** : Decentralization
@@ -197,12 +193,45 @@ combineddata.data <- read.csv(textConnection(combineddata.data))
 ```
 **Dependent variables**: access to water, access to toilet facilities, water provision infrastructure,healthcare centers (hospitals)  
 
-
 **Explanatory variables**: population, population density, per/c consumption, public expenditure per/c, health consumpt.(per head of house), monetary poverty index, average literacy rate, gini  
 
+##Micro data collection
 
+Decentralization: Authors's calculation, based on data from Municipal Financial Accounts of Benin's municipalitiess (Revenues & expenditures)
 
+He
+
+```{r}
+library(Zelig)
+R3water2 <- zelig(pop_wateraccess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
+summary(R3water2)
+
+R3.out <- setx(R3water2, decentralization2 = seq(0, 3, by = 2.2))
+
+simz2 <- sim(R3water2, x = R3.out)
+
+plot(simz2, xlab = 'decentralizatiion2', ylab = 'Water Access')
+```
+
+```{r, message=FALSE, echo=FALSE}
+
+library(Zelig)
+combineddata.data$connect_soneb<-combineddata.data$connect_soneb+0.1
+combineddata.data$pubhosp<-combineddata.data$pubhosp+0.1
+R3soneb <- zelig(log(connect_soneb) ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
+summary(R3soneb)
+
+R3soneb.out <- setx(R3soneb, decentralization2 = seq(0, 3, by = 2.2))
+
+simR3soneb <- sim(R3soneb, x = R3soneb.out)
+
+plot(simR3soneb, xlab = 'Decentralization', ylab = 'Water Access')
 ##Impact on Water Access
+
+```
+
+---
+
 ![Image](regwater.png)
 
 
@@ -216,6 +245,8 @@ combineddata.data <- read.csv(textConnection(combineddata.data))
 ##Impact on provision of public healthcare facilities
 
 ![Image](reghosp.png)
+
+
 
 ##References
 
