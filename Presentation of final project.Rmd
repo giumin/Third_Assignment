@@ -2,7 +2,7 @@
 title: "Presentation of final project"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "01 dicembre 2014"
-output: ioslides_presentation
+output: ioslides_presentation   
 bibliography: bibliographyproject.bib
 ---
 
@@ -19,6 +19,7 @@ library(gvlma)
 library(robust)
 library(het.test)
 library(stargazer)
+library(Zelig)
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -202,51 +203,61 @@ Decentralization: Authors's calculation, based on data from Municipal Financial 
 
 Deependant & Explanatory variables: Integrated Modular Survey on Households Living Conditions (EMICoV)
 
-##Model 1: Impact of decentralization on water access
-
-```{r, echo=FALSE, message=FALSE}
-library(Zelig)
+```{r, include=FALSE, message=FALSE}
 R3water <- zelig(pop_wateraccess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
 summary(R3water)
+```
 
+
+##Model 1: water access
+<div class="columns-2">
+```{r, echo=FALSE}
 R3water.out <- setx(R3water, decentralization2 = seq(0, 3, by = 2.2))
 simR3water <- sim(R3water, x = R3water.out)
 plot(simR3water, xlab = 'Decentralization', ylab = 'Water Access')
+```
 
-R3wateredu.out <- setx(R3water, educ_adult = seq(8, 86, by = 10))
+```{r, echo=FALSE, message=FALSE}
+
+R3wateredu.out <- setx(R3water, educ_adult = seq(8, 86, by = 20))
 simR3wateredu <- sim(R3water, x = R3wateredu.out)
 plot(simR3wateredu, xlab = 'Average Literacy Rate of Head of Households', ylab = 'Water Access')
 
 ```
+</div>
 
 ##Model 2: Impact of decentralization on access to toilet facilities 
 
-```{r, echo=FALSE, message=FALSE}
-library(Zelig)
+```{r, include=FALSE, message=FALSE}
 R3toilet <- zelig(pop_toiletacess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
 summary(R3toilet)
-
+```
+<div class="columns-2">
+```{r, echo=FALSE, message=FALSE}
 R3toilet.out <- setx(R3toilet, decentralization2 = seq(0, 3, by = 2.2))
 simR3toilet <- sim(R3toilet, x = R3toilet.out)
 plot(simR3toilet, xlab = 'Decentralization', ylab = 'Access to toilet facilities')
+```
 
+```{r, echo=FALSE, message=FALSE}
 R3toiletedu.out <- setx(R3toilet, educ_adult = seq(8, 86, by = 10))
 simR3toiletedu <- sim(R3toilet, x = R3toiletedu.out)
 plot(simR3toiletedu, xlab = 'Average Literacy Rate of Head of Households', ylab = 'Access to toilet facilities')
-
 ```
+</div>
 
 ##Model 3: Impact of decentralization on connection to water facilities (pipelines)
 
-```{r, message=FALSE, echo=FALSE}
-library(Zelig)
+```{r, message=FALSE, include=FALSE}
 combineddata.data$connect_soneb<-combineddata.data$connect_soneb+0.1
 combineddata.data$pubhosp<-combineddata.data$pubhosp+0.1
 combineddata.data$logpop<-log(combineddata.data$population)
 
 R3soneb <- zelig(log(connect_soneb) ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
 summary(R3soneb)
+```
 
+```{r, message=FALSE, echo=FALSE}
 R3soneb.out <- setx(R3soneb, decentralization2 = seq(0, 3, by = 2.2))
 simR3soneb <- sim(R3soneb, x = R3soneb.out)
 plot(simR3soneb, xlab = 'Decentralization', ylab = 'Water Facilities')
@@ -262,24 +273,33 @@ plot(simR3sonebpop, xlab = 'Log Population', ylab = 'Water Facilities')
 
 ##Model 4: Impact of decentralization on access to healthcare facilities 
 
-```{r, message=FALSE, echo=FALSE}
+```{r, message=FALSE, include=FALSE}
 R3pubhosp <- zelig(log(pubhosp) ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
 summary(R3pubhosp)
+```
 
+```{r, echo=FALSE,message=FALSE}
 R3pubhosp.out <- setx(R3pubhosp, decentralization2 = seq(0, 3, by = 2.2))
 simR3pubhosp <- sim(R3pubhosp, x = R3pubhosp.out)
 plot(simR3pubhosp, xlab = 'Decentralization', ylab = 'Access to healthcare facilities')
+```
 
+---
+
+```{r, echo=FALSE,message=FALSE}
 #log pop or population?
-
 R3pubhosppop.out <- setx(R3pubhosp, population = seq(10, 13, by = 0.5))
 simR3pubhosppop <- sim(R3pubhosp, x = R3pubhosppop.out)
 plot(simR3pubhosppop, xlab = 'Population', ylab = 'Access to Healthcare Facilities')
+```
 
+```{r, echo=FALSE,message=FALSE}
 R3pubhospedu.out <- setx(R3pubhosp, educ_adult = seq(8, 86, by = 10))
 simR3pubhospedu <- sim(R3pubhosp, x = R3pubhospedu.out)
 plot(simR3pubhospedu, xlab = 'Average Literacy Rate of Head of Households', ylab = 'Access to Healthcare Facilities')
+```
 
+```{r, echo=FALSE,message=FALSE}
 R3pubhosppovind.out <- setx(R3pubhosp, ind_pauv_mon = seq(15, 65, by = 10))
 simR3pubhosppovind <- sim(R3pubhosp, x = R3pubhosppovind.out)
 plot(simR3pubhosppovind, xlab = 'Monetary Poverty Index', ylab = 'Access to Healthcare Facilities')
