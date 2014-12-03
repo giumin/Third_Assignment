@@ -2,7 +2,11 @@
 title: "Presentation of final project"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "01 dicembre 2014"
-output: ioslides_presentation   
+output: 
+  ioslides_presentation:    
+   smart: true
+   widescreen: true
+  
 bibliography: bibliographyproject.bib
 ---
 
@@ -285,7 +289,7 @@ plot(simR3pubhosp, xlab = 'Decentralization', ylab = 'Access to healthcare facil
 ```
 
 ---
-
+<div class="columns-2">
 ```{r, echo=FALSE,message=FALSE}
 #log pop or population?
 R3pubhosppop.out <- setx(R3pubhosp, population = seq(10, 13, by = 0.5))
@@ -298,7 +302,9 @@ R3pubhospedu.out <- setx(R3pubhosp, educ_adult = seq(8, 86, by = 10))
 simR3pubhospedu <- sim(R3pubhosp, x = R3pubhospedu.out)
 plot(simR3pubhospedu, xlab = 'Average Literacy Rate of Head of Households', ylab = 'Access to Healthcare Facilities')
 ```
+</div>
 
+---
 ```{r, echo=FALSE,message=FALSE}
 R3pubhosppovind.out <- setx(R3pubhosp, ind_pauv_mon = seq(15, 65, by = 10))
 simR3pubhosppovind <- sim(R3pubhosp, x = R3pubhosppovind.out)
