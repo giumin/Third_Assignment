@@ -298,6 +298,13 @@ plot(simR3pubhospedu, xlab = 'Average Literacy Rate of Head of Households', ylab
 plot(simR3pubhosppovind, xlab = 'Monetary Poverty Index', ylab = 'Access to Healthcare Facilities')
 ```
 
+## Limitations 
+
+- Model specification 
+- Data limitation 
+- Measurement issue 
+
+
 ##References
 
 
