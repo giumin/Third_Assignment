@@ -52,7 +52,7 @@ print(Country_Benin)
 
 - Decentralization -> huge transformation of the political and administrative organization
 
-- Legal provisions has transfered large part of health provision competencies to subnational entities 
+- Legal provisions have transfered large part of health provision competencies to subnational entities 
 
 
 
@@ -83,7 +83,7 @@ Proponents of decentralization share the view that local governments are the maj
 
 - [@faguet2004does] (Bolivia): Public investment in education, water and sanitation rose significantly 
 
-- [@bird1999decentralization] (Asian and Latin-America): Positive effect of decentralization on health, primary education and infrastructure.
+- [@bird1999decentralization] (Asia and Latin-America): Positive effect of decentralization on health, primary education and infrastructure.
 
 ---
 
@@ -196,14 +196,14 @@ combineddata.data <- read.csv(textConnection(combineddata.data))
 ```
 **Dependent variables**: access to water, access to toilet facilities, water provision infrastructure,healthcare centers (hospitals)  
 
-**Explanatory variables**: population, population density, per/c consumption, public expenditure per/c, health consumpt.(per head of house), monetary poverty index, average literacy rate, gini  
+**Explanatory variables**: population, population density, per/c consumption, public expenditure per/c, health consumption, monetary poverty index, average literacy rate for head of houshold, gini  
 
 
 ##Micro data collection
 
-Decentralization: Authors's calculation, based on data from Municipal Financial Accounts of Benin's municipalitiess (Revenues & expenditures)
+Decentralization: Authors's calculation, based on data from Municipal Financial Accounts of Benin's municipalities (Revenues & expenditures)
 
-Deependant & Explanatory variables: Integrated Modular Survey on Households Living Conditions (EMICoV)
+Dependent & Explanatory variables: Integrated Modular Survey on Households Living Conditions (EMICoV), Demographic and Health Surveys, National Census
 
 ```{r, include=FALSE, message=FALSE}
 R3water <- zelig(pop_wateraccess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
@@ -262,7 +262,7 @@ simR3soneb <- sim(R3soneb, x = R3soneb.out)
 R3sonebpop.out <- setx(R3soneb, population = seq(34559, 862445, by = 10000))
 simR3sonebpop <- sim(R3soneb, x = R3sonebpop.out)
 plot(simR3soneb, xlab = 'Decentralization', ylab = 'Water Facilities')
-plot(simR3sonebpop, xlab = 'Log Population', ylab = 'Water Facilities')
+plot(simR3sonebpop, xlab = 'LogPopulation', ylab = 'Water Facilities')
 
 ```
 
@@ -286,7 +286,7 @@ simR3pubhospedu <- sim(R3pubhosp, x = R3pubhospedu.out)
 R3pubhosppovind.out <- setx(R3pubhosp, ind_pauv_mon = seq(15, 65, by = 10))
 simR3pubhosppovind <- sim(R3pubhosp, x = R3pubhosppovind.out)
 plot(simR3pubhosp, xlab = 'Decentralization', ylab = 'Access to healthcare facilities')
-plot(simR3pubhosppop, xlab = 'Population', ylab = 'Access to Healthcare Facilities')
+plot(simR3pubhosppop, xlab = 'LogPopulation', ylab = 'Access to Healthcare Facilities')
 ```
 
 ---
@@ -304,6 +304,13 @@ plot(simR3pubhosppovind, xlab = 'Monetary Poverty Index', ylab = 'Access to Heal
 - Data limitation 
 - Measurement issue 
 
+---
+
+<div class="centered">
+
+![Image](thank-you.png)
+
+</div>
 
 ##References
 
