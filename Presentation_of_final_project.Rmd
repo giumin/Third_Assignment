@@ -1,7 +1,7 @@
 ---
 title: "Presentation of final project"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
-date: "01 dicembre 2014"
+date: "04 December 2014"
 output: 
   ioslides_presentation:    
    smart: true
