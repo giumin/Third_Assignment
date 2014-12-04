@@ -48,9 +48,9 @@ print(Country_Benin)
 
 
 
-- Decentralization and devolution have been at the center of national policy for the past decade, as a mechanism for poverty alleviation 
+- Decentralization and devolution: at the center of national policy for the past decade as a mechanism for poverty alleviation 
 
-- Decentralization: huge transformation of the political and administrative organization
+- Decentralization -> huge transformation of the political and administrative organization
 
 - Legal provisions has transfered part of health provision competencies to subnational entities 
 
