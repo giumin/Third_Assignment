@@ -52,7 +52,7 @@ print(Country_Benin)
 
 - Decentralization -> huge transformation of the political and administrative organization
 
-- Legal provisions has transfered part of health provision competencies to subnational entities 
+- Legal provisions has transfered large part of health provision competencies to subnational entities 
 
 
 
