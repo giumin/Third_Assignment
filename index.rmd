@@ -6,7 +6,7 @@ output:
   html_document:
     toc: true
     smart: true
-    theme: united
+    theme: journal
 ---
 
 
@@ -218,11 +218,6 @@ Decentralization is typically defined in public planning, management and decisio
 It has different characteristics for different writers which often describe it as either delegation, devaluation, de-concentration and privatization of responsibility and authority of tasks to lower level of administration. 
 
 
-```{r, results='asis',echo=FALSE}
-stargazer(combineddata.data[c("decentralization","population","Density", "pubexp.c")], type = 'html', 
- title="Descriptive statistics/selected variables", digits=2)
-```
-
 
 
 
@@ -243,9 +238,6 @@ We assume that these variables might have some impact either on health health-re
 
 
 
-```{r,echo=FALSE, results='asis'}
-stargazer(combineddata.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'html', title="Descriptive statistics of dependent variables", digits=2)
-```
 
 
 
@@ -453,6 +445,10 @@ Therefore, we propose to revise our proxy for decentralization and to further wo
 #Appendix
 
 
+
+
+
+
 **Model 1**
 
 ```{r, echo=FALSE, results='asis'}
@@ -461,6 +457,10 @@ stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
                      title = 'Effect of decentralization on water access',
                      digits = 2, type = 'html', header = FALSE)
 ```
+
+
+
+
 
 
 
@@ -475,6 +475,11 @@ stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
 
 
 
+
+
+
+
+
 **Model 3**
 ```{r, echo=FALSE,results='asis'}
 
@@ -484,6 +489,11 @@ stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
                      title = 'Effect of decentralization on water delivery infrastructure',
                      digits = 2, type = 'html', header = FALSE)
 ```
+
+
+
+
+
 
 
 
