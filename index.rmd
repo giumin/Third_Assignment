@@ -2,14 +2,29 @@
 title: "Index.rmd"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "20 novembre 2014"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    smart: true
+    theme: united
 ---
 
 
-
+```{r,include=FALSE}
+library(ggmap)
+library(car)
+library(ggplot2)
+library(RCurl)
+library(gvlma)
+library(robust)
+library(het.test)
+library(stargazer)
+library(Zelig)
+```
 
 
 #Introduction
+
 
 
 
@@ -27,6 +42,8 @@ A better question would be: **What impact does decentralization have on the perf
 
 Moreover, before proceeding with the research, a basic question needs an answer:
 
+
+
 **Why Benin?**
 
 In Benin, legal provisions on decentralization has transfered part of health provision competencies to subnational entities such as districts and municipalities. Since the year 2002, municipal governments are increasingly responsible for providing basic services and infrastructures such as water access. To offset the vertical imbalance of subnational governments, the central government have conceded some tax raising powers and has also use intergovernmental transfers through the National Commission on Local Finances. 
@@ -36,7 +53,6 @@ We chose Benin because it is a young democracy and because decentralization, alt
 
 
 ```{r, echo=FALSE, message=FALSE}
-library(ggmap)
 Country_Benin<-qmap(location='benin',zoom=6)
 print(Country_Benin)
 ```
@@ -45,7 +61,10 @@ print(Country_Benin)
 
 
 
+
 #Project
+
+
 
 
 This project is divided into three sections. 
@@ -57,6 +76,7 @@ The final section presents our basic regression models and some potential issues
 
 The datasets are obtained from the Ministry of Economy and Finances, the National Institute of Statistics and the National Commission on Local Finances. 
 Additional information or variables will be drawn from international or regional databases such as the World Bank Indicators(WDI), the World Health Organization(WHO) or Afro-barometer.
+
 
 
 
@@ -81,6 +101,7 @@ names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
 names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 
 ```
+
 
 
 
@@ -181,16 +202,11 @@ Since health expenditure is highly decentralized, we could potentially argue tha
 In this section, we explore provision of health-related services and infrastructures on a local level. Particularly, we look at the impact of decentralization on the access to basic health-related services and infrastructure.
 The datasets on local finances are obtained from the National Commission on Local Finances of Benin. Health-related expenditures and provision are from Benin's Integrated Modular Surveys on Household Living Conditions (EMICoV) and the Demographic and Health Survey.
 
-```{r, include=FALSE}
-library(RCurl)
-library(foreign)  
-#url version to be edited 
-url <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/decentral.csv"
-decentralization.data <- getURL(url)                
-decentralization.data <- read.csv(textConnection(decentralization.data))
-
+```{r,include=FALSE, message=FALSE}
+url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/gh-pages/decenthealth.csv"
+combineddata.data <- getURL(url2, ssl.verifypeer = FALSE)                
+combineddata.data <- read.csv(textConnection(combineddata.data))
 ```
-
 
 
 
@@ -201,26 +217,14 @@ decentralization.data <- read.csv(textConnection(decentralization.data))
 Decentralization is typically defined in public planning, management and decision making, as the transfer of authority and power from higher to lower levels of governing, or from national to sub-national levels. 
 It has different characteristics for different writers which often describe it as either delegation, devaluation, de-concentration and privatization of responsibility and authority of tasks to lower level of administration. 
 
-```{r, include=FALSE, results='asis'}
-
-library(stargazer)
-```
 
 ```{r, results='asis',echo=FALSE}
-stargazer(decentralization.data[c("decentralization","population","Density", "pubexp.c")], type = 'html', 
+stargazer(combineddata.data[c("decentralization","population","Density", "pubexp.c")], type = 'html', 
  title="Descriptive statistics/selected variables", digits=2)
 ```
 
 
 
-####scatterplot matrix
-The above scatterplot matrix will illustrate the correlation matix between the explanatory variables decentlazation,population,density and public expenditure per capital.In addition,it will show that wether the study varaibles has showed normal distribution or not.
-as clearly showed in the graph almost all variables has followed positive skewed distribution.
-
-```{r, results='asis',echo=FALSE, message=FALSE}
-library("car")
-car::scatterplotMatrix(decentralization.data[c("decentralization","population","Density", "pubexp.c")])
-```
 
 **Dependent variables**
 
@@ -237,61 +241,220 @@ car::scatterplotMatrix(decentralization.data[c("decentralization","population","
 In addition to decentralization, we use a set of variables to account for heterogeneity accross the municipalities, such as population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, average literacy rate of the head of households, as well as a monetary poverty index, all of them obtained from Benin's EmiCov (2010, 2011). 
 We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. 
 
-```{r,include=FALSE}
-#URl to be edited 
-
-url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/master/health.csv"
-health.data <- getURL(url2)                
-health.data <- read.csv(textConnection(health.data))
-
-decenthealth <-merge(decentralization.data,health.data, by=c("Year", "ID", "Cities"), all=TRUE)
-```
-
 
 
 ```{r,echo=FALSE, results='asis'}
-
-stargazer(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'html', title="Descriptive statistics of dependent variables", digits=2)
+stargazer(combineddata.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'html', title="Descriptive statistics of dependent variables", digits=2)
 ```
 
-
-#####scatterplot matrix 
-The above scatterplot matrix will illustrate the correlation matix between the study variables water acess,water facilities,water pipeline connection and public healthcare center .In addition,it will show that wether the study varaibles has showed normal distribution or not.
-as clearly showed in the graph except acess to water ,water facilities ,both  water pipeline connection and public healthcare center follows positive skewed distribution.
-```{r,echo=FALSE, results='asis',message=FALSE}
-library("car")
-car::scatterplotMatrix(health.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")])
-```
 
 
 
 
 ###Results
 
-  
-**Effect of Decentralization on Water Access**
 
 
-In this model, decentralization reveals to be insignificant,as well as the other explanatory variables. This may be due to mispecification of the model. 
- 
+
+**1.Effect of Decentralization on Water Access**
+
+
+In this model, decentralization reveals to be insignificant. In the graph below, in fact, the range of specification is too wide for the variable to be significant. In regard to the other explanatory variables, on the other hand, it seems that only the Average Literacy rate of Head pf Household is significant for a confidence interval of 10%. The graph, in fact, shows that the grater this rate is, the higher is the access to water ( and the range of the interval is significant enough). This could mean that the head of houshold may have enough income to provide access to water.
+
 ```{r,include=FALSE, results='asis'}
-
 # First regression:water acces
-R1water <- lm(pop_wateraccess ~ decentralization, data = decenthealth)
+R1water <- lm(pop_wateraccess ~ decentralization, data = combineddata.data)
 confint(R1water)
 summary(R1water)
 
 # Second regression: water access
-R2water <- lm(pop_wateraccess ~ decentralization + population + Density, data = decenthealth)
+R2water <- lm(pop_wateraccess ~ decentralization + population + Density, data = combineddata.data)
 confint(R2water)
 
 # Third regression: water access
-R3water <- lm(pop_wateraccess ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = decenthealth)
+R3water <- lm(pop_wateraccess ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = combineddata.data)
 confint(R3water)
 
 ```
 
- 
+```{r, include=FALSE, message=FALSE}
+R3water <- zelig(pop_wateraccess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
+summary(R3water)
+```
+
+```{r, echo=FALSE}
+par(mfrow = c(1, 2))
+R3water.out <- setx(R3water, decentralization2 = seq(0, 3, by = 2.2))
+simR3water <- sim(R3water, x = R3water.out)
+R3wateredu.out <- setx(R3water, educ_adult = seq(8, 86, by = 20))
+simR3wateredu <- sim(R3water, x = R3wateredu.out)
+plot(simR3water, xlab = 'Decentralization', ylab = 'Water Access')
+plot(simR3wateredu, xlab = 'Average Literacy Rate of Head of Households', ylab = 'Water Access')
+
+```
+
+
+
+
+**2.Effect of decentralization on access to toilet facilities** 
+
+
+Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be  slightly significant. 
+
+
+```{r, include=FALSE}
+# First regression: toilet access
+R1toilet <- lm(pop_toiletacess ~ decentralization, data = combineddata.data)
+summary(R1toilet)
+confint(R1toilet)
+# Second regression: toilet access
+R2toilet <- lm(pop_toiletacess ~ decentralization + population + Density, data = combineddata.data)
+summary(R2toilet)
+confint(R2toilet)
+# Third regression: toilet access
+R3toilet <- lm(pop_toiletacess ~ decentralization +  population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = combineddata.data)
+summary(R3toilet)
+confint(R3toilet)
+```
+
+```{r, include=FALSE, message=FALSE}
+
+R3toilet <- zelig(pop_toiletacess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
+summary(R3toilet)
+```
+
+```{r, echo=FALSE, message=FALSE}
+par(mfrow = c(1, 2))
+R3toilet.out <- setx(R3toilet, decentralization2 = seq(0, 3, by = 2.2))
+simR3toilet <- sim(R3toilet, x = R3toilet.out)
+R3toiletedu.out <- setx(R3toilet, educ_adult = seq(8, 86, by = 10))
+simR3toiletedu <- sim(R3toilet, x = R3toiletedu.out)
+plot(simR3toilet, xlab = 'Decentralization', ylab = 'Access to toilet facilities')
+plot(simR3toiletedu, xlab = 'Average Literacy Rate of Head of Households', ylab = 'Access to toilet facilities')
+```
+
+
+
+
+**3.Effect of decentralization on water pipeline connection**
+
+
+In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastrucure. In reverse, population density, public expenditures per capita and average literacy rate of heads of households reveal to be significant; housholds health consumption is slightly significant, but not much. 
+
+
+```{r,include=FALSE}
+# First regression: water pipeline
+R1soneb <- lm(connect_soneb ~ decentralization, data = combineddata.data)
+summary(R1soneb)
+confint(R1soneb)
+# Second regression: water pipeline
+R2soneb <- lm(connect_soneb ~ decentralization + population + Density, data = combineddata.data)
+summary(R2soneb)
+confint(R2soneb)
+# Third regression: water pipeline
+R3soneb <- lm(connect_soneb ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=combineddata.data)
+summary(R3soneb)
+confint(R3soneb)
+```
+
+```{r, message=FALSE, include=FALSE}
+combineddata.data$connect_soneb<-combineddata.data$connect_soneb+0.1
+combineddata.data$pubhosp<-combineddata.data$pubhosp+0.1
+combineddata.data$logpop<-log(combineddata.data$population)
+
+R3soneb <- zelig(log(connect_soneb) ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
+summary(R3soneb)
+```
+
+```{r, message=FALSE, echo=FALSE}
+par(mfrow = c(1, 2))
+R3soneb.out <- setx(R3soneb, decentralization2 = seq(0, 3, by = 2.2))
+simR3soneb <- sim(R3soneb, x = R3soneb.out)
+R3sonebpop.out <- setx(R3soneb, population = seq(34559, 862445, by = 10000))
+simR3sonebpop <- sim(R3soneb, x = R3sonebpop.out)
+plot(simR3soneb, xlab = 'Decentralization', ylab = 'Water Facilities')
+plot(simR3sonebpop, xlab = 'LogPopulation', ylab = 'Water Facilities')
+
+```
+
+
+
+
+
+**4.Effect of decentralization on availability of public health infrastructure**
+
+
+Like the previous models, decentralization does not seem to be a significant elements in the availability of healthcare centers at the subnational level. With regards to the explanatory variables: population, population density, and average literacy rate of the head of households seem to be strongly determinants of the existence of healthcare centers. Public expenditures per capita and poverty level result to be significant as well.
+
+
+
+```{r,include=FALSE}
+# First regression: public healthcare center
+R1pubhosp<-lm(pubhosp ~ decentralization, data=combineddata.data)
+summary(R1pubhosp)
+confint(R1pubhosp)
+# Second regression: public healthcare center
+R2pubhosp <- lm(pubhosp ~ decentralization + population + Density, data = combineddata.data)
+summary(R2pubhosp)
+confint(R2pubhosp)
+# Third regression: public healthcare center
+R3pubhosp <- lm(pubhosp ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=combineddata.data)
+summary(R3pubhosp)
+confint(R3pubhosp)
+```
+
+
+```{r, message=FALSE, include=FALSE}
+R3pubhosp <- zelig(log(pubhosp) ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
+summary(R3pubhosp)
+```
+
+```{r, echo=FALSE,message=FALSE}
+par(mfrow = c(1, 2))
+R3pubhosp.out <- setx(R3pubhosp, decentralization2 = seq(0, 3, by = 2.2))
+simR3pubhosp <- sim(R3pubhosp, x = R3pubhosp.out)
+R3pubhosppop.out <- setx(R3pubhosp, population = seq(34559, 862445, by = 10000))
+simR3pubhosppop <- sim(R3pubhosp, x = R3pubhosppop.out)
+R3pubhospedu.out <- setx(R3pubhosp, educ_adult = seq(8, 86, by = 10))
+simR3pubhospedu <- sim(R3pubhosp, x = R3pubhospedu.out)
+
+R3pubhosppovind.out <- setx(R3pubhosp, ind_pauv_mon = seq(15, 65, by = 10))
+simR3pubhosppovind <- sim(R3pubhosp, x = R3pubhosppovind.out)
+plot(simR3pubhosp, xlab = 'Decentralization', ylab = 'Access to healthcare facilities')
+plot(simR3pubhosppop, xlab = 'LogPopulation', ylab = 'Access to Healthcare Facilities')
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+par(mfrow = c(1, 2))
+plot(simR3pubhospedu, xlab = 'Average Literacy Rate of Head of Households', ylab = 'Access to Healthcare Facilities')
+
+plot(simR3pubhosppovind, xlab = 'Monetary Poverty Index', ylab = 'Access to Healthcare Facilities')
+```
+
+
+
+
+
+
+#Conclusions 
+
+The macroeconomic overview suggests that Benin's has experienced an improvement on health-services delivery over the past few years. Given that health-related services is highly decentralized, we have tested the impact of decentralization on some key health-related variables, issued from Benin's Households Survy. The microeconomic analysis, however, did not find any significant imapct of decentralization (proxied by the ratio of own-revenue to total expenditures) on the provision of health-related services and infrastructures. Given that exisiting literatures provide various decentralization indicators, the significance found in the microeconomic analysis might be the result of a misleading indicator. 
+
+Moreover, because public services in Benin is highly financed by intergovernmental (rather than own-source revenues), it might be more reliable to consider an indicator or a model that takes into account this factor. 
+
+Therefore, we propose to revise our proxy for decentralization and to further work on our model specification. 
+
+
+
+
+
+
+#Appendix
+
+
+**Model 1**
+
 ```{r, echo=FALSE, results='asis'}
 labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
 stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
@@ -301,28 +464,7 @@ stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
 
 
 
-
-**Effect of decentralization on access to toilet facilities** 
-
-
-Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be  slightly significant. 
-
-
-```{r, include=FALSE}
-# First regression: toilet access
-R1toilet <- lm(pop_toiletacess ~ decentralization, data = decenthealth)
-summary(R1toilet)
-confint(R1toilet)
-# Second regression: toilet access
-R2toilet <- lm(pop_toiletacess ~ decentralization + population + Density, data = decenthealth)
-summary(R2toilet)
-confint(R2toilet)
-# Third regression: toilet access
-R3toilet <- lm(pop_toiletacess ~ decentralization +  population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = decenthealth)
-summary(R3toilet)
-confint(R3toilet)
-```
-
+**Model 2**
 ```{r,echo=FALSE,results='asis'}
 labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
 
@@ -333,29 +475,7 @@ stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
 
 
 
-**Effect of decentralization on water pipeline connection**
-
-
-In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastrucure. In reverse, population density, public expenditures per capita and average literacy rate of heads of households reveal to be significant; housholds health consumption is slightly significant. 
-
-
-
-
-```{r,include=FALSE}
-# First regression: water pipeline
-R1soneb <- lm(connect_soneb ~ decentralization, data = decenthealth)
-summary(R1soneb)
-confint(R1soneb)
-# Second regression: water pipeline
-R2soneb <- lm(connect_soneb ~ decentralization + population + Density, data = decenthealth)
-summary(R2soneb)
-confint(R2soneb)
-# Third regression: water pipeline
-R3soneb <- lm(connect_soneb ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=decenthealth)
-summary(R3soneb)
-confint(R3soneb)
-```
-
+**Model 3**
 ```{r, echo=FALSE,results='asis'}
 
 labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
@@ -367,41 +487,12 @@ stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
 
 
 
-**Effect of decentralization on availability of public health infrastructure**
-
-
-Like the previous models, decentralization does not seem to be a significant elements in the availability of healthcare centers at the subnational level. With regards to the explanatory variables: population, population density, and average literacy rate of the head of households seem to be strongly determinants of the existence of healthcare centers. Public expenditures per capita and poverty level result to be significant as well.
-
-
-
-```{r,include=FALSE}
-# First regression: public healthcare center
-R1pubhosp<-lm(pubhosp ~ decentralization, data=decenthealth)
-summary(R1pubhosp)
-confint(R1pubhosp)
-# Second regression: public healthcare center
-R2pubhosp <- lm(pubhosp ~ decentralization + population + Density, data = decenthealth)
-summary(R2pubhosp)
-confint(R2pubhosp)
-# Third regression: public healthcare center
-R3pubhosp <- lm(pubhosp ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=decenthealth)
-summary(R3pubhosp)
-confint(R3pubhosp)
-```
+**Model 4**
 
 ```{r, echo=FALSE,results='asis'}
 stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
                      title = 'Effect of decentralization on availability of healthcare centers',
                      digits = 2, type = 'html', header = FALSE)
 ```
-
-
-
-#Conclusions 
-
-The macroeconomic overview suggests that Benin's has experienced an improvement on health-services delivery over the past few years. Given that health-related services is highly decentralized, we have tested the impact of decentralization on some key health-related variables, issued from Benin's Households Survy. The microeconomic analysis, however, did not find any significant imapct of decentralization (proxied by the ratio of own-revenue to total expenditures) on the provision of health-related services and infrastructures. Given that exisiting literatures provide various decentralization indicators, the significance found in the microeconomic analysis might be the result of a misleading indicator. Moreover, because public services in Benin is highly financed by intergovernmental (rather than own-source revenues), it might be more reliable to consider an indicator or a model that takes into account this factor. Therefore, we propose to revise our proxy for decentralization and to further work on our model specification. 
-
-
-
 
 
