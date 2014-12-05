@@ -1,7 +1,7 @@
 ---
 title: "Index.rmd"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
-date: "20 novembre 2014"
+date: "5 Dicember 2014"
 output: 
   html_document:
     toc: true
