@@ -1,9 +1,7 @@
-Third_Assignment
+Assignment
 ================
-This repository was created to upload the third assignment for the CSSDA class. 
+This repository was created to upload the  for the CSSDA class. 
 The project is made by Rose-Camille Vincent, Daniel Jemberu and Giulia Minnucci.
-We will proceed with web scraping data, cleaning it and using descriptive and inferential statistics to adress our research question.
-The final important output is the pdf version.
-However, we included in the pdf the raw version of the regressions with summaries, because the stargazer command is somehow messing with the variables. If the professor looks at the rmd file, he can see that while the regression is ok, once we run the stargazer, the variables of the intercetpt, the first and the last variables of the regression are somehow messed up.
-We weren't able to solve this problem, also because the stargazer equation does not seem to have any mistakes, if compared to the one seen in class.
-In conclusion, we could not add dynamically generated tables for our regressions.
+We  proceeded with web scraping data, cleaning  and using descriptive and inferential statistics to adress our research question. In particular, in our analysis we show graphs represinting trends or regression result simulation. In the pdf version we also have and Appendix with the regression tables and the test for heteroscedasticity and robustness. 
+The final important output is the pdf version called Final_project, but, as requested, we also created a website with RMarkdown called index.rmd that is visible from the html verion.
+
