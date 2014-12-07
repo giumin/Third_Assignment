@@ -45,25 +45,33 @@ Federalism and devolution of public administration and servcices have been long 
 In contrast to these positive outcomes, there are many controversies with regards to the efficiency of decentralization mechanisms on public goods delivery. there are many controversies with regards to the efficiency of decentralization mechanisms on public goods delivery.For instance, a greater number of publications have indicated the pitfalls of decentralization policies, such as local capture and corruption of sub-national authorities. For instance [@reinikka2004local] highlights the capture of decentralized school grants by local officials in Uganda. On this topic, [@treisman2000causes] also suggests that more levels of government induce higher perceived corruption, less effective provision of public health services and lower adult literacy, especially in developing countries. Several additional pitfalls of decentralization in developing countries are stressed by [@prud1995dangers], such as inter-jurisdictional disparities or ethnic biases in elections. Other studies are those of [@del2008local], that suggests a process of yardstick competition between local governments in Indonesia, and [@gregoire2010decentralization], that establishes the existence of strategic complementarities of local public goods among Beninese communes. 
 
 With the recent trends in public finance reforms in developing countries, especially in Sub-Saharan Africa, there is a growing body of researchers devoted to investigating the impact of such reforms on the well-being of communities, thereby bridging public and development economics. Despite this growing interest, there is still very limited evidence of the contribution of these reforms, particularly decentralization, on health provision at subnational level. Unavailability or inaccuracy of local finances data as well as finding a proper measurement for health provision have been stated as some of the key challenges for such a research project.  
-Considering the importance of acess to basic health services, especially in a geographically and ethnically fragmented country like Benin, and given the weight of decentralization as a reform in the political and development agenda of the country over the past decade, it is worth investigating the impact of such a reform on the provision of health services at the subnational level. 
-
-This research wants to join the attempts to bring answers to fundamental questions at the border of public and development economics. Apart from an addition to existing literature, outputs of this exercise shall include policy recommendations to national and international stakeholders working in Benin, recommendations on the fiscal decentralization component of the next Growth and Poverty Reduction Strategy (2015-2020) and insights for other developing countries.
+Considering the importance of acess to basic health services, especially in a geographically and ethnically fragmented country like Benin, and given the weight of decentralization as a reform in the political and development agenda of the country over the past decade, it is worth investigating the impact of such a reform on the provision of health services at the subnational level.  This research wants to join the attempts to bring answers to fundamental questions at the border of public and development economics. 
 
 
 
-#Methodology
+#Analytical approach
+
+Conducting an empirical study on the relationship between decentralization and health provision is a very challenging exercise as it requires consistent and reliable microeconomic data which are, very often, not openly available or not consistent. In the case of Benin, due to some limitations in the dataset which are detailed in following sections, we have decided to broaden our approach by first looking at aggregate health-related data of Benin, such as health public expenditures over the past few years. As stated from previous sections, a large part of health-related expenditures has been confered to local governments. Therefore, we assume that there is a strong correlation between the macroeconomic overview and the outcomes on the subnational level. In addition to the macroeconomic overview, we explore microeconomic and sub-national data on health provision, in order words, we study the impact of decentralization on access to basic health-related services and infrastructures. We based our inference on an econometric methods and accounting for heterogeneity across municipalities. 
+
+##Macroeconomic overview 
 
 
-As stated previously, our research project aims to look at the impact of decentralization on health provision in Benin. Access to basic health-related services has been one of the core Millennium Development Goals; it is also regarded as basic human rights.
+looks at the microeconomic effect of decentralization on basic health-related facilities. For this purpose, we compute an indicator for decentralization
 
-For the methodology, we will first explore legal and political backgrounds of decentralization in Benin and attributions of different administrative levels with regards to health provision. 
+
+This section explores  
+The first one gives a general overview on health-related expenditures and provision in Benin over the years 2005 to 2010. The datasets are obtained from the World Bank (WB) and World Health Organization (WHO). 
+
+The second part , and we use health-related indicators provided in Benin's Integrated Modular Households Survey (EMICoV). 
+Since we have missing values in the households survey, we have decided to restrict our model to only two years: 2010 and 2011, for which we have a balanced panel. 
+The final section presents our basic regression models and some potential issues.
+
+The datasets are obtained from the Ministry of Economy and Finances, the National Institute of Statistics and the National Commission on Local Finances. 
+Additional information or variables will be drawn from international or regional databases such as the World Bank Indicators(WDI), the World Health Organization(WHO) or Afro-barometer.
 
 Secondly we will review existing theoretical and empirical literature on welfare states, poverty and health. The literature review will help us define the main concepts and discuss measurements of the key variables to be included in the empirical analysis. 
 
 The empirical strategy will consist of using panel data with fixed-effects estimators. Besides the indicators of decentralization level and health provision, the panel will contain information on the 77 municipalities such as population, territory, poverty level. We will use statistical methods to test for potential endogeneity of the main variables and for the fitness of our econometric model. 
-Studying the relationship between decentralization and health provision is a very challenging exercise as it requires consistent and reliable microeconomic data which are, very often, not openly available or not consistent. 
-
-For this reason, we have decided to broaden our approach by first looking at aggregate health-related data of Benin, such as health public expenditures over the past few years. In addition to the macroeconomic overview, we explore microeconomic and sub-national data on health provision. 
 
 
 

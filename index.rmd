@@ -65,8 +65,6 @@ print(Country_Benin)
 #Project
 
 
-
-
 This project is divided into three sections. 
 The first one gives a general overview on health-related expenditures and provision in Benin over the years 2005 to 2010. The datasets are obtained from the World Bank (WB) and World Health Organization (WHO). 
 
