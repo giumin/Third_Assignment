@@ -7,7 +7,6 @@ output:
     fig_caption: yes
     number_sections: yes
     toc: yes
-    word_document: default
 bibliography: bibliographyproject.bib
 ---
 
@@ -53,47 +52,17 @@ Considering the importance of acess to basic health services, especially in a ge
 
 Conducting an empirical study on the relationship between decentralization and health provision is a very challenging exercise as it requires consistent and reliable microeconomic data which are, very often, not openly available or not consistent. In the case of Benin, due to some limitations in the dataset which are detailed in following sections, we have decided to broaden our approach by first looking at aggregate health-related data of Benin, such as health public expenditures over the past few years. As stated from previous sections, a large part of health-related expenditures has been confered to local governments. Therefore, we assume that there is a strong correlation between the macroeconomic overview and the outcomes on the subnational level. In addition to the macroeconomic overview, we explore microeconomic and sub-national data on health provision, in order words, we study the impact of decentralization on access to basic health-related services and infrastructures. We based our inference on an econometric methods and accounting for heterogeneity across municipalities. 
 
+
 ##Macroeconomic overview 
+  
+This section brings a general overview of health-related expenditures and outcome in Benin over the years 2005 to 2010. We use data analytics tools to scrape openly available datasets. 
+The first dataset is obtained from the World Bank (WB) and includes the following indicators:
 
+(i) health expenditure per capita: defined as thesum of public and private health expenditures as a ratio of total population. This indicator covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
 
-looks at the microeconomic effect of decentralization on basic health-related facilities. For this purpose, we compute an indicator for decentralization
+(ii) public health expenditure: defined as recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
 
-
-This section explores  
-The first one gives a general overview on health-related expenditures and provision in Benin over the years 2005 to 2010. The datasets are obtained from the World Bank (WB) and World Health Organization (WHO). 
-
-The second part , and we use health-related indicators provided in Benin's Integrated Modular Households Survey (EMICoV). 
-Since we have missing values in the households survey, we have decided to restrict our model to only two years: 2010 and 2011, for which we have a balanced panel. 
-The final section presents our basic regression models and some potential issues.
-
-The datasets are obtained from the Ministry of Economy and Finances, the National Institute of Statistics and the National Commission on Local Finances. 
-Additional information or variables will be drawn from international or regional databases such as the World Bank Indicators(WDI), the World Health Organization(WHO) or Afro-barometer.
-
-Secondly we will review existing theoretical and empirical literature on welfare states, poverty and health. The literature review will help us define the main concepts and discuss measurements of the key variables to be included in the empirical analysis. 
-
-The empirical strategy will consist of using panel data with fixed-effects estimators. Besides the indicators of decentralization level and health provision, the panel will contain information on the 77 municipalities such as population, territory, poverty level. We will use statistical methods to test for potential endogeneity of the main variables and for the fitness of our econometric model. 
-
-
-
-
-#Data collection and merging
-
-The above-mentioned datasets are obtained from the Ministry of Economy and Finances, the National Institute of Statistics and the National Commission on Local Finances. 
-Additional information or variables will be drawn from international or regional databases such as the World Bank Indicators(WDI), the World Health Organization(WHO) or Afro-barometer.
-
-
-
-**World Bank Indicators**
-
-In this section, we use data analytics tools to scrape openly available datasets on Benin's health-related expenditures and services. The first dataset is obtained from the World Bank (WB) and includes the following indicators:
-
-(i) health expenditure per capita (SH.XPD.PCAP): sum of public and private health expenditures as a ratio of total population. This indicator covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
-
-(ii) public health expenditure (SH.XPD.PUBL): recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
-
-(iii) improved sanitation facilities(SH.STA.ACSN): access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. This indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
-
-To clean our dataset, we changed the names of the indicators to make them more readable. Consequently,we called the first indicator 'Public.Health.Expenditure, the second 'Health.Expenditure.Per.Capita' and the third 'Improved.Sanitation.Facilities'. We also deleted those elements that were not needed. 
+(iii) improved sanitation facilities: defined as the access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. This indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
 
 ```{r, include=FALSE}
 library(WDI)
@@ -104,7 +73,6 @@ names(Benin)[names(Benin)=="year"] <- "Year"
 names(Benin)[names(Benin)=="SH.XPD.PUBL"] <- "Public.Health.Expenditure"
 names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
 names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
-
 ```
 
 
@@ -131,6 +99,18 @@ We also cleaned the dataset eliminating superfluous columns and rows. We also us
 
 Once we have our datasets, it is useful to merge them together so as to work easily and quickly with one dataset that would include all the needed variables. Thus, firstly we change the names of the variables "country" and "year", so that they have exactly the same capital letters in both datasets, and secondly we use the 'merge' function.
 
+```{r, include=FALSE}
+library(WDI)
+healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL','SH.XPD.PCAP','SH.STA.ACSN'))
+Benin<-subset(healthpublicexpend,country=='Benin')
+Benin$iso2c<-NULL
+names(Benin)[names(Benin)=="year"] <- "Year"
+names(Benin)[names(Benin)=="SH.XPD.PUBL"] <- "Public.Health.Expenditure"
+names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
+names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
+
+```
+
 ```{r,include=FALSE}
 infrastructures <- read.csv("http://apps.who.int/gho/athena/data/data-text.csv?target=GHO/DEVICES01,DEVICES02,DEVICES03,DEVICES04,DEVICES05&profile=text&filter=COUNTRY:*;REGION:AFR;REGION:AMR;REGION:SEAR;REGION:EUR;REGION:EMR;REGION:WPR")
 Benininfra<-subset(infrastructures,Country=='Benin')
@@ -150,12 +130,36 @@ library(tidyr)
 tidy<-spread(messy,Indicator,Display.Value)
 ```
 
-
 ```{r, include=FALSE}
 names(Benin)[names(Benin)=="country"] <- "Country"
 total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 ```
 
+```{r,include=FALSE, message=FALSE}
+library(googleVis)
+```
+
+```{r,include=FALSE, results='asis'}
+compare_trend <-data.frame(
+  Year=c("2005","2006","2007","2008","2009","2010","2011"),
+  Public.Health.Expenditure=c(49.69487,50.22141,50.75158,50.95043,53.35198,51.16728,52.10150),
+  Health.Expenditure.Per.Capita=c( 25.21300,26.47114,28.77537,31.01608,31.80012,30.47805,33.73303),
+  Improved.Sanitation.Facilities=c(11.2,11.7,12.2,12.7,13.2,13.7,14.2))
+```
+
+```{r,echo=FALSE, results='asis'}
+line_plot <- gvisLineChart((compare_trend), 
+              options=list(
+                        title="Compare trends",
+                        titleTextStyle="{color:'black', 
+                                           fontName:'Courier', 
+                                           fontSize:16}",   
+                          curveType="function",
+                          width=800,
+                          height=500                         
+                          )) 
+print(line_plot, tag = 'chart')
+```
 
 
 
@@ -173,15 +177,6 @@ The graphs below suggest that all three elements, public health expenditure, hea
 As mentioned above, the central government in Benin (alike other developing countries in West-Africa) has used decentralization as a mechanisms to reach the targets of the Millennium Development Goals.  
  
 
-```{r, echo=FALSE}
-library(ggplot2)
-
-ggplot(data=Benin,aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() +theme_bw(base_size=8) + ggtitle("Trend of total public expenditure over the years\n")
-
-ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 8) + ggtitle("Trend over the years\n")
-
-ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 8) + ggtitle("Trend over the years\n")
-```
 
 Since health expenditure is highly decentralized, we could potentially argue that the macroeconomic overview is related to the outcome on a micro level.
 The microeconomic approach in section 2 will therefore help us testing this assumption.
@@ -192,11 +187,22 @@ The microeconomic approach in section 2 will therefore help us testing this assu
 
 ##Microeconomic Analysis 
 
+The datasets are obtained from the Ministry of Economy and Finances, the National Institute of Statistics and the National Commission on Local Finances. 
+Additional information or variables will be drawn from international or regional databases such as the World Bank Indicators(WDI), the World Health Organization(WHO) or Afro-barometer.
+
+Secondly we will review existing theoretical and empirical literature on welfare states, poverty and health. The literature review will help us define the main concepts and discuss measurements of the key variables to be included in the empirical analysis. 
+
+The empirical strategy will consist of using panel data with fixed-effects estimators. Besides the indicators of decentralization level and health provision, the panel will contain information on the 77 municipalities such as population, territory, poverty level. We will use statistical methods to test for potential endogeneity of the main variables and for the fitness of our econometric model. 
 
 
 In this section, we explore provision of health-related services and infrastructures on a local level. Particularly, we look at the impact of decentralization on the access to basic health-related services and infrastructure.
 The datasets on local finances are obtained from the National Commission on Local Finances of Benin. Health-related expenditures and provision are from Benin's Integrated Modular Surveys on Household Living Conditions (EMICoV) and the Demographic and Health Survey.
 [As we gathered the data from these sources as excel files, we transformed them in .csv files to import them in our project.]
+
+
+The second part , and we use health-related indicators provided in Benin's Integrated Modular Households Survey (EMICoV). 
+Since we have missing values in the households survey, we have decided to restrict our model to only two years: 2010 and 2011, for which we have a balanced panel. 
+The final section presents our basic regression models and some potential issues
 
 
 
