@@ -8,16 +8,22 @@ bibliography: bibliographyproject.bib
 
 
 
-
 #Introduction
 
+Since the beginning of the 1990s, most developing countries have embarked in a process of subsequent decentralization, combining political, administrative and fiscal aspects. Decentralization has also been at the center stage of the international development agenda, being considered as a major mechanism for poverty reduction in low and middle-income countries. As part of this process, subnational governments have been increasingly strenghtened, and granted more power in terms decision-making regarding their communities.
+
+Devolution of public administration is an important step in the overall decentralization process. In that regard, central governments, supported by numerous development agencies, have slowly transfers raising-revenues powers as well as expenditures assignments to local governments. Central governments, in their redistribute policies, have also invested in transfering grants to local entities, allowing them to meet their newly assigned expenditure requirements.Among these assignments, and along with the Millenium Development Goals are listed basic sanitation and health-related services, as well as primary education. 
 
 
-For the past decade, governments and policymakers in developing countries have invested in improving basic sanitation and health-related facilities in urban and rural areas. Decentralization and devolution of public administration are two important channels through which these governments, and development agencies, achieve these goals. 
 Health decentralization policies have already been implemented in  countries such as Gana, Zambia, Uganda and on a broader scale all over the world as a step in a process of economic and political change. 
 This initiative has also been supported by bilateral and multilateral agencies that have been investing in such projects time and resources. 
 The process of decentralization involves a series of mechanisms that are focused on the transferral of fiscal, administrative and political authority from the central level, such as the Ministry of Health, to the institutions at the local level. 
 Decentralization is said to have many benefits in the country where it is implemented; for example, improving efficiency in allocating resources to a set of services or improving the use of expenditures, since they are decided locally based on specific needs. 
+
+ Numerous researchers have also argued that strengthening of the
+public sector is the sole path to sustainable development in the poorest countries. 
+
+
 
 However, focusing our research on the impacts and effects this process has on health provision in Benin, we want to see if it is truly efficient always, or if it can affect negatively some circumstances and overall the benefits perceived by the population.
 For example, we would like to see if the fiscal decentralization somehow resulted in an increase or decrease of health provision, which means the complexity of elements that revolve around health care, like the number of facilities, improved health conditions etc...
@@ -40,7 +46,6 @@ library(ggmap)
 Country_Benin<-qmap(location='benin',zoom=6)
 print(Country_Benin)
 ```
-
 
 
 
@@ -78,7 +83,6 @@ As decentralization echoes in the developing world, there is an increasing body 
 
 
 #Methodology
-
 
 
 Proponents of decentralization share the view that public services delivery is more efficient at the local level. Yet, there are many controversies with regards to the efficiency of decentralization mechanisms on public goods delivery. 
