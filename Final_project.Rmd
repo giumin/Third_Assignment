@@ -42,32 +42,15 @@ Although at its very early stage decentralization has brought a huge transformat
 
 Proponents of decentralization share the view that local governments are the major vehicles for specific poverty alleviation policies. This argument is sustained by economic theory which suggest that decision-making should occur at the lowest level of government in order to reach allocation efficiency, reflecting economies of scale and benefit???cost spill outs [@shah1994reform]. The demand-side argument in favour of decentralization is derived from the existence of information asymmetries. It advances that local government has an informational advantage, which is essential to improve provision of public services [@oates1972fiscal]. On the supply side, decentralization is also seen as a mechanism to enhance accountability of policy makers through greater participation of nearby communities in political decisions [@crook1998democracy]  [@tiebout1956pure].
 
-Federalism and devolution of public administration and servcices have been long studied in well-established federalist countries such as the United States, Germany and Switzerland. In fact, Yet, there are many controversies with regards to the efficiency of decentralization mechanisms on public goods delivery. 
-
-An important part of the current debate around decentralization concerns the question of how local governments in developing countries can expand their fiscal autonomy and meet their expenditure requirement by increasing their internally generated revenues
-
-There have been numerous attempts to check these theories and empirically assess the impact of decentralization on provision of public goods and services. Hence, our first set of literature concerns the interaction between decentralization and public spending. 
-
-In that regards, there are several 
-positive evidences. 
-For instance, @santos2005participatory studying the case of the city Porto-Alegre in Brazil found that decentralization has contributed to double the level of access to basic sanitation as well as enrollment in elementary schools between 1989 and 1996, while revenue collection increased by 48%. 
-Moreover,@bardhan2000capture found greater fiscal autonomy of local governments expands the volume of service delivery in West Bengal, while @faguet2004does studying Bolivia finds that public investment in education, water and sanitation rose significantly with decentralization and devolution of administrative authorities. 
-Additionally, @bird1999decentralization in a comparative study of Asian and Latin-American economies also found positive effect of decentralization on health, primary education and infrastructure. On the comparison between centralized and decentralized in delivery of public goods or pro-poor programs, @galasso2005decentralized studied a decentralized food-for-education program in Bangladesh and found out that a somewhat larger fraction of the poor received benefits from the program compared to the non-poor. They also found that that the program shifted the balance of power in favor of the poor. 
+Federalism and devolution of public administration and servcices have been long studied in well-established federalist countries such as the United States, Germany and Switzerland. With the recent trends of similar reforms in the developing world, there have been numerous attempts to check the underlying theories and to empirically assess the impact of decentralization on provision of public goods and services. In that regards, there are several positive evidences. For instance, [@santos2005participatory] studying the case of the city Porto-Alegre in Brazil found that decentralization has contributed to double the level of access to basic sanitation as well as enrollment in elementary schools between 1989 and 1996, while revenue collection increased by 48%. Moreover,[@bardhan2000capture] found greater fiscal autonomy of local governments expands the volume of service delivery in West Bengal, while [@faguet2004does] studying Bolivia finds that public investment in education, water and sanitation rose significantly with decentralization and devolution of administrative authorities. Additionally, [@bird1999decentralization] in a comparative study of Asian and Latin-American economies also found positive effect of decentralization on health, primary education and infrastructure. On the comparison between centralized and decentralized in delivery of public goods or pro-poor programs, [@galasso2005decentralized] studied a decentralized food-for-education program in Bangladesh and found out that a somewhat larger fraction of the poor received benefits from the program compared to the non-poor. They also found that that the program shifted the balance of power in favor of the poor. 
 
 
-In contrast to these positive outcomes, a greater number of publications have indicated the pitfalls of decentralization policies, such as local capture and corruption of sub-national authorities. 
+n important part of the current debate around decentralization concerns the question of how local governments in developing countries can expand their fiscal autonomy and meet their expenditure requirement by increasing their internally generated revenues
 
-For instance @reinikka2004local highlights the capture of decentralized school grants by local officials in Uganda. 
-On this topic, @treisman2000causes also suggests that more levels of government induce higher perceived corruption, less effective provision of public health services and lower adult literacy, especially in developing countries.   
-Several additional pitfalls of decentralization in developing countries are stressed by @prud1995dangers, such as inter-jurisdictional disparities or ethnic biases in elections. 
-Other studies are those of @del2008local, that suggests a process of yardstick competition between local governments in Indonesia, and @gregoire2010decentralization, that establishes the existence of strategic complementarities of local public goods among Beninese communes. 
-
- 
-
-
-
-
-An important part of the current debate around decentralization concerns the question of how local governments in developing countries can expand their fiscal autonomy and meet their expenditure requirement by increasing their internally generated revenues. 
+there are many controversies with regards to the efficiency of decentralization mechanisms on public goods delivery. there are many controversies with regards to the efficiency of decentralization mechanisms on public goods delivery. 
+In contrast to these positive outcomes, a greater number of publications have indicated the pitfalls of decentralization policies, such as local capture and corruption of sub-national authorities. For instance [@reinikka2004local] highlights the capture of decentralized school grants by local officials in Uganda. On this topic, [@treisman2000causes] also suggests that more levels of government induce higher perceived corruption, less effective provision of public health services and lower adult literacy, especially in developing countries.   
+Several additional pitfalls of decentralization in developing countries are stressed by [@prud1995dangers], such as inter-jurisdictional disparities or ethnic biases in elections. 
+Other studies are those of [@del2008local], that suggests a process of yardstick competition between local governments in Indonesia, and [@gregoire2010decentralization], that establishes the existence of strategic complementarities of local public goods among Beninese communes.  
 
 
 
@@ -84,8 +67,6 @@ The empirical strategy will consist of using panel data with fixed-effects estim
 Studying the relationship between decentralization and health provision is a very challenging exercise as it requires consistent and reliable microeconomic data which are, very often, not openly available or not consistent. 
 
 For this reason, we have decided to broaden our approach by first looking at aggregate health-related data of Benin, such as health public expenditures over the past few years. In addition to the macroeconomic overview, we explore microeconomic and sub-national data on health provision. 
-
-
 
 
 
@@ -259,11 +240,9 @@ Like decentralization, it is very challenging to find a composite proxy for heal
 (iii)water provision infrastructure: percentage of households in that municipality that are connected to SONEB (water pipeline)
 (iv) hospital: the number of existing hospitals or public healthcare centers in the municpality. 
 
-
-
 **Explanatory variables**
 
-In addition to decentralization, we use a set of variables to account for heterogeneity accross the municipalities, such as population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, average literacy rate of the head of households, as well as a monetary poverty index, all of them obtained from Benin's EmiCov (2010, 2011). 
+In addition to decentralization, we use a set of variables to account for heterogeneity across the municipalities, such as population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, average literacy rate of the head of households, as well as a monetary poverty index, all of them obtained from Benin's EmiCov (2010, 2011). 
 We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. 
 
 Thus, we use the dataset 'health.data' that contains these variables and we merge it with the one on decentralization to make our analysis easier.
