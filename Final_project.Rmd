@@ -229,8 +229,6 @@ We assume that these variables might have some impact either on health health-re
 
 
 
-
-
 ```{r, results='asis',echo=FALSE, message=FALSE}
 library("car")
 car::scatterplotMatrix(combineddata.data[c("decentralization2","pop_wateraccess","pop_toiletacess", "connect_soneb", "pubhosp")])
