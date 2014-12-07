@@ -28,24 +28,24 @@ This paper is divided into four sections. The first section presents an overview
 Benin is a french-speaking west-African country with a GDP/capita of US$ 804.67 in 2013 (5.6% growth in 2013) and an estimated population of 10.32 million habitants in 2013. The country is 
 bordered by Nigeria on the east, Togo on the west, Burkina Faso and Niger on the North. The country is categorized as low-income and is currently ranked 165 out of 187 countries in the 2014 Human Development Index. 
 
-For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. 
-We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
-
-Decentralization in Benin only begun in the 2000s with establishment of 77 municipalities and transfer of competencies from central to local governments .  For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
-
-
-
-
-In Benin, legal provisions on decentralization has transfered part of health provision competencies to subnational entities such as districts and municipalities. Since the year 2002, municipal governments are increasingly responsible for providing basic services and infrastructures such as water access. To offset the vertical imbalance of subnational governments, the central government have conceded some tax raising powers and has also use intergovernmental transfers through the National Commission on Local Finances. 
-
-
-
-
 ```{r, echo=FALSE, message=FALSE}
 library(ggmap)
 Country_Benin<-qmap(location='benin',zoom=6)
 print(Country_Benin)
 ```
+
+Benin is a young democracy. Alike many developing countries, Benin has embarked in a process of subsequent decentralization in 2000s which combines political, administrative and fiscal aspects. Legal provisions on the administrative and territorial reforms of 1999  created 77 municipalities and 12 departments and outlines competencies - ranging from tax raising power to local public expenditure (elementary schooling, health-related services, sanitation) - to be transferred from central to local governments. In order to offset fiscal imbalance and allow local governments to meet their newly assigned expenditure requirements, the central government has been providing increasing amount of fiscal grants to local governments.Since 2002, the country has also been involved in a successive national strategy, also known as the Growth and Poverty Reduction Strategy (GPRS) which aims at fostering susntainable development at both national and subnational level. Decentralization has been incorporated as one of the core policy in these strategies. Alongside national development programs, the process has been backed by backed by the international community via technical support of implemented projects and programs such as PDDC (GIZ), PACTE (European Union), PA3D (UNDP), and PNDDC (World Bank), PDDC (GIZ). 
+
+As a young democracy, decentralization has brought a huge transformation of the political and administrative organization. 
+
+In Benin, legal provisions on decentralization has transfered part of health provision competencies to subnational entities such as districts and municipalities. 
+
+
+We chose Benin because 
+Referring to the context, decentralization in Benin is at its very early stage. Unlike previous research which evidence from well-established federalist systems, this research will exploit the early stage development of such policy, thereby bringing a new perspective into the academic debate. 
+
+
+
 
 
 
