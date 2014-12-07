@@ -171,16 +171,13 @@ In this section, we explore provision of health-related services and infrastruct
 
 As stated from section 1, we constructed a unique dataset combining data on municipal finances obtained from the National Commission on Local Finances, the Ministry of Economy and Finances, and development indicators obtained from Benin's Benin's Integrated Modular Surveys on Household Living Conditions (EMICoV), the Demographic and Health Survey and the National Census. 
 
-The several gap years in the household survey do not allow for a panel data analysis with sophisticated econometric methods. We therefore restricted the model to pooled-OLS regressions, with data for the years 2010 and 2011 and accounting for heterogeneity across municipalities. The appendix presents results of our statistical tests (for issues of endogeneity, multicollinearity of key variables) attesting the fitness of our econometric model.
-
-
-###Basic Regression models 
-
-In our basic model, we regress decentralization and our independent variables as above-mentionned.  
+The several gap years in the household survey do not allow for a panel data analysis with sophisticated econometric methods. We therefore restricted the model to pooled-OLS regressions, with data on the 77 municipalities of Benin for the years 2010 and 2011, and accounting for heterogeneity across municipalities. The appendix presents results of our statistical tests (for issues of endogeneity, multicollinearity of key variables) attesting the fitness of our econometric model which is defined as follows: 
 
 **Estimated Model**
 
-$$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
+$$ H_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
+ 
+where H represents our dependent variables, decentralization a composite indicator used as proxy for the degree of decentralization of municipality i at time t, X a set of explanatory variables accounting for heterogeneity across municipalities and for economic conditions at the municipal level and e as the error term. 
 
 
 ```{r, include=FALSE}
@@ -196,48 +193,40 @@ combineddata.data <- read.csv(textConnection(combineddata.data))
 ```
 
 
+**Description of variables**
 
+*Decentralization*
 
-###Description of Variables 
+Decentralization is typically defined in public planning, management and decision making, as the transfer of authority and power from higher to lower levels of governing, or from national to sub-national levels. It has different characteristics for different writers which often describe it as either delegation, devaluation, de-concentration and privatization of responsibility and authority of tasks to lower level of administration. Yet, decentralization is a very complex mechanism. In general, its measurement involves two elements: (i)the level and (ii)the degree where the level can be regarded as the distribution of power over decision-making inside a particular administrative system while the level takes into account sociological and anthropological aspects. 
 
-**Independent variable: Decentralization**
-
-Decentralization is typically defined in public planning, management and decision making, as the transfer of authority and power from higher to lower levels of governing, or from national to sub-national levels. 
-It has different characteristics for different writers which often describe it as either delegation, devaluation, de-concentration and privatization of responsibility and authority of tasks to lower level of administration. 
-
-Yet, decentralization is a very complex mechanism. In general, its measurement involves two elements: 
-(i)the level  
-(ii)the degree,
-where the degree can be regarded as the distribution of power over the decision made inside the system, whereas the level takes into account sociological and political aspects. 
-
-The definition and measurement of decentralizaiton has led to a long academic debate, with several authors proposing new indicators as the most reliable proxy, giving birth to a multiplicity of indicators using different approaches. Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimensions, it is difficult to assess and measure the outcome of decentralization mechanisms in an empirical study.
-
-A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditure, few propose here to use the Revenue authonomy(RA) indicator used by [@akai2002sakata] and [@habibi2003etal] to proxy for decentralization. 
+The definition and measurement of decentralizaiton has led to a long academic debate, with several authors proposing new indicators as the most reliable proxy, giving birth to a multiplicity of indicators using different approaches. Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimensions, it is difficult to assess and measure the outcome of decentralization mechanisms in an empirical study. A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditure, we propose here to use the Revenue authonomy(RA) indicator used by [@akai2002sakata] and [@habibi2003etal] to proxy for decentralization. 
 This indicator is defined as the ratio of own-source revenues over the total expenditures of a subnational entity.  
 
 ```{r, results='asis',echo=FALSE, message=FALSE}
-stargazer(combineddata.data[c("decentralization","population","Density", "pubexp.c")], type = 'latex', title="Descriptive statistics/selected variables", digits=2)
+stargazer(combineddata.data[c("decentralization2","Density", "pubexp.c")], type = 'latex', title="Descriptive statistics/selected variables", digits=2)
 ```
 
 
-**Dependent variables**
+*Dependent variables*
 
-Like decentralization, it is very challenging to find a composite proxy for health provision. We have therefore decided to focus on some key variables which data is only available on a macro level. These variables are drawn from Benin's EmiCoV (2010,2011) and are defined as follwos: 
+To account for health provision, we have therefore decided to focus on some key variables that reflect the data from the macroeconomic overview on improved sanitation. These variables are drawn from Benin's EmiCoV (2010,2011) and are defined as follwos: 
 (i) access to water: defined as the percentage of households in the municipality that have access to water 
 (ii)access to toilet facilities: percentage of households in the municipality that have access to toilet facilities 
 (iii)water provision infrastructure: percentage of households in that municipality that are connected to SONEB (water pipeline)
-(iv) hospital: the number of existing hospitals or public healthcare centers in the municpality. 
-
-**Explanatory variables**
-
-In addition to decentralization, we use a set of variables to account for heterogeneity across the municipalities, such as population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, average literacy rate of the head of households, as well as a monetary poverty index, all of them obtained from Benin's EmiCov (2010, 2011). 
-We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. 
-
-Thus, we use the dataset 'health.data' that contains these variables and we merge it with the one on decentralization to make our analysis easier.
+(iv) hospital: the number of existing hospitals or public healthcare centers in the municipality. 
 
 ```{r, echo=FALSE, results='asis',message=FALSE}
 stargazer(combineddata.data[c("pop_wateraccess","pop_toiletacess","pubhosp","connect_soneb")], type = 'latex', title="Descriptive statistics of dependent variables", digits=2)
 ```
+
+
+*Explanatory variables*
+
+As mentionned above, Benin is a geographically, ethnically and economically fragmented country. We therefore use a set of parameters to account for heterogeneity across the municipalities. These are population, population density, per capita consumption (to account for subnational economic conditions), public expenditure per capita, households consumption in health-related services, monetary poverty index, average literacy rate of the head of households, and decentralization perception index, all drawn from Benin's EMICoV(2010,2011), Demographic and Health Survey (2011,2012) and National Census(2002,2013).
+
+We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. 
+
+
 
 
 
