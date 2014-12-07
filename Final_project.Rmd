@@ -21,12 +21,11 @@ Devolution of public administration is an important step in the overall decentra
 
 Decentralization is said to have many benefits such as improving efficiency in allocation of services. That has been supported by economic theory and empirical findings. This paper aims at investigating the impact of decentralization on the delivery of health-related services in the context of a developing country: Benin. More particularly, it will examine the following question: **what impact does decentralization have on the provision of health-related services in Benin?**. In other words, whether health provision has been efficient in improving the access to basic health-related services such as access to water and health-care centers at the municipal level. 
 
-This paper is divided into four sections. The first section presents an overview of Benin and it's decentralization policy. The second part presents a brief overview of the theoretical background on decentralization as well as the empirical findings with regards to its contribution to poverty-related services and local governance. The third presents our analytical framework, more particularly a macroeconomic overview of health-related expenditures and provision in Benin over the past few years; and a microanalysis which uses an econometric model to assess the impact of decentralization on some key health-related services at the municipal level. The fourth and final section discusses the findings, the limitations of this research and potential windows for research. 
+This paper is divided into four sections. The first section presents an overview of Benin and its decentralization policy. The second part presents a brief overview of the theoretical background on decentralization as well as the empirical findings with regards to its contribution to poverty-related services and local governance. The third presents our analytical framework, more particularly a macroeconomic overview of health-related expenditures and provision in Benin over the past few years; and a microanalysis which uses an econometric model to assess the impact of decentralization on some key health-related services at the municipal level. The fourth and final section discusses the findings, the limitations of this paper and potential windows for research. 
 
 #Overview of Benin 
 
-Benin is a french-speaking west-African country with a GDP/capita of US$ 804.67 in 2013 (5.6% growth in 2013) and an estimated population of 10.32 million habitants in 2013. The country is 
-bordered by Nigeria on the east, Togo on the west, Burkina Faso and Niger on the North. The country is categorized as low-income and is currently ranked 165 out of 187 countries in the 2014 Human Development Index. 
+Benin is a french-speaking west-African country with a GDP/capita of US$ 804.67 in 2013 (5.6% growth in 2013) and an estimated population of 10.32 million habitants in 2013. The country is bordered by Nigeria on the east, Togo on the west, Burkina Faso and Niger on the North. The country is categorized as low-income and is currently ranked 165 out of 187 countries in the 2014 Human Development Index. 
 
 ```{r, echo=FALSE, message=FALSE}
 library(ggmap)
@@ -36,17 +35,7 @@ print(Country_Benin)
 
 Benin is a young democracy. Alike many developing countries, Benin has embarked in a process of subsequent decentralization in 2000s which combines political, administrative and fiscal aspects. Legal provisions on the administrative and territorial reforms of 1999  created 77 municipalities and 12 departments and outlines competencies - ranging from tax raising power to local public expenditure (elementary schooling, health-related services, sanitation) - to be transferred from central to local governments. In order to offset fiscal imbalance and allow local governments to meet their newly assigned expenditure requirements, the central government has been providing increasing amount of fiscal grants to local governments.Since 2002, the country has also been involved in a successive national strategy, also known as the Growth and Poverty Reduction Strategy (GPRS) which aims at fostering susntainable development at both national and subnational level. Decentralization has been incorporated as one of the core policy in these strategies. Alongside national development programs, the process has been backed by backed by the international community via technical support of implemented projects and programs such as PDDC (GIZ), PACTE (European Union), PA3D (UNDP), and PNDDC (World Bank), PDDC (GIZ). 
 
-As a young democracy, decentralization has brought a huge transformation of the political and administrative organization. 
-
-In Benin, legal provisions on decentralization has transfered part of health provision competencies to subnational entities such as districts and municipalities. 
-
-
-We chose Benin because 
-Referring to the context, decentralization in Benin is at its very early stage. Unlike previous research which evidence from well-established federalist systems, this research will exploit the early stage development of such policy, thereby bringing a new perspective into the academic debate. 
-
-
-
-
+Although at its very early stage decentralization has brought a huge transformation to the political and administrative organization of subnational entities in Benin. With the recent trends in public finance reforms in developing countries, especially in Sub-Saharan Africa, there is a growing body of researchers devoted to investigating the impact of such reforms on the well-being of communities, thereby bridging public and development economics. Despite this growing interest, there is still very limited evidence of the contribution of these reforms, particularly decentralization, on health provision at subnational level. Unavailability or inaccuracy of local finances data as well as finding a proper measurement for health provision have been stated as some of the key challenges for such a research project. Yet, considering the importance of acess to basic health services, especially in a geographically and ethnically fragmented country like Benin, and given the amount of investment in decentralization process over the past decade, it  this topic is worth being investigated. Taking advantage of a unique dataset on Benin's municipalities, combining financial data and development indicators, this paper is an attempt to relate decentralization and provision of health-related services, . 
 
 
 #Literature review
