@@ -35,57 +35,55 @@ print(Country_Benin)
 
 Benin is a young democracy. Alike many developing countries, Benin has embarked in a process of subsequent decentralization in 2000s which combines political, administrative and fiscal aspects. Legal provisions on the administrative and territorial reforms of 1999  created 77 municipalities and 12 departments and outlines competencies - ranging from tax raising power to local public expenditure (elementary schooling, health-related services, sanitation) - to be transferred from central to local governments. In order to offset fiscal imbalance and allow local governments to meet their newly assigned expenditure requirements, the central government has been providing increasing amount of fiscal grants to local governments.Since 2002, the country has also been involved in a successive national strategy, also known as the Growth and Poverty Reduction Strategy (GPRS) which aims at fostering susntainable development at both national and subnational level. Decentralization has been incorporated as one of the core policy in these strategies. Alongside national development programs, the process has been backed by backed by the international community via technical support of implemented projects and programs such as PDDC (GIZ), PACTE (European Union), PA3D (UNDP), and PNDDC (World Bank), PDDC (GIZ). 
 
-Although at its very early stage decentralization has brought a huge transformation to the political and administrative organization of subnational entities in Benin. With the recent trends in public finance reforms in developing countries, especially in Sub-Saharan Africa, there is a growing body of researchers devoted to investigating the impact of such reforms on the well-being of communities, thereby bridging public and development economics. Despite this growing interest, there is still very limited evidence of the contribution of these reforms, particularly decentralization, on health provision at subnational level. Unavailability or inaccuracy of local finances data as well as finding a proper measurement for health provision have been stated as some of the key challenges for such a research project. Yet, considering the importance of acess to basic health services, especially in a geographically and ethnically fragmented country like Benin, and given the amount of investment in decentralization process over the past decade, it  this topic is worth being investigated. Taking advantage of a unique dataset on Benin's municipalities, combining financial data and development indicators, this paper is an attempt to relate decentralization and provision of health-related services, . 
+Although at its very early stage decentralization has brought a huge transformation to the political and administrative organization of subnational entities in Benin. With the recent trends in public finance reforms in developing countries, especially in Sub-Saharan Africa, there is a growing body of researchers devoted to investigating the impact of such reforms on the well-being of communities, thereby bridging public and development economics. Despite this growing interest, there is still very limited evidence of the contribution of these reforms, particularly decentralization, on health provision at subnational level. Unavailability or inaccuracy of local finances data as well as finding a proper measurement for health provision have been stated as some of the key challenges for such a research project. Yet, considering the importance of acess to basic health services, especially in a geographically and ethnically fragmented country like Benin, and given the weight of decentralization as a reform in the political and development agenda of the country over the past decade, it is worth investigating the impact of such a reform on the provision of health services at the subnational level. Taking advantage of a unique dataset on Benin's municipalities, combining financial data and development indicators, this paper is an attempt to bring an answer to that research question. 
 
 
 #Literature review
 
+Proponents of decentralization share the view that local governments are the major vehicles for specific poverty alleviation policies. This argument is sustained by economic theory which suggest that decision-making should occur at the lowest level of government in order to reach allocation efficiency, reflecting economies of scale and benefit???cost spill outs [@shah1994reform]. The demand-side argument in favour of decentralization is derived from the existence of information asymmetries. It advances that local government has an informational advantage, which is essential to improve provision of public services [@oates1972fiscal]. On the supply side, decentralization is also seen as a mechanism to enhance accountability of policy makers through greater participation of nearby communities in political decisions [@crook1998democracy]  [@tiebout1956pure].
 
+Federalism and devolution of public administration and servcices have been long studied in well-established federalist countries such as the United States, Germany and Switzerland. In fact, Yet, there are many controversies with regards to the efficiency of decentralization mechanisms on public goods delivery. 
 
-Proponents of decentralization share the view that local governments are the major vehicles for specific poverty alleviation policies. This argument is sustained by economic theories which argue that: 
-
-(i) decision-making should occur at the lowest level of government in order to reach allocation efficiency reflecting economies of scale and benefit-cost spill outs [@shah1994reform] 
-
-(ii) local government has an informational advantage, which is essential to improve provision of public services [@oates1972fiscal]
-
-(iii) decentralization shall enhance the accountability of policymakers through greater participation of nearby communities in political decisions [@crook1998democracy]  [@tiebout1956pure]
+An important part of the current debate around decentralization concerns the question of how local governments in developing countries can expand their fiscal autonomy and meet their expenditure requirement by increasing their internally generated revenues
 
 There have been numerous attempts to check these theories and empirically assess the impact of decentralization on provision of public goods and services. Hence, our first set of literature concerns the interaction between decentralization and public spending. 
 
-In that regards, there are several positive evidences. 
+In that regards, there are several 
+positive evidences. 
 For instance, @santos2005participatory studying the case of the city Porto-Alegre in Brazil found that decentralization has contributed to double the level of access to basic sanitation as well as enrollment in elementary schools between 1989 and 1996, while revenue collection increased by 48%. 
 Moreover,@bardhan2000capture found greater fiscal autonomy of local governments expands the volume of service delivery in West Bengal, while @faguet2004does studying Bolivia finds that public investment in education, water and sanitation rose significantly with decentralization and devolution of administrative authorities. 
 Additionally, @bird1999decentralization in a comparative study of Asian and Latin-American economies also found positive effect of decentralization on health, primary education and infrastructure. On the comparison between centralized and decentralized in delivery of public goods or pro-poor programs, @galasso2005decentralized studied a decentralized food-for-education program in Bangladesh and found out that a somewhat larger fraction of the poor received benefits from the program compared to the non-poor. They also found that that the program shifted the balance of power in favor of the poor. 
 
 
-In contrast to these positive outcomes, a greater number of publications have indicated the pitfalls of decentralization policies, such as local capture and corruption of subnational authorities. 
+In contrast to these positive outcomes, a greater number of publications have indicated the pitfalls of decentralization policies, such as local capture and corruption of sub-national authorities. 
 
 For instance @reinikka2004local highlights the capture of decentralized school grants by local officials in Uganda. 
 On this topic, @treisman2000causes also suggests that more levels of government induce higher perceived corruption, less effective provision of public health services and lower adult literacy, especially in developing countries.   
-Several additional pitfalls of decentralization in developing countries are stressed by @prud1995dangers, such as interjurisdictional disparities or ethnic biases in elections. 
+Several additional pitfalls of decentralization in developing countries are stressed by @prud1995dangers, such as inter-jurisdictional disparities or ethnic biases in elections. 
 Other studies are those of @del2008local, that suggests a process of yardstick competition between local governments in Indonesia, and @gregoire2010decentralization, that establishes the existence of strategic complementarities of local public goods among Beninese communes. 
 
-As decentralization echoes in the developing world, there is an increasing body of researchers devoted to empirically assess its contribution to poverty alleviation. In light of these publications, we hope to contribute to the debate by studying an important aspect in development economics literature which is health, and which will be at the center of the post-2015 development agenda. 
+ 
 
 
+
+
+An important part of the current debate around decentralization concerns the question of how local governments in developing countries can expand their fiscal autonomy and meet their expenditure requirement by increasing their internally generated revenues. 
 
 
 
 #Methodology
 
 
-Proponents of decentralization share the view that public services delivery is more efficient at the local level. Yet, there are many controversies with regards to the efficiency of decentralization mechanisms on public goods delivery. 
+As stated previously, our research project aims to look at the impact of decentralization on health provision in Benin. Access to basic health-related services has been one of the core Millennium Development Goals; it is also regarded as basic human rights.
 
-As stated previously, our research project aims to look at the impact of decentralization on health provision in Benin. Access to basic health-related services has been one of the core Millenium Development Goals; it is also regarded as basic human rights.
+For the methodology, we will first explore legal and political backgrounds of decentralization in Benin and attributions of different administrative levels with regards to health provision. 
 
-For the methodology, we will first explore legal and political backgrounds of decentralisation in Benin and attributions of different administrative levels with regards to health provision. 
-
-Secondly we will review existing theoretical and empirical literatures on welfare states, poverty and health. The literature review will help us define the main concepts and discuss measurements of the key variables to be included in the empirical analysis. 
+Secondly we will review existing theoretical and empirical literature on welfare states, poverty and health. The literature review will help us define the main concepts and discuss measurements of the key variables to be included in the empirical analysis. 
 
 The empirical strategy will consist of using panel data with fixed-effects estimators. Besides the indicators of decentralization level and health provision, the panel will contain information on the 77 municipalities such as population, territory, poverty level. We will use statistical methods to test for potential endogeneity of the main variables and for the fitness of our econometric model. 
-Studying the relationship between decentralization and health provision is a very challenging exercise as it requires consistent and reliable microeconomic data which are, very often, not openly avaible or not consistent. 
+Studying the relationship between decentralization and health provision is a very challenging exercise as it requires consistent and reliable microeconomic data which are, very often, not openly available or not consistent. 
 
-For this reason, we have decided to broaden our approache by first looking at aggregate health-related data of Benin, such as health public expenditures over the past few years. In addition to the macroeconomic overview, we explore microeconomic and subnational data on health provision. 
+For this reason, we have decided to broaden our approach by first looking at aggregate health-related data of Benin, such as health public expenditures over the past few years. In addition to the macroeconomic overview, we explore microeconomic and sub-national data on health provision. 
 
 
 
@@ -127,7 +125,7 @@ names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 
 **World Health Organization Indicators**
 
-The second dataset is taken from the WHO databases, particularly from the Global Health Obervatory Data which provides information on health infrastructures per 100,000 population in Benin including:
+The second dataset is taken from the WHO databases, particularly from the Global Health Observatory Data which provides information on health infrastructures per 100,000 population in Benin including:
 
 (i) Health posts, that  are either community centres or health environments with a very limited number of beds with limited curative and preventive care resources normally assisted by health workers or nurses,
 
@@ -141,9 +139,9 @@ The second dataset is taken from the WHO databases, particularly from the Global
 
 (vi) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be: regional, specialized, research hospitals or Federal/National Institutes.
 
-Unlinke the dataset from the World Bank, this datasets only provide Benin-related indicators for the years 2010 and 2013, which we extracted for this project. 
+Unlike the dataset from the World Bank, this datasets only provide Benin-related indicators for the years 2010 and 2013, which we extracted for this project. 
 
-We also cleaned the dataset eliminating superfluos columns and rows. We also used the coomand 'tidy' to organize it in a way that would make the merging og the datasets easier.
+We also cleaned the dataset eliminating superfluous columns and rows. We also used the command 'tidy' to organize it in a way that would make the merging of the datasets easier.
 
 Once we have our datasets, it is useful to merge them together so as to work easily and quickly with one dataset that would include all the needed variables. Thus, firstly we change the names of the variables "country" and "year", so that they have exactly the same capital letters in both datasets, and secondly we use the 'merge' function.
 
@@ -185,8 +183,8 @@ total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 
 For a macro view of the situation, we thought it would be better to use some graphs that show the trend for each indicator during the years following the decentralization process.
 
-The graphs below suggest that all three elements, public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the timespan 2005 to 2011. 
-As mentionned above, the central government in Benin (alike other developing countries in West-Africa) has used decentralization as a mechanisms to reach the targets of the Millenium Development Goals.  
+The graphs below suggest that all three elements, public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the time-span 2005 to 2011. 
+As mentioned above, the central government in Benin (alike other developing countries in West-Africa) has used decentralization as a mechanisms to reach the targets of the Millennium Development Goals.  
  
 
 ```{r, echo=FALSE}
