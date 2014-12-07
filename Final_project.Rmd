@@ -2,7 +2,12 @@
 title: "Final Project"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "27 novembre 2014"
-output: pdf_document
+output:
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+    word_document: default
 bibliography: bibliographyproject.bib
 ---
 
@@ -10,25 +15,27 @@ bibliography: bibliographyproject.bib
 
 #Introduction
 
-Since the beginning of the 1990s, most developing countries have embarked in a process of subsequent decentralization, combining political, administrative and fiscal aspects. Decentralization has also been at the center stage of the international development agenda, being considered as a major mechanism for poverty reduction in low and middle-income countries. As part of this process, subnational governments have been increasingly strenghtened, and granted more power in terms decision-making regarding their communities.
+Since the beginning of the 1990s, most developing countries have embarked in a process of subsequent decentralization, combining political, administrative and fiscal aspects. Decentralization has also been at the center stage of the international development agenda, being considered as a major mechanism for poverty reduction in low and middle-income countries. As part of this process, subnational governments have been increasingly strengthened, and granted more power in terms decision-making regarding their communities.
 
-Devolution of public administration is an important step in the overall decentralization process. In that regard, central governments, supported by numerous development agencies, have slowly transfers raising-revenues powers as well as expenditures assignments to local governments. Central governments, in their redistribute policies, have also invested in transfering grants to local entities, allowing them to meet their newly assigned expenditure requirements.Among these assignments, and along with the Millenium Development Goals are listed basic sanitation and health-related services, as well as primary education. Decentralization of health expenditures and policies have taken place accross many countries in GHana, Zambia, Benin, Uganda, and on a broader scale all over the world as a step in a process of improving living standards of rural population. The political and administrative decentralization of health provision have been accompagnied by several by several bilateral and multilateral projects both in time and resources. 
+Devolution of public administration is an important step in the overall decentralization process. In that regard, central governments, supported by numerous development agencies, have slowly transfers raising-revenues powers as well as expenditures assignments to local governments. Central governments, in their redistribute policies, have also invested in transferring grants to local entities, allowing them to meet their newly assigned expenditure requirements. Among these assignments, and along with the Millennium Development Goals are listed basic sanitation and health-related services, as well as primary education. Decentralization of health expenditures and policies have taken place across many countries in Ghana, Zambia, Benin, Uganda, and on a broader scale all over the world as a step in a process of improving living standards of rural population. The political and administrative decentralization of health provision have been accompanied by several bilateral and multilateral projects both in time and resources. 
 
-Decentralization is said to have many benefits such as improving efficiency in allocation of services. That has been supported by economic theory and empirical findings. 
-However, focusing our research on the impacts and effects this process has on health provision in Benin, we want to see if it is truly efficient always, or if it can affect negatively some circumstances and overall the benefits perceived by the population.
-For example, we would like to see if the fiscal decentralization somehow resulted in an increase or decrease of health provision, which means the complexity of elements that revolve around health care, like the number of facilities, improved health conditions etc...
+Decentralization is said to have many benefits such as improving efficiency in allocation of services. That has been supported by economic theory and empirical findings. This paper aims at investigating the impact of decentralization on the delivery of health-related services in the context of a developing country: Benin. More particularly, it will examine the following question: **what impact does decentralization have on the provision of health-related services in Benin?**. In other words, whether health provision has been efficient in improving the access to basic health-related services such as access to water and health-care centers at the municipal level. 
 
-Thus, our research question is : which are the effects of decentralization on health provision in Benin? 
-A better question would be: **What impact does decentralization have on the performance of the health provision system in Benin?**
+This paper is divided into four sections. The first section presents an overview of Benin and it's decentralization policy. The second part presents a brief overview of the theoretical background on decentralization as well as the empirical findings with regards to its contribution to poverty-related services and local governance. The third presents our analytical framework, more particularly a macroeconomic overview of health-related expenditures and provision in Benin over the past few years; and a microanalysis which uses an econometric model to assess the impact of decentralization on some key health-related services at the municipal level. The fourth and final section discusses the findings, the limitations of this research and potential windows for research. 
 
-Moreover, before proceeding with the research, a basic question needs an answer:
+#Overview of Benin 
 
-**Why Benin?**
+Benin is a french-speaking west-African country, bordered by Nigeria on the eastern side, Togo on the Western side, Burkina Faso and Niger on the Northern part. The country is currently ranked 165 out of 187 countries in the 2014 Human Development Index, with a GDP/capita of US$794.433 (5% growth in 2013) and an estimated population of 9.351 million in 2012. For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. 
+We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
+
+Decentralization in Benin only begun in the 2000s with establishment of 77 municipalities and transfer of competencies from central to local governments . The country is currently ranked 165 out of 187 countries in the 2014 Human Development Index, with a GDP/capita of US$794.433 (5% growth in 2013) and an estimated population of 9.351 million in 2012. For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
+
+
+
 
 In Benin, legal provisions on decentralization has transfered part of health provision competencies to subnational entities such as districts and municipalities. Since the year 2002, municipal governments are increasingly responsible for providing basic services and infrastructures such as water access. To offset the vertical imbalance of subnational governments, the central government have conceded some tax raising powers and has also use intergovernmental transfers through the National Commission on Local Finances. 
 
-The country is currently ranked 165 out of 187 countries in the 2014 Human Development Index, with a GDP/capita of US$794.433 (5% growth in 2013) and an estimated population of 9.351 million in 2012. For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. 
-We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
+
 
 
 ```{r, echo=FALSE, message=FALSE}
@@ -88,13 +95,6 @@ Studying the relationship between decentralization and health provision is a ver
 
 For this reason, we have decided to broaden our approache by first looking at aggregate health-related data of Benin, such as health public expenditures over the past few years. In addition to the macroeconomic overview, we explore microeconomic and subnational data on health provision. 
 
-
-This paper is divided into three sections. 
-The first one gives a general overview on health-related expenditures and provision in Benin over the years 2005 to 2010. The datasets are obtained from the World Bank (WB) and World Health Organization (WHO). 
-
-The second part looks at the microeconomic effect of decentralization on basic health-related facilities. For this purpose, we compute an indicator for decentralization, and we use health-related indicators provided in Benin's Integrated Modular Households Survey (EMICoV). 
-Since we have missing values in the households survey, we have decided to restrict our model to only two years: 2010 and 2011, for which we have a balanced panel. 
-The final section presents our basic regression models and some potential issues.
 
 
 
