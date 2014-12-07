@@ -25,10 +25,13 @@ This paper is divided into four sections. The first section presents an overview
 
 #Overview of Benin 
 
-Benin is a french-speaking west-African country, bordered by Nigeria on the eastern side, Togo on the Western side, Burkina Faso and Niger on the Northern part. The country is currently ranked 165 out of 187 countries in the 2014 Human Development Index, with a GDP/capita of US$794.433 (5% growth in 2013) and an estimated population of 9.351 million in 2012. For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. 
+Benin is a french-speaking west-African country with a GDP/capita of US$ 804.67 in 2013 (5.6% growth in 2013) and an estimated population of 10.32 million habitants in 2013. The country is 
+bordered by Nigeria on the east, Togo on the west, Burkina Faso and Niger on the North. The country is categorized as low-income and is currently ranked 165 out of 187 countries in the 2014 Human Development Index. 
+
+For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. 
 We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
 
-Decentralization in Benin only begun in the 2000s with establishment of 77 municipalities and transfer of competencies from central to local governments . The country is currently ranked 165 out of 187 countries in the 2014 Human Development Index, with a GDP/capita of US$794.433 (5% growth in 2013) and an estimated population of 9.351 million in 2012. For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
+Decentralization in Benin only begun in the 2000s with establishment of 77 municipalities and transfer of competencies from central to local governments .  For the past decade, decentralization has been at the core of the major national policies, which aims at reducing poverty for a human sustainable development. We chose Benin because it is a young democracy and because decentralization, although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
 
 
 
