@@ -162,48 +162,25 @@ print(line_plot, tag = 'chart')
 ```
 
 
-
-
-#Analysis and results
-
-
-
-##Macroeconomic Overview
-
-
-For a macro view of the situation, we thought it would be better to use some graphs that show the trend for each indicator during the years following the decentralization process.
-
-The graphs below suggest that all three elements, public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the time-span 2005 to 2011. 
-As mentioned above, the central government in Benin (alike other developing countries in West-Africa) has used decentralization as a mechanisms to reach the targets of the Millennium Development Goals.  
- 
-
-
-Since health expenditure is highly decentralized, we could potentially argue that the macroeconomic overview is related to the outcome on a micro level.
-The microeconomic approach in section 2 will therefore help us testing this assumption.
-
-
-
+The graphs above suggest that all three elements: public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the time-span 2005 to 2011. Since health expenditure is highly decentralized, we could therefore assume that the macroeconomic overview is a reflection of the microeconomic data. The microeconomic analysis will therefore look to confirm this assumption.
 
 
 ##Microeconomic Analysis 
 
-The datasets are obtained from the Ministry of Economy and Finances, the National Institute of Statistics and the National Commission on Local Finances. 
-Additional information or variables will be drawn from international or regional databases such as the World Bank Indicators(WDI), the World Health Organization(WHO) or Afro-barometer.
+In this section, we explore provision of health-related services and infrastructures on a municipal level. Particularly, we look at the impact of decentralization on the access to basic health-related services and infrastructure.
 
-Secondly we will review existing theoretical and empirical literature on welfare states, poverty and health. The literature review will help us define the main concepts and discuss measurements of the key variables to be included in the empirical analysis. 
+As stated from section 1, we constructed a unique dataset combining data on municipal finances obtained from the National Commission on Local Finances, the Ministry of Economy and Finances, and development indicators obtained from Benin's Benin's Integrated Modular Surveys on Household Living Conditions (EMICoV), the Demographic and Health Survey and the National Census. 
 
-The empirical strategy will consist of using panel data with fixed-effects estimators. Besides the indicators of decentralization level and health provision, the panel will contain information on the 77 municipalities such as population, territory, poverty level. We will use statistical methods to test for potential endogeneity of the main variables and for the fitness of our econometric model. 
-
-
-In this section, we explore provision of health-related services and infrastructures on a local level. Particularly, we look at the impact of decentralization on the access to basic health-related services and infrastructure.
-The datasets on local finances are obtained from the National Commission on Local Finances of Benin. Health-related expenditures and provision are from Benin's Integrated Modular Surveys on Household Living Conditions (EMICoV) and the Demographic and Health Survey.
-[As we gathered the data from these sources as excel files, we transformed them in .csv files to import them in our project.]
+The several gap years in the household survey do not allow for a panel data analysis with sophisticated econometric methods. We therefore restricted the model to pooled-OLS regressions, with data for the years 2010 and 2011 and accounting for heterogeneity across municipalities. The appendix presents results of our statistical tests (for issues of endogeneity, multicollinearity of key variables) attesting the fitness of our econometric model.
 
 
-The second part , and we use health-related indicators provided in Benin's Integrated Modular Households Survey (EMICoV). 
-Since we have missing values in the households survey, we have decided to restrict our model to only two years: 2010 and 2011, for which we have a balanced panel. 
-The final section presents our basic regression models and some potential issues
+###Basic Regression models 
 
+In our basic model, we regress decentralization and our independent variables as above-mentionned.  
+
+**Estimated Model**
+
+$$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
 
 
 ```{r, include=FALSE}
@@ -263,16 +240,6 @@ stargazer(combineddata.data[c("pop_wateraccess","pop_toiletacess","pubhosp","con
 ```
 
 
-
-
-
-###Basic Regression models 
-
-In our basic model, we regress decentralization and our independent variables as above-mentionned.  
-
-**Estimated Model**
-
-$$ D_{it} = \alpha + \beta_{1}Decentralization_{it} + X\beta_{} + e $$
 
 
 ```{r, results='asis',echo=FALSE, message=FALSE}
