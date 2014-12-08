@@ -135,31 +135,19 @@ names(Benin)[names(Benin)=="country"] <- "Country"
 total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 ```
 
-```{r,include=FALSE, message=FALSE}
-library(googleVis)
+```{r, echo=FALSE}
+library(ggplot2)
+
+
+ggplot(data=Benin,aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() +theme_bw(base_size=14) + ggtitle("Trend of total public expenditure over the years\n")
+
+ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 14) + ggtitle("Trend over the years\n")
+
+ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 14) + ggtitle("Trend over the years\n")
+
+
 ```
 
-```{r,include=FALSE, results='asis'}
-compare_trend <-data.frame(
-  Year=c("2005","2006","2007","2008","2009","2010","2011"),
-  Public.Health.Expenditure=c(49.69487,50.22141,50.75158,50.95043,53.35198,51.16728,52.10150),
-  Health.Expenditure.Per.Capita=c( 25.21300,26.47114,28.77537,31.01608,31.80012,30.47805,33.73303),
-  Improved.Sanitation.Facilities=c(11.2,11.7,12.2,12.7,13.2,13.7,14.2))
-```
-
-```{r,echo=FALSE, results='asis'}
-line_plot <- gvisLineChart((compare_trend), 
-              options=list(
-                        title="Compare trends",
-                        titleTextStyle="{color:'black', 
-                                           fontName:'Courier', 
-                                           fontSize:16}",   
-                          curveType="function",
-                          width=800,
-                          height=500                         
-                          )) 
-print(line_plot, tag = 'chart')
-```
 
 
 The graphs above suggest that all three elements: public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the time-span 2005 to 2011. Since health expenditure is highly decentralized, we could therefore assume that the macroeconomic overview is a reflection of the microeconomic data. The microeconomic analysis will therefore look to confirm this assumption.
@@ -314,7 +302,7 @@ summary(R3toilet)
 ```
 
 
-```{r,echo=FALSE,results='asis',message=FALSE}
+```{r,echo=FALSE,results='asis', message=FALSE}
 
 #Testing for multicollinearity among variables
 vif(R3toilet)
