@@ -77,7 +77,6 @@ names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 ```
 
 
-
 **World Health Organization Indicators**
 
 The second dataset is taken from the WHO databases, particularly from the Global Health Observatory Data which provides information on health infrastructures per 100,000 population in Benin including:
@@ -140,15 +139,13 @@ total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 library(ggplot2)
 
 
-ggplot(data=total,aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() +theme_bw(base_size=14) + ggtitle("Trend of total public expenditure over the years\n")
+ggplot(data=Benin,aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() +theme_bw(base_size=14) + ggtitle("Trend of public expenditure over the years\n")
 
-ggplot(data=total, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 14) + ggtitle("Trend over the years\n")
+ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 14) + ggtitle("Trend over the years\n")
 
-ggplot(data=total, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 14) + ggtitle("Trend over the years\n")
-
+ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 14) + ggtitle("Trend over the years\n")
 
 ```
-
 
 
 The graphs above suggest that all three elements: public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the time-span 2005 to 2011. Since health expenditure is highly decentralized, we could therefore assume that the macroeconomic overview is a reflection of the microeconomic data. The microeconomic analysis will therefore look to confirm this assumption.
@@ -216,8 +213,6 @@ As mentionned above, Benin is a geographically, ethnically and economically frag
 We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. 
 
 
-
-
 ```{r, results='asis', echo=FALSE, message=FALSE}
 library("car")
 car::scatterplotMatrix(combineddata.data[c("decentralization2","pop_wateraccess","pop_toiletacess", "connect_soneb", "pubhosp")])
@@ -226,6 +221,7 @@ car::scatterplotMatrix(combineddata.data[c("decentralization2","pop_wateraccess"
 
 **Effect of Decentralization on Water Access**
 
+In this model, we evaluate the impact of decentralization on access to water at the municipal level in Benin. As described in the econometric equation, decentralization is the independet variable, percentage of households in the municipality that have access to water. 
 
 In this model, decentralization reveals to be insignificant,as well as the other explanatory variables. This may be due to mispecification of the model. 
  
@@ -284,7 +280,7 @@ stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
 **Effect of decentralization on access to toilet facilities** 
 
 
-Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be  slightly significant. 
+Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be  slightly significant. Because access to water is potentially related to demographic and economic conditions of both households and the districts, we added population, population density, per capita consumption, public expenditure per capita, households consumption in health-related services, monetary poverty index, average literacy rate of the head of households, and decentralization perception index as our control variables. 
 
 
 ```{r,include=FALSE, results='asis'}
