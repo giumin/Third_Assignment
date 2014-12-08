@@ -219,12 +219,12 @@ car::scatterplotMatrix(combineddata.data[c("decentralization2","pop_wateraccess"
 ```
 
 
-**Effect of Decentralization on Water Access**
+**Impact of Decentralization on Water Access**
 
-In this model, we evaluate the impact of decentralization on access to water at the municipal level in Benin. As described in the econometric equation, decentralization is the independet variable, percentage of households in the municipality that have access to water. 
+For our first estimation, we evaluate the impact of decentralization on access to water at the municipal level in Benin. As described in the econometric equation, decentralization is the independet variable, percentage of households in the municipality that have access to water. 
 
 In this model, decentralization reveals to be insignificant,as well as the other explanatory variables. This may be due to mispecification of the model. 
- 
+
 
 ```{r,include=FALSE}
 library(car)
@@ -232,7 +232,6 @@ library(gvlma)
 library(robust)
 library(het.test)
 ```
-
  
 ```{r,include=FALSE, results='asis'}
 # First regression:water acces
@@ -249,38 +248,22 @@ R3water <- lm(pop_wateraccess ~ decentralization2 + log(population) + Density + 
 summary(R3water)
 ```
 
-```{r,echo=FALSE,results='asis',message=FALSE}
-
-#Testing for multicollinearity among variables
-vif(R3water)
-sqrt(vif(R3water)) > 2
-
-# Evaluate homoscedasticity
-#   non-constant error variance test
-ncvTest(R3water)
-#   Beusch-Pagan test
-bptest(R3water)
-
-# Global test of model assumptions
-gvmodelwater <- gvlma(R3water) 
-
-diagnostic <- summary(gvmodelwater)
-```
  
 ```{r, echo=FALSE, results='asis'}
 labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','gini','perception of decentralization','(Intercept)')
 stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
-                     title = 'Effect of decentralization on water access',
+                     title = 'Impact of decentralization on water access',
                      digits = 2, type = 'latex', header = FALSE)
 ```
 
+In the first restricted model, decentralization does not reveal to be significant. In the second model, logarithm of population reveals to be significant such that an increase in population by one percent would increase access to water by approximately 5.8 percentage point. However, once we control for additional parameters, the variable turns out to be insignificant. In the final specification, Household health-related consumption and education level of head of households are significant, respectively at 10% and 5% such that an increase in the average literacy of head of household in a particular municipality would increase access to water by 0.19 percentage point; and a growth in health consumption by one percent point would decrease access to water by 1.37 percentage point (ceteris paribus). The ajusted Rsquare however remain very low, suggesting a mispecification of our model, although the results from the tests for validation of linear models assumptions is on overall positive. 
 
 
+**Impact of decentralization on access to toilet facilities** 
 
-**Effect of decentralization on access to toilet facilities** 
+For estimation, we evaluate the impact of decentralization on access to water at the municipal level in Benin. As described in the econometric equation, decentralization is the independet variable, percentage of households in the municipality that have access to water. 
 
-
-Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be  slightly significant. Because access to water is potentially related to demographic and economic conditions of both households and the districts, we added population, population density, per capita consumption, public expenditure per capita, households consumption in health-related services, monetary poverty index, average literacy rate of the head of households, and decentralization perception index as our control variables. 
+In this model, decentralization reveals to be insignificant,as well as the other explanatory variables. This may be due to mispecification of the model. 
 
 
 ```{r,include=FALSE, results='asis'}
@@ -297,6 +280,8 @@ R3toilet <- lm(pop_toiletacess ~ decentralization2 + log(population) + Density +
 summary(R3toilet)
 
 ```
+
+Decentralization seems to not have a particular effect on access to toilet facilities. In the second restricted model, as we introduced demographic variables, population reveals to be significant at 10% such that a one percent increase in the population size is likely to increase access to toilet facilities by 3.064 percent point, far greater than the previous model on water access, although population is no longer meaningful in the final equation. Like in the equation on water access, the average literacy rate of head of households appear to have a positive impact on access to toilet facilities at 1% significance such that an increase in average literacy rate of households would increase access to toilet facilities by 0.09 percentage point.  although the coefficient  while average literacy rate of head of households results to be  slightly significant. Because access to water is potentially related to demographic and economic conditions of both households and the districts, we added population, population density, per capita consumption, public expenditure per capita, households consumption in health-related services, monetary poverty index, average literacy rate of the head of households, and decentralization perception index as our control variables. 
 
 
 ```{r,echo=FALSE, results='asis', message=FALSE}
@@ -438,6 +423,8 @@ stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
 ```
 
 
+ Considering the potential implications of the other variables in governmental redistribution mechanism or public goods delivery, it is surprising that education 
+
 
 #Potential Issues 
 
@@ -446,5 +433,30 @@ The macroeconomic overview suggests that Benin's has experienced an improvement 
 
 #References
 
+#Annexes
+
+Validation of Linear Model Assumptions
+
+**Impact of decentralization on water access**
+
+*Testing for multicollinearity among variables*
+
+```{r,echo=FALSE,results='asis',message=FALSE}
+#Testing for multicollinearity among variables
+vif(R3water)
+sqrt(vif(R3water)) > 2
+
+```
+
+*Global Validation of Linear Model Assumptions*
+
+```{r,echo=FALSE,results='asis',message=FALSE}
+library(gvlma)
+
+# Global test of model assumptions
+gvmodelwater <- gvlma(R3water) 
+diagnosticwater <- summary(gvmodelwater)
+kable(diagnostic)
+```
 
 
