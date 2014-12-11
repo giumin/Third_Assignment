@@ -302,7 +302,9 @@ R3soneb <- lm(connect_soneb ~ decentralization2 + log(population) + Density + lo
 summary(R3soneb)
 
 # Third regression: Robust 
-R3sonebrobust <- rlm(connect_soneb ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
+combineddata.data$connect_soneb<-combineddata.data$connect_soneb+0.1
+combineddata.data$logsoneb<-log(combineddata.data$connect_soneb)
+R3sonebrobust <- rlm(logsoneb ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
 summary(R3sonebrobust)
 ```
 
@@ -318,7 +320,7 @@ stargazer::stargazer(R1soneb, R2soneb, R3soneb, R3sonebrobust, covariate.labels 
 
 Unlike previous models, decentralization appears to be significant in our second restricted models (10%), such that an increase in decentralization by one unit would be associated with an decrease in the number of connections to water facilities by 7.82 units. This is a relatively surprising result and seems to contradict the assumptions that decentralization might lead to greater access of public goods on sub-national level.Once we control for other parameters, however, the variable decentralization turns insignificant. Alike previous models, average literacy rate of head of households appears to be a determinant of the average connection rate to water pipeline within a particular municipality. Public expenditure is positively significant at 5%, indicating that if public expenditure increases by 1 percent, the number of water pipeline connection would increase by 4.27 units. Households health-related consumption is also slightly significant.
 
-It's worth noting that the adjusted R square has significantly increased in comparison with the previous equation, signaling an improvement in the goodness fit of the model. The global validation test for linear models assumptions (in annexes) however reveals that the model suffers from heterogeneity and thus violation of Gauss Markov assumptions for an unbiased and efficient pooled-OLS estimates. We have chosen to run a robust regression model, shown in the last column of the table in which none of the variables is significant. Due to the limitations in the panel data (time dimension=2), we decided not to pursue more sophisticated specification (e.g.fixed or random effects models). Our results remain should be regarded as indication for further research on the topic or in that particular context.
+It's worth noting that the adjusted R square has significantly increased in comparison with the previous equation, signaling an improvement in the goodness fit of the model. The global validation test for linear models assumptions (in annexes) however reveals that the model suffers from heterogeneity and thus violation of Gauss Markov assumptions for an unbiased and efficient pooled-OLS estimates. We have chosen to run a robust regression model and take the logarithm of our dependent variables (due to skewness). The result indicates that none of the variables is significant. Due to the limitations in the panel data (time dimension=2), we decided not to pursue more sophisticated specification (e.g.fixed or random effects models). Our results remain should be regarded as indication for further research on the topic or in that particular context.
 
 
 **Effect of decentralization on availability of public health facilities**
