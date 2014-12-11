@@ -23,6 +23,7 @@ Decentralization is said to have many benefits such as improving efficiency in a
 
 This paper is divided into four sections. The first section presents an overview of Benin and its decentralization policy. The second part presents a brief overview of the theoretical background on decentralization as well as the empirical findings with regards to its contribution to poverty-related services and local governance. The third presents our analytical framework, more particularly a macroeconomic overview of health-related expenditures and provision in Benin over the past few years; and a micro-analysis which uses an econometric model to assess the impact of decentralization on some key health-related services at the municipal level. The fourth and final section discusses the findings, the limitations of this paper and potential windows for research. 
 
+
 #Overview of Benin 
 
 Benin is a french-speaking west-African country with a GDP/capita of US$ 804.67 in 2013 (5.6% growth in 2013) and an estimated population of 10.32 million habitants in 2013. The country is bordered by Nigeria on the east, Togo on the west, Burkina Faso and Niger on the North. The country is categorized as low-income and is currently ranked 165 out of 187 countries in the 2014 Human Development Index. 
@@ -135,6 +136,7 @@ names(Benin)[names(Benin)=="country"] <- "Country"
 total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
 ```
 
+
 ```{r, echo=FALSE}
 library(ggplot2)
 
@@ -148,8 +150,17 @@ ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + 
 ```
 
 
+```{r, echo=FALSE, results='asis',message=FALSE}
+myvars <- names(Benininfra) %in% c("row.names","Country", "Numeric") 
+Benininfra.new <- Benininfra[!myvars]
+kable(Benininfra.new, header=T)
+
+```
+
+
 The graphs above suggest that all three elements: public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the time-span 2005 to 2011. Since health expenditure is highly decentralized, we could therefore assume that the macroeconomic overview is a reflection of the microeconomic data. The microeconomic analysis will therefore look to confirm this assumption.
 As for the variables taken from the WHO, unfortunately there are only two years (2010 and 2013), which does not really help us with our search. Nonetheless, looking at the values for those years related to 'Specialized hospitals'(0.12 and0.11) and 'Provincial hospitals' (0.6 and 0.5), there seems to be no important variations per 100000 habitants in the span of three years.
+
 
 ##Microeconomic Analysis 
 
@@ -222,7 +233,6 @@ car::scatterplotMatrix(combineddata.data[c("decentralization2","pop_wateraccess"
 **Impact of Decentralization on Water Access**
 
 For our first estimation, we evaluate the impact of decentralization on access to water at the municipal level in Benin. As described in the econometric equation, decentralization is the independent variable, percentage of households in the municipality that have access to water. 
-
 In this model, decentralization reveals to be insignificant,as well as the other explanatory variables. This may be due to mispecification of the model. 
 
 
@@ -298,7 +308,6 @@ As displayed by above regression table, decentralization does not seem to have a
 Here we also use our basic regression model to assess the impact of decentralization on provision of water facilities. In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastructure. In reverse, population density, public expenditures per capita and average literacy rate of heads of households reveal to be significant; households health consumption is slightly significant. 
 
 
-
 ```{r,include=FALSE, results='asis'}
 # First regression:access to pipelines
 R1soneb <- lm(connect_soneb ~ decentralization2, data = combineddata.data)
@@ -314,32 +323,6 @@ summary(R3soneb)
 ```
 
 
-```{r, echo=FALSE, results='asis',message=FALSE}
-
-#Testing for multicollinearity among variables
-vif(R3soneb)
-sqrt(vif(R3soneb)) > 2
-
-# Evaluate homoscedasticity
-#   non-constant error variance test
-ncvTest(R3soneb)
-#   Beusch-Pagan test
-bptest(R3soneb)
-
-# Global test of model assumptions
-gvmodelsoneb <- gvlma(R3soneb) 
-summary(gvmodelsoneb)
-
-
-## Heteroskedastic robust standard errors in R
-require("sandwich")
-require("lmtest")
-
-R3soneb$newse<-vcovHC(R3soneb)
-coeftest(R3soneb,R3soneb$newse)
-
-```
-
 ```{r, echo=FALSE,results='asis'}
 
 labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','gini','perception of decentralization','(Intercept)')
@@ -349,6 +332,9 @@ stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
                      digits = 2, type = 'latex', header = FALSE)
 ```
 
+Unlike previous models, decentralizattion appears to be significant in our second restricted models. ike previous models, the results does not indicate any effect of decentralization on provision of water facilities. In order terms, giving more financial and administrative powers to municipal governments does not seem to increase the number of households that are connected to water pipeline, which indicates a lack of investment in that area. In our second restricted model, 
+
+As displayed by above regression table, decentralization does not seem to have any particular incidence on the access to toilet facilities at the municipal level. In the second restricted model, as we introduced demographic variables, population reveals to be significant at 10% such that a one percent increase in the population size is likely to increase access to toilet facilities by 3.064 percent point, far greater than the previous model on water access, although population is no longer meaningful in the final equation. Like in the equation on water access, the average literacy rate of head of households appear to have a positive impact on access to toilet facilities at 1% significance such that an increase in average literacy rate of households would increase access to toilet facilities by 0.09 percentage point. The final model also displays an increase in the adjusted R square. However,although the fitness test of the linear model assumptions hold (see annexes) the value of the adjusted R square remains relatively low, which again implies potential mispecification and the omission of key variables
 
 
 **Effect of decentralization on availability of public health infrastructure**
@@ -457,6 +443,26 @@ kable(diagnostictoilet)
 ```
 
 
+**Impact of decentralization on provision of water facilities**
+
+*Testing for multicollinearity among variables*
+
+```{r, echo=FALSE, results='asis',message=FALSE}
+
+#Testing for multicollinearity among variables
+vif(R3soneb)
+sqrt(vif(R3soneb)) > 2
+
+```
+
+*Global Validation of Linear Model Assumptions*
+
+```{r,echo=FALSE,results='asis',message=FALSE}
+# Global test of model assumptions
+# Global test of model assumptions
+gvmodelsoneb <- gvlma(R3soneb) 
+diagnosticsoneb<-summary(gvmodelsoneb)
+kable(diagnosticsoneb)
 
 ```
 
