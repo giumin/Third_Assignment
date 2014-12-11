@@ -370,12 +370,15 @@ The scarcity of sub-national and local data, and the limitations to the empirica
 
 *Global Validation of Linear Model Assumptions*
 
-```{r,echo=FALSE,results='asis',message=FALSE}
-library(gvlma)
-
+```{r,echo=FALSE,include=FALSE}
 # Global test of model assumptions
+library(gvlma)
 gvmodelwater <- gvlma(R3water) 
 diagnosticwater <- summary(gvmodelwater)
+```
+
+
+```{r,echo=FALSE,results='asis',message=FALSE}
 kable(diagnosticwater)
 ```
 
@@ -383,10 +386,14 @@ kable(diagnosticwater)
 **Impact of decentralization on access to toilet facilities**
 
 *Global Validation of Linear Model Assumptions*
-```{r,echo=FALSE,results='asis',message=FALSE}
+
+```{r,echo=FALSE,include=FALSE}
 # Global test of model assumptions
 gvmodeltoilet <- gvlma(R3toilet) 
 diagnostictoilet<-summary(gvmodeltoilet)
+```
+
+```{r,echo=FALSE,results='asis',message=FALSE}
 kable(diagnostictoilet)
 ```
 
@@ -395,19 +402,24 @@ kable(diagnostictoilet)
 
 *Global Validation of Linear Model Assumptions*
 
-```{r,echo=FALSE,results='asis',message=FALSE}
+```{r,echo=FALSE,include=FALSE}
 # Global test of model assumptions
 gvmodelsoneb <- gvlma(R3soneb) 
 diagnosticsoneb<-summary(gvmodelsoneb)
+```
+
+```{r,echo=FALSE,results='asis',message=FALSE}
 kable(diagnosticsoneb)
 ```
 
 **Impact of decentralization on provision of healthcare facilities**
-
-```{r,echo=FALSE,results='asis',message=FALSE}
+```{r,echo=FALSE,include=FALSE}
 # Global test of model assumptions
 gvmodelpubhosp <- gvlma(R3pubhosp) 
 diagnosticpuphosp<-summary(gvmodelpubhosp)
+```
+
+```{r,echo=FALSE,results='asis',message=FALSE}
 kable(diagnosticpuphosp)
 ```
 
