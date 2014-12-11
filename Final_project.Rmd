@@ -337,13 +337,12 @@ stargazer::stargazer(R1soneb, R2soneb, R3soneb, R3sonebrobust, covariate.labels 
 
 Unlike previous models, decentralization appears to be significant in our second restricted models (10%), such that an increase in decentralization by one unit would be associated with an decrease in the number of connections to water facilities by 7.82 units. This is a relatively suprising result and seems to contradict the assumptions that decentralization might lead to greater access of public goods on subnational level.Once we control for other parameters, however, the variable decentralization turns insignificant. Alike previous models, average literacy rate of head of households appears to be a determinant of the average connection rate to water pipeline within a particular municipality. Public expenditure is positively significant at 5%, indicating that if public expenditure increases by 1 percent, the number of water pipeline connection would increase by 4.27 units. Households health-related consumption is also slightly significant.
 
-It's worth noting that the adjusted R square has significantly increased in comparision with the previous equation, signaling an improvement in the goodness fit of the model. However, as we test for the global 
+It's worth noting that the adjusted R square has significantly increased in comparision with the previous equation, signaling an improvement in the goodness fit of the model. The global validation test for linear models assumptions (in annexes) however reveals that the model suffers from heterogeneity and thus violation of Gauss Markow assumptions for an unbiased and efficient pooled-OLS estimates. We have chosen to run a robust regression model, shown in the last column of the table in which none of the variables is significant. Due to the limitations in the panel data (time dimension=2), we decided not to pursue more sophisticated specification (e.g.fixed or random effects models). Our results remain should be regarded as indication for further research on the topic or in that particular context.
 
 
-**Effect of decentralization on availability of public health infrastructure**
+**Effect of decentralization on availability of public health facilities**
 
-Like the previous models, decentralization does not seem to be a significant elements in the availability of healthcare centers at the sub-national level. With regards to the explanatory variables: population, population density, and average literacy rate of the head of households seem to be strongly determinants of the existence of healthcare centers. Public expenditures per capita and poverty level result to be significant as well.
-
+Using our estimated model as indicated above, we assess the impact of decentralization on the access to public health infrastructures, notably access to provincials and rural hospitals. The data drawn from the World Health Organization has suggested a decrease in the number provincial as well as specialized hospitals from 2010 to 2013. Our microeconomic data provides the number of hospitals per municipalities over the period 2010 and 2011. we considered publicly funded healthcare centers which we regress on our key explanatory variables to assess whether an increase in financial and administrative independence of Beninese municipalities might have led to an increase in the provision of healthcare facilities. 
 
 ```{r,include=FALSE, results='asis'}
 # First regression:public health center
@@ -355,14 +354,13 @@ R2pubhosp <- lm(pubhosp ~ decentralization2 + log(population) + Density, data = 
 summary(R2pubhosp)
 
 # Third regression: public health center
-R3pubhosp <- lm(pubhosp ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
+R3pubhosp <- lm(log(pubhosp) ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
 summary(R3pubhosp)
 
 library(robust) 
 R3pubhosp.robust <- rlm(pubhosp ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
 summary(R3pubhosp.robust)
 ```
-
 
 ```{r, echo=FALSE,results='asis'}
 labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','gini','perception of decentralization','(Intercept)')
@@ -373,11 +371,20 @@ stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
                      digits = 2, type = 'latex', header = FALSE)
 ```
 
+As indicated by above regression table, our indicator for decentralization does not appear to have a significant impact of the provision of healthcare facilities. In our second regression equation, population is highly and positively significant which indicates that the greater the population of a municipality, the higher the propensity to have access to a healthcare center, even though the coefficient is relatively small. Population density is also negatively significant which indicates that the higher the population density, the less likely it is to have access to health care facilities. In the third and more specificed equation,  population and population density are similarly significant (density moving from 5% to 1%) with the exact same direction in the correlation with our dependent variable. Public expenditure per capita reveals to be significant at 5%, a result that goes along with favorable theories on decentralization. Once more, the average rate of literacy of head of household is strongly and positively significant, although the coefficient is relatively small. For this late model, monetary poverty index is positively significant, such as the higher the greater the number of poor people, the higher the propensity to have access to healthcare facilities. This latter is a surprising result and contrary to general expectations based on municipal income and poverty level. However, given that in recent years and with the millenium development goals, a special emphasis was put on provision of healthcare in rural areas, it might have been the case that the growth rate of provision of healthcare facilities was higher in rural than in urbain areas, which may justify such as result.
 
- Considering the potential implications of the other variables in governmental redistribution mechanism or public goods delivery, it is surprising that education 
+With more specification, the ajusted R-square of the last regression equation has also considerably improved. However, the global validation of linear models assumptions test indicates that the basic assumptions are not fulfilled and there we should not consider these coefficients as unbiased and efficient even though they are significant. As an attempt to correct for the biasness, we run a robust model and take the logarithm of our dependent variable (indicated by the Skewness in the test result).
 
 
-#Potential Issues 
+
+It's worth noting that the adjusted R square has significantly increased in comparision with the previous equation, signaling an improvement in the goodness fit of the model. The global validation test for linear models assumptions (in annexes) however reveals that the model suffers from heterogeneity and thus violation of Gauss Markow assumptions for an unbiased and efficient pooled-OLS estimates. We have chosen to run a robust regression model, shown in the last column of the table in which none of the variables is significant. Due to the limitations in the panel data (time dimension=2), we decided not to pursue more sophisticated specification (e.g.fixed or random effects models). Our results remain should be regarded as indication for further research on the topic or in that particular context.
+Considering the potential implications of the other variables in governmental redistribution mechanism or public goods delivery, it is surprising that education 
+
+
+
+#Conclusions and Discussion
+
+This paper is an attempt to empirically assess the impact decentralization on provision of health-related facilities by considering Benin as a case study. Have we h
 
 The macroeconomic overview suggests that Benin's has experienced an improvement on health-services delivery over the past few years. Given that health-related services is highly decentralized, we have tested the impact of decentralization on some key health-related variables, issued from Benin's Households Survey. The microeconomic analysis, however, did not find any significant impact of decentralization (proxied by the ratio of own-revenue to total expenditures) on the provision of health-related services and infrastructures. Given that existing literature provide various decentralization indicators, the significance found in the microeconomic analysis might be the result of a misleading indicator. Moreover, because public services in Benin is highly financed by intergovernmental (rather than own-source revenues), it might be more reliable to consider an indicator or a model that takes into account this factor. Therefore, we propose to revise our proxy for decentralization and to further work on our model specification. 
 
@@ -468,8 +475,6 @@ sqrt(vif(R3pubhosp)) > 2
 ```{r,echo=FALSE,results='asis',message=FALSE}
 # Global test of model assumptions
 gvmodelpubhosp <- gvlma(R3pubhosp) 
-diagnosticpuphsp<-summary(gvmodelpubhosp)
-
+diagnosticpuphosp<-summary(gvmodelpubhosp)
 kable(diagnosticpuphosp)
-
 ```
