@@ -23,7 +23,7 @@ library(Zelig)
 ```
 
 
-#Introduction
+#Project
 
 Since the beginning of the 1990s, most developing countries have embarked in a process of subsequent decentralization, combining political, administrative and fiscal aspects. Decentralization has also been at the center stage of the international development agenda, being considered as a major mechanism for poverty reduction in low and middle-income countries. As part of this process, sub-national governments have been increasingly strengthened, and granted more power in terms decision-making regarding their communities.
 
@@ -32,6 +32,7 @@ In terms of provision of public goods, subnational authorities are also taking t
 In this project, we focus on assessing the impact of decentralization on health provision. In order words, we try to assess whether granting more financial and administrative power to subnational authorities result in a greater provision of basic health-related services such as access to water or healthcare centres.  
 
 **Research question**
+
 *what impact does decentralization have on the provision of health-related services in Benin?*
 
 **Why Benin?**
@@ -41,39 +42,35 @@ Benin is a french-speaking west-African country with a GDP/capita of US$ 804.67 
 Benin is a young democracy. Since 2000, the country is embarked in a process of subsequent decentralization in 2000s which combines political, administrative and fiscal aspects. Legal provisions on the administrative and territorial reforms of 1999  created 77 municipalities and 12 departments and outlines competencies - ranging from tax raising power to local public expenditure (elementary schooling, health-related services, sanitation) - to be transferred from central to local governments. Although at its very early stage, was accompanied by a huge transformation of the political and administrative organization. 
 
 
-
 ```{r, echo=FALSE, message=FALSE}
 Country_Benin<-qmap(location='benin',zoom=6)
 print(Country_Benin)
 ```
 
 
+#Analytical Approach
 
-#Project
+The analysis is divided into two sections: 
 
+(i) a macroeconomic overview of health-related expenditures and outcomes over the years 2005 to 2010.The datasets are drawn from the World Bank Indicators and the World Health Organization (WHO)
 
-This project is divided into three sections. 
-The first one gives a general overview on health-related expenditures and provision in Benin over the years 2005 to 2010. The datasets are obtained from the World Bank (WB) and World Health Organization (WHO). 
-
-The second part looks at the microeconomic effect of decentralization on basic health-related facilities. For this purpose, we compute an indicator for decentralization, and we use health-related indicators provided in Benin's Integrated Modular Households Survey (EMICoV). 
-Since we have missing values in the households survey, we have decided to restrict our model to only two years: 2010 and 2011, for which we have a balanced panel. 
-The final section presents our basic regression models and some potential issues.
-
-The datasets are obtained from the Ministry of Economy and Finances, the National Institute of Statistics and the National Commission on Local Finances. 
-Additional information or variables will be drawn from international or regional databases such as the World Bank Indicators(WDI), the World Health Organization(WHO) or Afro-barometer.
+(ii) a microeconomic analysis which consists in an empirical assessment of the imapct of decentralization on 4 health-related indicators which are access to water, access to toilet facilities, access to toilet facilities and access to healthcare centres. The analysis uses a combined unique dataset which combines indicators on municipal finances and health provision at the municipal level in Benin. The original datasets are obtained from the Ministry of Economy and Finances, the National Institute of Statistics and the National Commission on Local Finances, more particularly from the following surveys/census: Benin's Integrated Modular Households Survey (EMICoV), the Demographic and Health Survey and the National Census. 
 
 
 
+##Macroeconomic overview 
+
+This section brings a general overview of health-related expenditures and outcome in Benin over the years 2005 to 2010. We've drawn data from the World Bank and WHO. 
 
 **World Bank Indicators**
 
-The first dataset is obtained from the World Bank (WB) and includes the following indicators:
+The World Bank (WB) and includes the following indicators for Benin: 
 
-(i) health expenditure per capita (SH.XPD.PCAP): sum of public and private health expenditures as a ratio of total population. This indicator covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
+(i) health expenditure per capita: sum of public and private health expenditures as a ratio of total population. This indicator covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
 
-(ii) public health expenditure (SH.XPD.PUBL): recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
+(ii) public health expenditure: recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
 
-(iii) improved sanitation facilities(SH.STA.ACSN): access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. This indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
+(iii) improved sanitation facilities: access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. This indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
 
 ```{r, include=FALSE}
 library(WDI)
@@ -84,11 +81,7 @@ names(Benin)[names(Benin)=="year"] <- "Year"
 names(Benin)[names(Benin)=="SH.XPD.PUBL"] <- "Public.Health.Expenditure"
 names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
 names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
-
 ```
-
-
-
 
 **World Health Organization Indicators**
 
