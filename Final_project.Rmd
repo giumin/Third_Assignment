@@ -57,21 +57,14 @@ Conducting an empirical study on the relationship between decentralization and h
 
 ##Macroeconomic overview 
   
-<<<<<<< HEAD
 This section brings a general overview of health-related expenditures and outcome in Benin over the years 2005 to 2010. As we have limited information on the micro level, the macroeconomic overview allows us to frame assumptions on the overall provision of health-related services in Benin. To that end, We use data analytics tools to scrape openly available datasets from the World Bank and the World Health Organization. 
 
 *World Bank indicators* 
 
 The first dataset is obtained from the World Bank (WB) and includes the following variables:
-=======
-This section brings a general overview of health-related expenditures and outcome in Benin over the years 2005 to 2010. We use data analytics tools to scrape openly available datasets. 
-The first dataset is obtained from the World Bank (WB) and includes the following indicators:
->>>>>>> origin/gh-pages
 
 (i) health expenditure per capita: defined as the sum of public and private health expenditures as a ratio of total population. This indicator covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
-
 (ii) public health expenditure: defined as recurrent and capital spending from government (central and local) budgets, external borrowings and grants (including donations from international agencies and nongovernmental organizations), and social (or compulsory) health insurance funds. 
-
 (iii) improved sanitation facilities: defined as the access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. This indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
 
 ```{r, include=FALSE}
@@ -85,28 +78,18 @@ names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
 names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 ```
 
-
-**World Health Organization Indicators**
+*World Health Organization Indicators*
 
 The second dataset is taken from the WHO databases, particularly from the Global Health Observatory Data which provides information on health infrastructures per 100,000 population in Benin including:
 
 (i) Health posts, that  are either community centres or health environments with a very limited number of beds with limited curative and preventive care resources normally assisted by health workers or nurses,
-
 (ii) Health centers,which includes the number of health centres from the public and private sectors, per 100,000 population
-
 (iii) Number of district/rural hospitals from the public and private sectors, per 100,000 population,
-
 (iv) Number of provincial hospitals from the public and private sectors, per 100,000 population
-
 (v) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be regional, specialized, research hospitals or Federal/National Institutes.
-
 (vi) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be: regional, specialized, research hospitals or Federal/National Institutes.
 
 Unlike the dataset from the World Bank, this datasets only provide Benin-related indicators for the years 2010 and 2013, which we extracted for this project. 
-
-We also cleaned the dataset eliminating superfluous columns and rows. We also used the command 'tidy' to organize it in a way that would make the merging of the datasets easier.
-
-Once we have our datasets, it is useful to merge them together so as to work easily and quickly with one dataset that would include all the needed variables. Thus, firstly we change the names of the variables "country" and "year", so that they have exactly the same capital letters in both datasets, and secondly we use the 'merge' function.
 
 ```{r, include=FALSE}
 library(WDI)
@@ -135,19 +118,13 @@ messy<-data.frame(
   Country=c("Benin","Benin","Benin","Benin","Benin","Benin"),
   Display.Value=c(0.29,6.36,0.06,0.12,0.05,0.11)
   )
-library(tidyr)
-tidy<-spread(messy,Indicator,Display.Value)
 ```
 
-```{r, include=FALSE}
-names(Benin)[names(Benin)=="country"] <- "Country"
-total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
-```
+The graphs above suggest that all three elements: public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the time-span 2005 to 2011. Since health expenditure is highly decentralized, we could therefore assume that the macroeconomic overview is a reflection of the microeconomic data. The microeconomic analysis will therefore look to confirm this assumption.
 
 
 ```{r, echo=FALSE}
 library(ggplot2)
-
 
 ggplot(data=Benin,aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() +theme_bw(base_size=14) + ggtitle("Trend of public expenditure over the years\n")
 
@@ -157,6 +134,7 @@ ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + 
 
 ```
 
+Although the WHO data is only available for 2010 and 2013, this table indicates a small variation (decrease) in the number of provincial and specialized hospitals in Benin. As for the data from WHO, we will further assess these outcomes in the section below and with the microeconomic analysis. 
 
 ```{r, echo=FALSE, results='asis',message=FALSE}
 library(knitr)
@@ -165,9 +143,6 @@ Benininfra.new <- Benininfra[!myvars]
 kable(Benininfra.new, format='latex')
 ```
 
-
-The graphs above suggest that all three elements: public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the time-span 2005 to 2011. Since health expenditure is highly decentralized, we could therefore assume that the macroeconomic overview is a reflection of the microeconomic data. The microeconomic analysis will therefore look to confirm this assumption.
-As for the variables taken from the WHO, unfortunately there are only two years (2010 and 2013), which does not really help us with our search. Nonetheless, looking at the values for those years related to 'Specialized hospitals'(0.12 and0.11) and 'Provincial hospitals' (0.6 and 0.5), there seems to be no important variations per 100000 habitants in the span of three years.
 
 
 ##Microeconomic Analysis 
