@@ -179,7 +179,7 @@ combineddata.data <- read.csv(textConnection(combineddata.data))
 
 Decentralization is typically defined in public planning, management and decision making, as the transfer of authority and power from higher to lower levels of governing, or from national to sub-national levels. It has different characteristics for different writers which often describe it as either delegation, devaluation, de-concentration and privatization of responsibility and authority of tasks to lower level of administration. Yet, decentralization is a very complex mechanism. In general, its measurement involves two elements: (i)the level and (ii)the degree where the level can be regarded as the distribution of power over decision-making inside a particular administrative system while the level takes into account sociological and anthropological aspects. 
 
-The definition and measurement of decentralization has led to a long academic debate, with several authors proposing new indicators as the most reliable proxy, giving birth to a multiplicity of indicators using different approaches. Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimensions, it is difficult to assess and measure the outcome of decentralization mechanisms in an empirical study. A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditure, we propose here to use the Revenue autonomy(RA) indicator used by [@akai2002sakata] and [@habibi2003etal] to proxy for decentralization. 
+The definition and measurement of decentralization has led to a long academic debate, with several authors proposing new indicators as the most reliable proxy, giving birth to a multiplicity of indicators using different approaches. Due to this high degree of complexity, which encompasses a number of political, fiscal and administrative dimensions, it is difficult to assess and measure the outcome of decentralization mechanisms in an empirical study. A large part of the debate on decentralization measurement regards the choice between revenue versus expenditure decentralization. Because decentralized health provision implies both decentralized revenues and expenditure, we propose here to use the Revenue autonomy(RA) indicator used by [@akai2002fiscal] and [@habibi2003] to proxy for decentralization. 
 This indicator is defined as the ratio of own-source revenues over the total expenditures of a sub-national entity.  
 
 ```{r, results='asis',echo=FALSE, message=FALSE}
@@ -363,26 +363,10 @@ For this empirical assessment, we have chosen Benin as a case study. Decentraliz
 The scarcity of sub-national and local data, and the limitations to the empirical measurements of health provision or decentralization per se, have impeded a thorough analysis of the question. However, from a policy perspective, this exercise has indicated that education level of head of households might be an important component in the underlying process of rural development and that should be considered in the overall development policy of sub-national regions. Moreover, the results suggest that, more than a decentralized system, an increase in the overall public expenditure per capita at municipal level might have some significant impact on health provision. Relying on these, we remain confident that this exercise will be a start for further reflection on the topic as it joins the effort in looking for answers to key development questions. 
 
 
-
-
-
-#References
-
 #Annexes
 
-Validation of Linear Model Assumptions
 
 **Impact of decentralization on water access**
-
-*Testing for multicollinearity among variables*
-
-```{r,echo=FALSE,results='asis',message=FALSE}
-#Testing for multicollinearity among variables
-library(car)
-vif(R3water)
-sqrt(vif(R3water)) > 2
-
-```
 
 *Global Validation of Linear Model Assumptions*
 
@@ -398,14 +382,6 @@ kable(diagnosticwater)
 
 **Impact of decentralization on access to toilet facilities**
 
-*Testing for multicollinearity among variables*
-
-```{r,echo=FALSE, results='asis', message=FALSE}
-#Testing for multicollinearity among variables
-vif(R3toilet)
-sqrt(vif(R3toilet)) > 2
-```
-
 *Global Validation of Linear Model Assumptions*
 ```{r,echo=FALSE,results='asis',message=FALSE}
 # Global test of model assumptions
@@ -416,16 +392,6 @@ kable(diagnostictoilet)
 
 
 **Impact of decentralization on provision of water facilities**
-
-*Testing for multicollinearity among variables*
-
-```{r, echo=FALSE, results='asis',message=FALSE}
-
-#Testing for multicollinearity among variables
-vif(R3soneb)
-sqrt(vif(R3soneb)) > 2
-
-```
 
 *Global Validation of Linear Model Assumptions*
 
@@ -438,17 +404,13 @@ kable(diagnosticsoneb)
 
 **Impact of decentralization on provision of healthcare facilities**
 
-*Testing for multicollinearity among variables*
-
-```{r, echo=FALSE,results='asis',message=FALSE}
-#Testing for multicollinearity among variables
-vif(R3pubhosp)
-sqrt(vif(R3pubhosp)) > 2
-```
-
 ```{r,echo=FALSE,results='asis',message=FALSE}
 # Global test of model assumptions
 gvmodelpubhosp <- gvlma(R3pubhosp) 
 diagnosticpuphosp<-summary(gvmodelpubhosp)
 kable(diagnosticpuphosp)
 ```
+
+
+#References
+
