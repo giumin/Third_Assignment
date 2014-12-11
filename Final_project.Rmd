@@ -12,7 +12,6 @@ bibliography: bibliographyproject.bib
 ---
 
 
-
 #Introduction
 
 Since the beginning of the 1990s, most developing countries have embarked in a process of subsequent decentralization, combining political, administrative and fiscal aspects. Decentralization has also been at the center stage of the international development agenda, being considered as a major mechanism for poverty reduction in low and middle-income countries. As part of this process, sub-national governments have been increasingly strengthened, and granted more power in terms decision-making regarding their communities.
@@ -111,7 +110,7 @@ messy<-data.frame(
   )
 ```
 
-As indicated by the charts below, Benin has experienced a s
+As indicated by the charts below, Benin has experienced a considerable increase in public health expenditure and health expenditure per capita over the recent years. The country has also experience improvement in sanitation facilities (data from the World Bank) 
 
 ```{r, echo=FALSE}
 library(ggplot2)
@@ -122,6 +121,8 @@ ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + 
 
 ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 14) + ggtitle("Trend over the years\n")
 ```
+
+The table below indicates that the number 
 
 ```{r, echo=FALSE, results='asis',message=FALSE}
 library(knitr)
@@ -344,12 +345,13 @@ As indicated by above regression table, our indicator for decentralization does 
 With more specification, the ajusted R-square of the last regression equation has also considerably improved. However, the global validation of linear models assumptions test indicates that some assumptions, although the heterogeneity assumption is met. This imply that we should not consider these coefficients as unbiased and efficient even though they are significant.As for the previous case, these results must also be taken as an indicator for further research which may involve a more balanced panel dataset which could allow for sophisticated econometric models. 
 
 
-
 #Conclusions and Discussion
 
 This paper is an attempt to empirically assess the impact decentralization on provision of health-related facilities. As stated in the introduction, decentralization has been at the center stage of policy experiments in many developing countries, especially in Sub-Saharan Africa. Likewise, provision of health-related services has also been one of the core development policy in these countries, mainly as part of the millenium development goals. Bridging these two is very relevant as they both have as final aim the improvement of living standards of the poorest strata of the population within a country. 
 
-For this empirical assessment, we have chosen Benin as a case study. Decentralization has been at a pilot phase for the past 10 years, and a major vector in the provision of health related services on the subnational level. We computed a proxy for decentralization, taken from existing literature (the ratio of own-revenue to total expenditures), and we assess the impact of this indicator on four dependent variables which are related to health. The overall result suggest that decentralization (proxied by our variable) does not have an impact of the provision of services considered in this paper (access to water, water facilities, toilet facilities and public healthcare centers). The overall result also suggests that average literacy rate of head of households, public expenditure per capita and demographic indicator such as population might have a significant impact of the provision of the above-mentioned services. Nothwithstanding, and as stated in the first section, this paper is an attempt and results should be simply considered as indications for further research. The scarcity of subnational and local data, and the limitations to the empirical measurements of health provision or decentralization per se, have impeded a thorough analysis of the question. However, from a policy perspective, this exercise has indicated that education level of head of households might be an important component in the underlying process of rural development and that should be considered in the overall development policy of subnational regions. Moreover, the results suggest that, more than a decentralized system, an increase in the overall public expenditure per capita at municipal level might have some significant impact on health provision. Relying on these, we remain confident that this exercice will be a start for further reflection on the topic as it joins the effort in looking for answers to key development questions. 
+For this empirical assessment, we have chosen Benin as a case study. Decentralization has been at a pilot phase for the past 10 years, and a major vector in the provision of health related services on the subnational level. We computed a proxy for decentralization, taken from existing literature (the ratio of own-revenue to total expenditures), and we assess the impact of this indicator on four dependent variables which are related to health. The overall result suggest that decentralization (proxied by our variable) does not have an impact of the provision of services considered in this paper (access to water, water facilities, toilet facilities and public healthcare centers). The overall result also suggests that average literacy rate of head of households, public expenditure per capita and demographic indicator such as population might have a significant impact of the provision of the above-mentioned services. Nothwithstanding, and as stated in the first section, this paper is an attempt and results should be simply considered as indications for further research. 
+
+The scarcity of subnational and local data, and the limitations to the empirical measurements of health provision or decentralization per se, have impeded a thorough analysis of the question. However, from a policy perspective, this exercise has indicated that education level of head of households might be an important component in the underlying process of rural development and that should be considered in the overall development policy of subnational regions. Moreover, the results suggest that, more than a decentralized system, an increase in the overall public expenditure per capita at municipal level might have some significant impact on health provision. Relying on these, we remain confident that this exercice will be a start for further reflection on the topic as it joins the effort in looking for answers to key development questions. 
 
 
 #References
@@ -364,6 +366,7 @@ For this empirical assessment, we have chosen Benin as a case study. Decentraliz
 
 ```{r,echo=FALSE,results='asis',message=FALSE}
 #Testing for multicollinearity among variables
+library(car)
 vif(R3water)
 sqrt(vif(R3water)) > 2
 
