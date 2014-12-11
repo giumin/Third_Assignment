@@ -1,5 +1,5 @@
 ---
-title: "Final Project"
+title: "Decentralization Impact on provision of health-related services: Case of Benin"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "27 November 2014"
 output:
