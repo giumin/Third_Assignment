@@ -278,7 +278,7 @@ stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
 ```
 
 
-As displayed by above regression table, decentralization does not seem to have any particular incidence on the access to toilet facilities at the municipal level. In the second restricted model, as we introduced demographic variables, population reveals to be significant at 10% such that a one percent increase in the population size is likely to increase access to toilet facilities by 3.064 percent point, far greater than the previous model on water access, although population is no longer meaningful in the final equation. Like in the equation on water access, the average literacy rate of head of households appear to have a positive impact on access to toilet facilities at 1% significance such that an increase in average literacy rate of households would increase access to toilet facilities by 0.09 percentage point. The final model also displays an increase in the adjusted R square. However,although the fitness test of the linear model assumptions hold (see annexes) the value of the adjusted R square remains relatively low, which again implies potential mispecification and the omission of key variables
+As displayed by above regression table, decentralization does not seem to have any particular incidence on the access to toilet facilities at the municipal level. In the second restricted model, as we introduced demographic variables, population reveals to be significant at 10% such that a one percent increase in the population size is likely to increase access to toilet facilities by 3.064 percent point, far greater than the previous model on water access, although population is no longer meaningful in the final equation. Like in the equation on water access, the average literacy rate of head of households appear to have a positive impact on access to toilet facilities at 1% significance such that an increase in average literacy rate of households would increase access to toilet facilities by 0.09 percentage point. However,although the fitness test of the linear model assumptions hold (see annexes) the value of the adjusted R square remains relatively low, which again implies potential mispecification and the omission of key variables
 
 
 
@@ -363,20 +363,20 @@ For this empirical assessment, we have chosen Benin as a case study. Decentraliz
 The scarcity of sub-national and local data, and the limitations to the empirical measurements of health provision or decentralization per se, have impeded a thorough analysis of the question. However, from a policy perspective, this exercise has indicated that education level of head of households might be an important component in the underlying process of rural development and that should be considered in the overall development policy of sub-national regions. Moreover, the results suggest that, more than a decentralized system, an increase in the overall public expenditure per capita at municipal level might have some significant impact on health provision. Relying on these, we remain confident that this exercise will be a start for further reflection on the topic as it joins the effort in looking for answers to key development questions. 
 
 
+
 #Annexes
+```{r,echo=FALSE,include=FALSE}
+library(gvlma)
+```
 
 
 **Impact of decentralization on water access**
-
 *Global Validation of Linear Model Assumptions*
 
 ```{r,echo=FALSE,include=FALSE}
-# Global test of model assumptions
-library(gvlma)
 gvmodelwater <- gvlma(R3water) 
 diagnosticwater <- summary(gvmodelwater)
 ```
-
 
 ```{r,echo=FALSE,results='asis',message=FALSE}
 kable(diagnosticwater)
@@ -413,6 +413,9 @@ kable(diagnosticsoneb)
 ```
 
 **Impact of decentralization on provision of healthcare facilities**
+
+*Global Validation of Linear Model Assumptions*
+
 ```{r,echo=FALSE,include=FALSE}
 # Global test of model assumptions
 gvmodelpubhosp <- gvlma(R3pubhosp) 
@@ -422,7 +425,6 @@ diagnosticpuphosp<-summary(gvmodelpubhosp)
 ```{r,echo=FALSE,results='asis',message=FALSE}
 kable(diagnosticpuphosp)
 ```
-
 
 #References
 

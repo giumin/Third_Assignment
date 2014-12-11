@@ -64,7 +64,7 @@ This section brings a general overview of health-related expenditures and outcom
 
 **World Bank Indicators**
 
-The World Bank (WB) and includes the following indicators for Benin: 
+The World Bank (WB) dataset includes the following indicators for Benin for the years 2005 to 2011.
 
 (i) health expenditure per capita: sum of public and private health expenditures as a ratio of total population. This indicator covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
 
@@ -82,59 +82,6 @@ names(Benin)[names(Benin)=="SH.XPD.PUBL"] <- "Public.Health.Expenditure"
 names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
 names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 ```
-
-**World Health Organization Indicators**
-
-The second dataset is taken from the WHO databases, particularly from the Global Health Obervatory Data which provides information on health infrastructures per 100,000 population in Benin including:
-
-(i) Health posts, that  are either community centres or health environments with a very limited number of beds with limited curative and preventive care resources normally assisted by health workers or nurses,
-
-(ii) Health centers,which includes the number of health centres from the public and private sectors, per 100,000 population
-
-(iii) Number of district/rural hospitals from the public and private sectors, per 100,000 population,
-
-(iv) Number of provincial hospitals from the public and private sectors, per 100,000 population,
-
-(v) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be regional, specialized, research hospitals or Federal/National Institutes.
-
-(vi) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be: regional, specialized, research hospitals or Federal/National Institutes.
-
-Unlinke the dataset from the World Bank, this datasets only provide Benin-related indicators for the years 2010 and 2013, which we extracted for this project. 
-
-```{r,include=FALSE}
-infrastructures <- read.csv("http://apps.who.int/gho/athena/data/data-text.csv?target=GHO/DEVICES01,DEVICES02,DEVICES03,DEVICES04,DEVICES05&profile=text&filter=COUNTRY:*;REGION:AFR;REGION:AMR;REGION:SEAR;REGION:EUR;REGION:EMR;REGION:WPR")
-Benininfra<-subset(infrastructures,Country=='Benin')
-Benininfra$PUBLISH.STATES<-NULL
-Benininfra$WHO.region<-NULL
-Benininfra$Low<-NULL
-Benininfra$High<-NULL
-Benininfra$Comments<-NULL
-library(dplyr)
-messy<-data.frame(
-  Indicator=c("District/rural hospitals", "Health centres","Provincial hospitals","Specialized hospitals","Provincial hospitals","Specialized hospitals"),
-  Year=c(2010,2010,2010,2010,2013,2013),
-  Country=c("Benin","Benin","Benin","Benin","Benin","Benin"),
-  Display.Value=c(0.29,6.36,0.06,0.12,0.05,0.11)
-  )
-library(tidyr)
-tidy<-spread(messy,Indicator,Display.Value)
-```
-
-
-```{r, include=FALSE}
-names(Benin)[names(Benin)=="country"] <- "Country"
-total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
-```
-
-
-
-
-
-#Analysis
-
-
-
-##Macroeconomic Overview
 
 ```{r,include=FALSE, message=FALSE}
 library(googleVis)
@@ -163,22 +110,52 @@ print(line_plot, tag = 'chart')
 ```
 
 
-The above graph suggests that all three elements, public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the timespan 2005 to 2011. 
-As mentionned above, the central government in Benin (alike other developing countries in West-Africa) has used decentralization as a mechanisms to reach the targets of the Millenium Development Goals.  
-
-Since health expenditure is highly decentralized, we could potentially argue that the macroeconomic overview is related to the outcome on a micro level.
+The graphs above suggest that all three elements: public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the time-span 2005 to 2011. Since health expenditure is highly decentralized, we could therefore assume that the macroeconomic overview is a reflection of the microeconomic data. The microeconomic analysis will therefore look to confirm this assumption.
 
 
+**World Health Organization Indicators**
 
+The second dataset is taken from the WHO databases, particularly from the Global Health Obervatory Data which provides information on health infrastructures per 100,000 population in Benin including:
 
+(i) Health posts, that  are either community centres or health environments with a very limited number of beds with limited curative and preventive care resources normally assisted by health workers or nurses,
+(ii) Health centers,which includes the number of health centres from the public and private sectors, per 100,000 population
+(iii) Number of district/rural hospitals from the public and private sectors, per 100,000 population,
+(iv) Number of provincial hospitals from the public and private sectors, per 100,000 population,
+(v) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be regional, specialized, research hospitals or Federal/National Institutes.
+(vi) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be: regional, specialized, research hospitals or Federal/National Institutes.
+
+Unlinke the dataset from the World Bank, this datasets only provide Benin-related indicators for the years 2010 and 2013, which we extracted for this project. 
+
+```{r,include=FALSE}
+infrastructures <- read.csv("http://apps.who.int/gho/athena/data/data-text.csv?target=GHO/DEVICES01,DEVICES02,DEVICES03,DEVICES04,DEVICES05&profile=text&filter=COUNTRY:*;REGION:AFR;REGION:AMR;REGION:SEAR;REGION:EUR;REGION:EMR;REGION:WPR")
+Benininfra<-subset(infrastructures,Country=='Benin')
+Benininfra$PUBLISH.STATES<-NULL
+Benininfra$WHO.region<-NULL
+Benininfra$Low<-NULL
+Benininfra$High<-NULL
+Benininfra$Comments<-NULL
+library(dplyr)
+messy<-data.frame(
+  Indicator=c("District/rural hospitals", "Health centres","Provincial hospitals","Specialized hospitals","Provincial hospitals","Specialized hospitals"),
+  Year=c(2010,2010,2010,2010,2013,2013),
+  Country=c("Benin","Benin","Benin","Benin","Benin","Benin"),
+  Display.Value=c(0.29,6.36,0.06,0.12,0.05,0.11)
+  )
+```
+
+```{r, echo=FALSE, results='asis',message=FALSE}
+library(knitr)
+myvars <- names(Benininfra) %in% c("row.names","Country", "Numeric") 
+Benininfra.new <- Benininfra[!myvars]
+kable(Benininfra.new, format='html')
+```
+
+Although the WHO data is only available for 2010 and 2013, this table indicates a small variation (decrease) in the number of provincial and specialized hospitals in Benin. As for the data from WHO, we will further assess these outcomes in the section below and with the microeconomic analysis.
 
 
 ##Microeconomic Analysis 
 
-
-
-In this section, we explore provision of health-related services and infrastructures on a local level. Particularly, we look at the impact of decentralization on the access to basic health-related services and infrastructure.
-The datasets on local finances are obtained from the National Commission on Local Finances of Benin. Health-related expenditures and provision are from Benin's Integrated Modular Surveys on Household Living Conditions (EMICoV) and the Demographic and Health Survey.
+In the second part of the analysis, we explore provision of health-related services and infrastructures on a local (municipal) level. Particularly, we look at the impact of decentralization on the access to basic health-related services and infrastructure.
 
 ```{r,include=FALSE, message=FALSE}
 url2 <- "https://raw.githubusercontent.com/giumin/Third_Assignment/gh-pages/decenthealth.csv"
@@ -186,50 +163,31 @@ combineddata.data <- getURL(url2, ssl.verifypeer = FALSE)
 combineddata.data <- read.csv(textConnection(combineddata.data))
 ```
 
-
-
-###Description of Variables 
-
 **Independent variable: Decentralization**
 
-Decentralization is typically defined in public planning, management and decision making, as the transfer of authority and power from higher to lower levels of governing, or from national to sub-national levels. 
-It has different characteristics for different writers which often describe it as either delegation, devaluation, de-concentration and privatization of responsibility and authority of tasks to lower level of administration. 
-
-
-
-
+Decentralization is our independent variable. It generally means the transfer of authority and power from higher to lower levels of governing, or from national to sub-national levels. Existing literature present various measurements methods for indicators that could proxy decentralization. In this project, and after an analysis of the context, we used the ratio of revenues over expenditure.
 
 **Dependent variables**
 
- We have  decided to focus on some key variables which data is only available on a macro level. These variables are drawn from Benin's EmiCoV (2010,2011) and are defined as follwos: 
+ We have  decided to focus on four key variables which are:
 (i) access to water: defined as the percentage of households in the municipality that have access to water 
 (ii)access to toilet facilities: percentage of households in the municipality that have access to toilet facilities 
 (iii)water provision infrastructure: percentage of households in that municipality that are connected to SONEB (water pipeline)
 (iv) hospital: the number of existing hospitals or public healthcare centers in the municpality. 
 
-
-
 **Explanatory variables**
 
-In addition to decentralization, we use a set of variables to account for heterogeneity accross the municipalities, such as population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, average literacy rate of the head of households, as well as a monetary poverty index, all of them obtained from Benin's EmiCov (2010, 2011). 
-We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. 
-
-
-
-
-
-
+In addition to decentralization, we included a set of variables to account for heterogeneity accross the municipalities. These are population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, average literacy rate of the head of households, as well as a monetary poverty index. We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. 
 
 
 ###Results
 
-
-
-
 **1.Effect of Decentralization on Water Access**
 
+In this model, decentralization reveals to be insignificant. In the graph below, in fact, the range of specification is too wide for the variable to be significant. In regard to the other explanatory variables, on the other hand, only the Average Literacy rate of Head of Household is significant for a confidence interval of 10%. The graph, in fact, shows that the grater this rate is, the higher is the access to water ( and the range of the interval is significant enough). This could mean that the head of houshold may have enough income to provide access to water.
 
-In this model, decentralization reveals to be insignificant. In the graph below, in fact, the range of specification is too wide for the variable to be significant. In regard to the other explanatory variables, on the other hand, it seems that only the Average Literacy rate of Head pf Household is significant for a confidence interval of 10%. The graph, in fact, shows that the grater this rate is, the higher is the access to water ( and the range of the interval is significant enough). This could mean that the head of houshold may have enough income to provide access to water.
+In this model, decentralization, as proxied by our indicator, reveals to be insignificant. Education level of head of households is the most significant at 5%. Although our statistical test for linear models assumptions does not reveal any particular issue, the adjusted R-square is however very low which indicates potential misspecification.
+
 
 ```{r,include=FALSE, results='asis'}
 # First regression:water acces
@@ -262,10 +220,10 @@ plot(simR3wateredu, xlab = 'Average Literacy Rate of Head of Households', ylab =
 
 
 
+
 **2.Effect of decentralization on access to toilet facilities** 
 
-
-Alike the model on water access, decentralization seems to not have a particular effect on the access to toilet facilities, while average literacy rate of head of households results to be  slightly significant. 
+Alike the previous model on access to water, decentralization reveals insignificant. Once again, average literacy rate of head of households is significant at 1%. Although the fitness test of the linear model assumptions hold in this case as well, the value of the adjusted R square remains relatively low again implies potential mispecification and the omission of key variables.
 
 
 ```{r, include=FALSE}
@@ -277,11 +235,9 @@ confint(R1toilet)
 R2toilet <- lm(pop_toiletacess ~ decentralization + population + Density, data = combineddata.data)
 summary(R2toilet)
 confint(R2toilet)
-
 ```
 
 ```{r, include=FALSE, message=FALSE}
-
 R3toilet <- zelig(pop_toiletacess ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
 summary(R3toilet)
 ```
@@ -298,11 +254,10 @@ plot(simR3toiletedu, xlab = 'Average Literacy Rate of Head of Households', ylab 
 
 
 
-
 **3.Effect of decentralization on water pipeline connection**
 
-
 In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastrucure. In reverse, population density, public expenditures per capita and average literacy rate of heads of households reveal to be significant; housholds health consumption is slightly significant, but not much. 
+
 
 
 ```{r,include=FALSE}
