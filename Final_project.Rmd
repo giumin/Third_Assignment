@@ -128,7 +128,7 @@ The table below indicates that the number
 library(knitr)
 myvars <- names(Benininfra) %in% c("row.names","Country", "Numeric") 
 Benininfra.new <- Benininfra[!myvars]
-kable(Benininfra.new, header=T)
+kable(Benininfra.new, format='latex')
 ```
 
 The graphs above suggest that all three elements: public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the time-span 2005 to 2011. Since health expenditure is highly decentralized, we could therefore assume that the macroeconomic overview is a reflection of the microeconomic data. The microeconomic analysis will therefore look to confirm this assumption.
