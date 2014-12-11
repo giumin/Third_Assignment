@@ -1,5 +1,5 @@
 ---
-title: "Decentralization Impact on Provision of Health-related Services"
+title: "Decentralization Impact on Provision of Health-related Services: Case of Benin"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "5 December 2014"
 output: 
