@@ -331,7 +331,8 @@ R1soneb <- lm(connect_soneb ~ decentralization, data = combineddata.data)
 summary(R1soneb)
 confint(R1soneb)
 
-
+R2soneb <- lm(connect_soneb ~ decentralization2 + log(population) + Density, data = combineddata.data)
+summary(R2soneb)
 ```
 
 ```{r, message=FALSE, include=FALSE}
