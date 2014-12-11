@@ -261,10 +261,6 @@ summary(R1water)
 R2water <- lm(pop_wateraccess ~ decentralization + population + Density, data = combineddata.data)
 confint(R2water)
 
-# Third regression: water access
-R3water <- lm(pop_wateraccess ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = combineddata.data)
-confint(R3water)
-
 ```
 
 ```{r, include=FALSE, message=FALSE}
@@ -301,10 +297,7 @@ confint(R1toilet)
 R2toilet <- lm(pop_toiletacess ~ decentralization + population + Density, data = combineddata.data)
 summary(R2toilet)
 confint(R2toilet)
-# Third regression: toilet access
-R3toilet <- lm(pop_toiletacess ~ decentralization +  population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data = combineddata.data)
-summary(R3toilet)
-confint(R3toilet)
+
 ```
 
 ```{r, include=FALSE, message=FALSE}
@@ -337,14 +330,8 @@ In this model, our key explanatory variable 'decentralization' seems to have no 
 R1soneb <- lm(connect_soneb ~ decentralization, data = combineddata.data)
 summary(R1soneb)
 confint(R1soneb)
-# Second regression: water pipeline
-R2soneb <- lm(connect_soneb ~ decentralization + population + Density, data = combineddata.data)
-summary(R2soneb)
-confint(R2soneb)
-# Third regression: water pipeline
-R3soneb <- lm(connect_soneb ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=combineddata.data)
-summary(R3soneb)
-confint(R3soneb)
+
+
 ```
 
 ```{r, message=FALSE, include=FALSE}
@@ -387,10 +374,7 @@ confint(R1pubhosp)
 R2pubhosp <- lm(pubhosp ~ decentralization + population + Density, data = combineddata.data)
 summary(R2pubhosp)
 confint(R2pubhosp)
-# Third regression: public healthcare center
-R3pubhosp <- lm(pubhosp ~ decentralization + population + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon, data=combineddata.data)
-summary(R3pubhosp)
-confint(R3pubhosp)
+
 ```
 
 
@@ -450,7 +434,7 @@ Therefore, we propose to revise our proxy for decentralization and to further wo
 **Model 1**
 
 ```{r, echo=FALSE, results='asis'}
-labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
+labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','ind_pauv_mon', 'gini','for_dentr.','(Intercept)')
 stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
                      title = 'Effect of decentralization on water access',
                      digits = 2, type = 'html', header = FALSE)
@@ -464,7 +448,7 @@ stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
 
 **Model 2**
 ```{r,echo=FALSE,results='asis'}
-labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
+labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','ind_pauv_mon', 'gini','for_dentr.','(Intercept)')
 
 stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
                      title = 'Effect of decentralization on toilet access',
@@ -481,7 +465,7 @@ stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
 **Model 3**
 ```{r, echo=FALSE,results='asis'}
 
-labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','(Intercept)')
+labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','ind_pauv_mon', 'gini','for_dentr.','(Intercept)')
 
 stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
                      title = 'Effect of decentralization on water delivery infrastructure',
