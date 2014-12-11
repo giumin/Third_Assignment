@@ -1,5 +1,5 @@
 ---
-title: "Decentralization Impact on provision of health-related services"
+title: "Decentralization Impact on Provision of Health-related Services"
 author: "Giulia Minnucci,Daniel Jemberu, Rose-Camille Vincent"
 date: "5 December 2014"
 output: 
@@ -27,9 +27,9 @@ library(Zelig)
 
 Since the beginning of the 1990s, most developing countries have embarked in a process of subsequent decentralization, combining political, administrative and fiscal aspects. Decentralization has also been at the center stage of the international development agenda, being considered as a major mechanism for poverty reduction in low and middle-income countries. As part of this process, sub-national governments have been increasingly strengthened, and granted more power in terms decision-making regarding their communities.
 
-In terms of provision of public goods, subnational authorities are also taking the lead. For instance, provision of health-related public services have been decentralized in many countries such as Gana, Zambia, Uganda. These initiatives have also been supported by bilateral and multilateral development agencies.
+In terms of provision of public goods, sub-national authorities are also taking the lead. For instance, provision of health-related public services have been decentralized in many countries such as Ghana, Zambia, Uganda. These initiatives have also been supported by bilateral and multilateral development agencies.
 
-In this project, we focus on assessing the impact of decentralization on health provision. In order words, we try to assess whether granting more financial and administrative power to subnational authorities result in a greater provision of basic health-related services such as access to water or healthcare centres.  
+In this project, we focus on assessing the impact of decentralization on health provision. In order words, we try to assess whether granting more financial and administrative power to sub-national authorities result in a greater provision of basic health-related services such as access to water or healthcare centres.  
 
 **Research question**
 
@@ -54,7 +54,7 @@ The analysis is divided into two sections:
 
 (i) a macroeconomic overview of health-related expenditures and outcomes over the years 2005 to 2010.The datasets are drawn from the World Bank Indicators and the World Health Organization (WHO)
 
-(ii) a microeconomic analysis which consists in an empirical assessment of the imapct of decentralization on 4 health-related indicators which are access to water, access to toilet facilities, access to toilet facilities and access to healthcare centres. The analysis uses a combined unique dataset which combines indicators on municipal finances and health provision at the municipal level in Benin. The original datasets are obtained from the Ministry of Economy and Finances, the National Institute of Statistics and the National Commission on Local Finances, more particularly from the following surveys/census: Benin's Integrated Modular Households Survey (EMICoV), the Demographic and Health Survey and the National Census. 
+(ii) a microeconomic analysis which consists in an empirical assessment of the impact of decentralization on 4 health-related indicators which are access to water, access to toilet facilities, access to toilet facilities and access to healthcare centres. The analysis uses a combined unique dataset which combines indicators on municipal finances and health provision at the municipal level in Benin. The original datasets are obtained from the Ministry of Economy and Finances, the National Institute of Statistics and the National Commission on Local Finances, more particularly from the following surveys/census: Benin's Integrated Modular Households Survey (EMICoV), the Demographic and Health Survey and the National Census. 
 
 
 
@@ -115,7 +115,7 @@ The graphs above suggest that all three elements: public health expenditure, hea
 
 **World Health Organization Indicators**
 
-The second dataset is taken from the WHO databases, particularly from the Global Health Obervatory Data which provides information on health infrastructures per 100,000 population in Benin including:
+The second dataset is taken from the WHO databases, particularly from the Global Health Observatory Data which provides information on health infrastructures per 100,000 population in Benin including:
 
 (i) Health posts, that  are either community centres or health environments with a very limited number of beds with limited curative and preventive care resources normally assisted by health workers or nurses,
 (ii) Health centers,which includes the number of health centres from the public and private sectors, per 100,000 population
@@ -124,7 +124,7 @@ The second dataset is taken from the WHO databases, particularly from the Global
 (v) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be regional, specialized, research hospitals or Federal/National Institutes.
 (vi) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be: regional, specialized, research hospitals or Federal/National Institutes.
 
-Unlinke the dataset from the World Bank, this datasets only provide Benin-related indicators for the years 2010 and 2013, which we extracted for this project. 
+Unlike the dataset from the World Bank, this datasets only provide Benin-related indicators for the years 2010 and 2013, which we extracted for this project. 
 
 ```{r,include=FALSE}
 infrastructures <- read.csv("http://apps.who.int/gho/athena/data/data-text.csv?target=GHO/DEVICES01,DEVICES02,DEVICES03,DEVICES04,DEVICES05&profile=text&filter=COUNTRY:*;REGION:AFR;REGION:AMR;REGION:SEAR;REGION:EUR;REGION:EMR;REGION:WPR")
@@ -173,11 +173,11 @@ Decentralization is our independent variable. It generally means the transfer of
 (i) access to water: defined as the percentage of households in the municipality that have access to water 
 (ii)access to toilet facilities: percentage of households in the municipality that have access to toilet facilities 
 (iii)water provision infrastructure: percentage of households in that municipality that are connected to SONEB (water pipeline)
-(iv) hospital: the number of existing hospitals or public healthcare centers in the municpality. 
+(iv) hospital: the number of existing hospitals or public healthcare centers in the municipality. 
 
 **Explanatory variables**
 
-In addition to decentralization, we included a set of variables to account for heterogeneity accross the municipalities. These are population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, average literacy rate of the head of households, as well as a monetary poverty index. We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. 
+In addition to decentralization, we included a set of variables to account for heterogeneity across the municipalities. These are population, population density, per capita consumption, public expenditure per capita, households health consumption, indicators on monetary poverty, average literacy rate of the head of households, as well as a monetary poverty index. We assume that these variables might have some impact either on health health-related expenditures on municipal or households level, and also some impact on decentralization process per se. 
 
 
 ###Results
@@ -251,25 +251,28 @@ plot(simR3toiletedu, xlab = 'Average Literacy Rate of Head of Households', ylab 
 
 **3.Effect of decentralization on water pipeline connection**
 
-In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastrucure. In reverse, population density, public expenditures per capita and average literacy rate of heads of households reveal to be significant; housholds health consumption is slightly significant, but not much. 
+In this model, our key explanatory variable 'decentralization' seems to have no impact of connection to water delivery infrastructure. In reverse, population density, households health consumption, and average literacy rate of heads of households reveal to be significant.
 
 ```{r,include=FALSE}
 # First regression: water pipeline
 R1soneb <- lm(connect_soneb ~ decentralization, data = combineddata.data)
 summary(R1soneb)
 confint(R1soneb)
-
 R2soneb <- lm(connect_soneb ~ decentralization2 + log(population) + Density, data = combineddata.data)
 summary(R2soneb)
 ```
 
 ```{r, message=FALSE, include=FALSE}
 combineddata.data$connect_soneb<-combineddata.data$connect_soneb+0.1
+combineddata.data$logsoneb<-log(combineddata.data$connect_soneb)
 combineddata.data$pubhosp<-combineddata.data$pubhosp+0.1
 combineddata.data$logpop<-log(combineddata.data$population)
 R3soneb <- zelig(log(connect_soneb) ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data, model="ls")
 summary(R3soneb)
 ```
+
+
+
 
 ```{r, message=FALSE, echo=FALSE}
 par(mfrow = c(1, 2))
@@ -283,15 +286,9 @@ plot(simR3sonebpop, xlab = 'LogPopulation', ylab = 'Water Facilities')
 ```
 
 
-
-
-
 **4.Effect of decentralization on availability of public health infrastructure**
 
-
-Like the previous models, decentralization does not seem to be a significant elements in the availability of healthcare centers at the subnational level. With regards to the explanatory variables: population, population density, and average literacy rate of the head of households seem to be strongly determinants of the existence of healthcare centers. Public expenditures per capita and poverty level result to be significant as well.
-
-
+Like the previous models, decentralization does not seem to be a determinant of the availability of healthcare centers at the sub-national level. With regards to the explanatory variables: population, population density, and average literacy rate of the head of households seem to be strongly determinants of the existence of healthcare centers. Public expenditures per capita and poverty level result to be significant as well.
 
 ```{r,include=FALSE}
 # First regression: public healthcare center
@@ -335,17 +332,17 @@ plot(simR3pubhosppovind, xlab = 'Monetary Poverty Index', ylab = 'Access to Heal
 ```
 
 
+#Conclusions and Discussion
 
+This project was an attempt to empirically assess the impact decentralization on provision of health-related facilities. Decentralization has been at the center stage of policy experiments in Benin which is the focus of this project. Health-related services have also been decentralized with the legal provisions on intergovernmental structure. 
 
+The macroeconomic overview suggests that Benin's has experienced an improvement on health-services delivery over the past few years. Given that health-related services is highly decentralized, we wanted to test the impact of decentralization on some key health-related variables on the sub-national level.
 
+For this empirical assessment, we computed a proxy for decentralization as the ratio of own-revenue to total expenditures), and we assess the impact of this indicator on four dependent variables which are related to health. The overall result suggest that decentralization (proxied by our variable) does not have an impact of the provision of services considered in this paper (access to water, water facilities, toilet facilities and public healthcare centers).The overall result also suggests that average literacy rate of head of households, public expenditure per capita and demographic indicator such as population might have a significant impact of the provision of the above-mentioned services. 
 
-#Conclusions 
+The scarcity of sub-national and local data, and the limitations to the empirical measurements of health provision or decentralization per se, have impeded a thorough analysis of the question. However, from a policy perspective, this exercise has indicated that education level of head of households might be an important component in the underlying process of rural development and that should be considered in the overall development policy of sub-national regions. 
 
-The macroeconomic overview suggests that Benin's has experienced an improvement on health-services delivery over the past few years. Given that health-related services is highly decentralized, we have tested the impact of decentralization on some key health-related variables, issued from Benin's Households Survy. The microeconomic analysis, however, did not find any significant imapct of decentralization (proxied by the ratio of own-revenue to total expenditures) on the provision of health-related services and infrastructures. Given that exisiting literatures provide various decentralization indicators, the significance found in the microeconomic analysis might be the result of a misleading indicator. 
-
-Moreover, because public services in Benin is highly financed by intergovernmental (rather than own-source revenues), it might be more reliable to consider an indicator or a model that takes into account this factor. 
-
-Therefore, we propose to revise our proxy for decentralization and to further work on our model specification. 
+Moreover, the results suggest that, more than a decentralized system, an increase in the overall public expenditure per capita at municipal level might have some significant impact on health provision. Relying on these, we remain confident that this exercise will be a start for further reflection on the topic as it joins the global effort in the search of answers to key development questions.
 
 
 
@@ -353,9 +350,6 @@ Therefore, we propose to revise our proxy for decentralization and to further wo
 
 
 #Appendix
-
-
-
 
 
 
@@ -369,11 +363,6 @@ stargazer::stargazer(R1water, R2water, R3water, covariate.labels = labels,
 ```
 
 
-
-
-
-
-
 **Model 2**
 ```{r,echo=FALSE,results='asis'}
 labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','gini','perception of decentralization','(Intercept)')
@@ -382,11 +371,6 @@ stargazer::stargazer(R1toilet, R2toilet, R3toilet, covariate.labels = labels,
                      title = 'Effect of decentralization on toilet access',
                      digits = 2, type = 'html', header = FALSE)
 ```
-
-
-
-
-
 
 
 
@@ -402,16 +386,10 @@ stargazer::stargazer(R1soneb, R2soneb, R3soneb, covariate.labels = labels,
 
 
 
-
-
-
-
-
 **Model 4**
 
 ```{r, echo=FALSE,results='asis'}
 labels <- c('Decentralization', 'Population', 'Population Density', 'Log Public Expenditure per capita', 'Log Consumption per Capita', 'Average Households Health Consumption Ratio', 'Average Literacy Rate of Head of Households', 'Monetary Poverty Index','gini','perception of decentralization','(Intercept)')
-
 
 stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
                      title = 'Effect of decentralization on availability of healthcare centers',
