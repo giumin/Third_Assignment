@@ -57,8 +57,11 @@ Conducting an empirical study on the relationship between decentralization and h
 
 ##Macroeconomic overview 
   
-This section brings a general overview of health-related expenditures and outcome in Benin over the years 2005 to 2010. We use data analytics tools to scrape openly available datasets. 
-The first dataset is obtained from the World Bank (WB) and includes the following indicators:
+This section brings a general overview of health-related expenditures and outcome in Benin over the years 2005 to 2010. As we have limited information on the micro level, the macroeconomic overview allows us to frame assumptions on the overall provision of health-related services in Benin. To that end, We use data analytics tools to scrape openly available datasets from the World Bank and the Worlth Health Organization. 
+
+*World Bank indicators* 
+
+The first dataset is obtained from the World Bank (WB) and includes the following variables:
 
 (i) health expenditure per capita: defined as the sum of public and private health expenditures as a ratio of total population. This indicator covers the provision of health services (preventive and curative), family planning activities, nutrition activities, and emergency aid designated for health but does not include provision of water and sanitation. Data are in current U.S. dollars.
 
@@ -78,39 +81,18 @@ names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
 ```
 
 
-**World Health Organization Indicators**
+*World Health Organization Indicators*
 
 The second dataset is taken from the WHO databases, particularly from the Global Health Observatory Data which provides information on health infrastructures per 100,000 population in Benin including:
 
 (i) Health posts, that  are either community centres or health environments with a very limited number of beds with limited curative and preventive care resources normally assisted by health workers or nurses,
-
 (ii) Health centers,which includes the number of health centres from the public and private sectors, per 100,000 population
-
 (iii) Number of district/rural hospitals from the public and private sectors, per 100,000 population,
-
 (iv) Number of provincial hospitals from the public and private sectors, per 100,000 population
-
 (v) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be regional, specialized, research hospitals or Federal/National Institutes.
-
 (vi) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be: regional, specialized, research hospitals or Federal/National Institutes.
 
 Unlike the dataset from the World Bank, this datasets only provide Benin-related indicators for the years 2010 and 2013, which we extracted for this project. 
-
-We also cleaned the dataset eliminating superfluous columns and rows. We also used the command 'tidy' to organize it in a way that would make the merging of the datasets easier.
-
-Once we have our datasets, it is useful to merge them together so as to work easily and quickly with one dataset that would include all the needed variables. Thus, firstly we change the names of the variables "country" and "year", so that they have exactly the same capital letters in both datasets, and secondly we use the 'merge' function.
-
-```{r, include=FALSE}
-library(WDI)
-healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL','SH.XPD.PCAP','SH.STA.ACSN'))
-Benin<-subset(healthpublicexpend,country=='Benin')
-Benin$iso2c<-NULL
-names(Benin)[names(Benin)=="year"] <- "Year"
-names(Benin)[names(Benin)=="SH.XPD.PUBL"] <- "Public.Health.Expenditure"
-names(Benin)[names(Benin)=="SH.XPD.PCAP"] <- "Health.Expenditure.Per.Capita"
-names(Benin)[names(Benin)=="SH.STA.ACSN"] <- "Improved.Sanitation.Facilities"
-
-```
 
 ```{r,include=FALSE}
 infrastructures <- read.csv("http://apps.who.int/gho/athena/data/data-text.csv?target=GHO/DEVICES01,DEVICES02,DEVICES03,DEVICES04,DEVICES05&profile=text&filter=COUNTRY:*;REGION:AFR;REGION:AMR;REGION:SEAR;REGION:EUR;REGION:EMR;REGION:WPR")
@@ -127,28 +109,19 @@ messy<-data.frame(
   Country=c("Benin","Benin","Benin","Benin","Benin","Benin"),
   Display.Value=c(0.29,6.36,0.06,0.12,0.05,0.11)
   )
-library(tidyr)
-tidy<-spread(messy,Indicator,Display.Value)
 ```
 
-```{r, include=FALSE}
-names(Benin)[names(Benin)=="country"] <- "Country"
-total<-merge(Benin,tidy, by=c("Country","Year"),all=TRUE)
-```
-
+As indicated by the charts below, Benin has experienced a s
 
 ```{r, echo=FALSE}
 library(ggplot2)
 
-
-ggplot(data=Benin,aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() +theme_bw(base_size=14) + ggtitle("Trend of public expenditure over the years\n")
+ggplot(data=Benin,aes(x=Year,y=Public.Health.Expenditure)) + geom_line() + geom_point() +theme_bw(base_size=14) + ggtitle("Trend in public expenditure over the years\n")
 
 ggplot(data=Benin, aes(x=Year,y=Health.Expenditure.Per.Capita)) + geom_line() + geom_point() + theme_bw(base_size = 14) + ggtitle("Trend over the years\n")
 
 ggplot(data=Benin, aes(x=Year,y=Improved.Sanitation.Facilities)) +geom_line() + geom_point() + theme_bw(base_size = 14) + ggtitle("Trend over the years\n")
-
 ```
-
 
 ```{r, echo=FALSE, results='asis',message=FALSE}
 library(knitr)
@@ -156,7 +129,6 @@ myvars <- names(Benininfra) %in% c("row.names","Country", "Numeric")
 Benininfra.new <- Benininfra[!myvars]
 kable(Benininfra.new, header=T)
 ```
-
 
 The graphs above suggest that all three elements: public health expenditure, health expenditure per capita, and improved sanitation, have considerably increased over the time-span 2005 to 2011. Since health expenditure is highly decentralized, we could therefore assume that the macroeconomic overview is a reflection of the microeconomic data. The microeconomic analysis will therefore look to confirm this assumption.
 As for the variables taken from the WHO, unfortunately there are only two years (2010 and 2013), which does not really help us with our search. Nonetheless, looking at the values for those years related to 'Specialized hospitals'(0.12 and0.11) and 'Provincial hospitals' (0.6 and 0.5), there seems to be no important variations per 100000 habitants in the span of three years.
@@ -354,12 +326,8 @@ R2pubhosp <- lm(pubhosp ~ decentralization2 + log(population) + Density, data = 
 summary(R2pubhosp)
 
 # Third regression: public health center
-R3pubhosp <- lm(log(pubhosp) ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
+R3pubhosp <- lm(pubhosp) ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
 summary(R3pubhosp)
-
-library(robust) 
-R3pubhosp.robust <- rlm(pubhosp ~ decentralization2 + log(population) + Density + log(pubexp.c) + log(consump.c) + cons_health + educ_adult + ind_pauv_mon + gini + for_dentr., data = combineddata.data)
-summary(R3pubhosp.robust)
 ```
 
 ```{r, echo=FALSE,results='asis'}
@@ -373,27 +341,22 @@ stargazer::stargazer(R1pubhosp, R2pubhosp, R3pubhosp, covariate.labels = labels,
 
 As indicated by above regression table, our indicator for decentralization does not appear to have a significant impact of the provision of healthcare facilities. In our second regression equation, population is highly and positively significant which indicates that the greater the population of a municipality, the higher the propensity to have access to a healthcare center, even though the coefficient is relatively small. Population density is also negatively significant which indicates that the higher the population density, the less likely it is to have access to health care facilities. In the third and more specificed equation,  population and population density are similarly significant (density moving from 5% to 1%) with the exact same direction in the correlation with our dependent variable. Public expenditure per capita reveals to be significant at 5%, a result that goes along with favorable theories on decentralization. Once more, the average rate of literacy of head of household is strongly and positively significant, although the coefficient is relatively small. For this late model, monetary poverty index is positively significant, such as the higher the greater the number of poor people, the higher the propensity to have access to healthcare facilities. This latter is a surprising result and contrary to general expectations based on municipal income and poverty level. However, given that in recent years and with the millenium development goals, a special emphasis was put on provision of healthcare in rural areas, it might have been the case that the growth rate of provision of healthcare facilities was higher in rural than in urbain areas, which may justify such as result.
 
-With more specification, the ajusted R-square of the last regression equation has also considerably improved. However, the global validation of linear models assumptions test indicates that the basic assumptions are not fulfilled and there we should not consider these coefficients as unbiased and efficient even though they are significant. As an attempt to correct for the biasness, we run a robust model and take the logarithm of our dependent variable (indicated by the Skewness in the test result).
-
-
-
-It's worth noting that the adjusted R square has significantly increased in comparision with the previous equation, signaling an improvement in the goodness fit of the model. The global validation test for linear models assumptions (in annexes) however reveals that the model suffers from heterogeneity and thus violation of Gauss Markow assumptions for an unbiased and efficient pooled-OLS estimates. We have chosen to run a robust regression model, shown in the last column of the table in which none of the variables is significant. Due to the limitations in the panel data (time dimension=2), we decided not to pursue more sophisticated specification (e.g.fixed or random effects models). Our results remain should be regarded as indication for further research on the topic or in that particular context.
-Considering the potential implications of the other variables in governmental redistribution mechanism or public goods delivery, it is surprising that education 
+With more specification, the ajusted R-square of the last regression equation has also considerably improved. However, the global validation of linear models assumptions test indicates that some assumptions, although the heterogeneity assumption is met. This imply that we should not consider these coefficients as unbiased and efficient even though they are significant.As for the previous case, these results must also be taken as an indicator for further research which may involve a more balanced panel dataset which could allow for sophisticated econometric models. 
 
 
 
 #Conclusions and Discussion
 
-This paper is an attempt to empirically assess the impact decentralization on provision of health-related facilities by considering Benin as a case study. Have we h
+This paper is an attempt to empirically assess the impact decentralization on provision of health-related facilities. As stated in the introduction, decentralization has been at the center stage of policy experiments in many developing countries, especially in Sub-Saharan Africa. Likewise, provision of health-related services has also been one of the core development policy in these countries, mainly as part of the millenium development goals. Bridging these two is very relevant as they both have as final aim the improvement of living standards of the poorest strata of the population within a country. 
 
-The macroeconomic overview suggests that Benin's has experienced an improvement on health-services delivery over the past few years. Given that health-related services is highly decentralized, we have tested the impact of decentralization on some key health-related variables, issued from Benin's Households Survey. The microeconomic analysis, however, did not find any significant impact of decentralization (proxied by the ratio of own-revenue to total expenditures) on the provision of health-related services and infrastructures. Given that existing literature provide various decentralization indicators, the significance found in the microeconomic analysis might be the result of a misleading indicator. Moreover, because public services in Benin is highly financed by intergovernmental (rather than own-source revenues), it might be more reliable to consider an indicator or a model that takes into account this factor. Therefore, we propose to revise our proxy for decentralization and to further work on our model specification. 
+For this empirical assessment, we have chosen Benin as a case study. Decentralization has been at a pilot phase for the past 10 years, and a major vector in the provision of health related services on the subnational level. We computed a proxy for decentralization, taken from existing literature (the ratio of own-revenue to total expenditures), and we assess the impact of this indicator on four dependent variables which are related to health. The overall result suggest that decentralization (proxied by our variable) does not have an impact of the provision of services considered in this paper (access to water, water facilities, toilet facilities and public healthcare centers). The overall result also suggests that average literacy rate of head of households, public expenditure per capita and demographic indicator such as population might have a significant impact of the provision of the above-mentioned services. Nothwithstanding, and as stated in the first section, this paper is an attempt and results should be simply considered as indications for further research. The scarcity of subnational and local data, and the limitations to the empirical measurements of health provision or decentralization per se, have impeded a thorough analysis of the question. However, from a policy perspective, this exercise has indicated that education level of head of households might be an important component in the underlying process of rural development and that should be considered in the overall development policy of subnational regions. Moreover, the results suggest that, more than a decentralized system, an increase in the overall public expenditure per capita at municipal level might have some significant impact on health provision. Relying on these, we remain confident that this exercice will be a start for further reflection on the topic as it joins the effort in looking for answers to key development questions. 
 
 
 #References
 
 #Annexes
 
-Validation of Linear Model Assumptions
+**Validation of Linear Model Assumptions**
 
 **Impact of decentralization on water access**
 
