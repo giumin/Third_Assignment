@@ -80,6 +80,7 @@ The World Bank (WB) dataset includes the following indicators for Benin for the 
 
 (iii) improved sanitation facilities: access to improved sanitation facilities as the percentage of the population using improved sanitation facilities. This indicator includes flush/pour flush (to piped sewer system, septic tank, pit latrine), ventilated improved pit (VIP) latrine, pit latrine with slab, and composting toilet.
 
+
 ```{r, include=FALSE}
 library(WDI)
 healthpublicexpend<-WDI(indicator= c('SH.XPD.PUBL','SH.XPD.PCAP','SH.STA.ACSN'))
@@ -134,6 +135,7 @@ The second dataset is taken from the WHO databases, particularly from the Global
 (vi) Number of specialized hospitals delivering mainly tertiary care from the public and private sectors, per 100,000 population. These specialized hospitals could be: regional, specialized, research hospitals or Federal/National Institutes.
 
 Unlike the dataset from the World Bank, this datasets only provide Benin-related indicators for the years 2010 and 2013, which we extracted for this project. 
+
 
 ```{r,include=FALSE}
 infrastructures <- read.csv("http://apps.who.int/gho/athena/data/data-text.csv?target=GHO/DEVICES01,DEVICES02,DEVICES03,DEVICES04,DEVICES05&profile=text&filter=COUNTRY:*;REGION:AFR;REGION:AMR;REGION:SEAR;REGION:EUR;REGION:EMR;REGION:WPR")
